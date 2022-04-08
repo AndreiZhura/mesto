@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Mesto Russia Yandex</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img src="./images/logo.svg" alt="логотип" class="header__logo" />
+    </header>
+    <main class="main">
+        <section class="profile">
+            <img src="./images/JacquesYvesCousteau.jpg" alt="Аватар" class="profile__avatar" />
+            <div class="profile__info">
+                <h1 class="profile__name" id="profileName">Жак-Ив Кусто</h1>
+                <button class="profile__button-edit" id="popOpen" type="button"></button>
+                <p class="profile__profession" id="profileProfession">Исследователь океана</p>
+            </div>
+            <button class="profile__button-add" type="button"></button>
+        </section>
+        <div class="elements">
+            <article class="element">
+                <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Карачаевск</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+
+            <article class="element">
+                <img src="./images/elbrus.jpg" alt="Гора Эльрус" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Гора Эльбрус</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+
+            <article class="element">
+                <img src="./images/dombay.jpg" alt="Домбай" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Домбай</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+
+            <article class="element">
+                <img src="./images/elbrus.jpg" alt="Гора Эльрус" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Гора Эльбрус</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+
+            <article class="element">
+                <img src="./images/dombay.jpg" alt="Домай" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Домбай</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+
+            <article class="element">
+                <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__rectangle" />
+                <div class="element__group">
+                    <h2 class="element__title">Карачаево-Черкесская Республика</h2>
+                    <button class="element__like element__like_active_white" type="button"></button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__author">&COPY;2022 Mesto Russia</p>
+    </footer>
+
+    <section class="popup">
+        <div class="popup__main">
+            <button class="popup__button" type="button"></button>
+            <form class="popup__container" name="conteiner">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input placeholder="name" type="text" name="namePopup" id="nameInput" class="popup__input" />
+                <input placeholder="profession" type="text" name="proffesionPopup" id="jobInput" class="popup__input" />
+                <button type="submit" class="popup__save">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

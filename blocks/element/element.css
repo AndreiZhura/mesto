@@ -1,0 +1,12 @@
+.element {
+    display: grid;
+    grid-template-rows: 80% 20%;
+    grid-template-areas: "i""g";
+    width: 100%;
+}
+
+@media screen and (max-width:320px) {
+    .element {
+        width: 282px;
+    }
+}
