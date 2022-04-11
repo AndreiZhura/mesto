@@ -1,11 +1,14 @@
 const popup = document.querySelector('.popup');
-const formElement = document.querySelector('.popup__container')
+const formElement = document.querySelector('.popup__container');
+const popupImaje = document.querySelector('.popupImage');
+
     // Находим поля формы в DOM
 const prolileName = document.getElementById('profileName');
 const profileProfession = document.getElementById('profileProfession');
 const nameInput = document.getElementById('nameInput');
 const jobInput = document.getElementById('jobInput');
 const popOpenButton = document.querySelector('.profile__button-edit');
+const popupImageOpen = document.querySelector('.profile__button-add');
 const popClose = document.querySelector('.popup__button');
 const likeWhite = document.querySelector('.element__like_active_white');
 const likeBlack = document.querySelector('.element__like_active_black');
@@ -20,6 +23,9 @@ like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
 
+function openPopupImage(){
+    popupImaje.classList.add('popup_open');
+}
 
 function open() {
     popup.classList.add('popup_open');
@@ -48,7 +54,7 @@ function formSubmitHandler(evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-
+popupImageOpen.addEventListener('submit' openPopupImage);
 popOpenButton.addEventListener('click', open);
 popClose.addEventListener('click', close);
 // Прикрепляем обработчик к форме:
@@ -57,3 +63,29 @@ popClose.addEventListener('click', close);
 
 /*Забавно что вы оставляете ссылки на материалы HTML-academy ,
 материал там и в правду хорошо изложен!*/
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
