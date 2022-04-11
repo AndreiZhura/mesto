@@ -1,6 +1,6 @@
 const popup = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__container');
-const popupImaje = document.querySelector('.popupImage');
+const popupImage = document.querySelector('.popupImage');
 
     // Находим поля формы в DOM
 const prolileName = document.getElementById('profileName');
@@ -23,9 +23,14 @@ like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
 
-function openPopupImage(){
-    popupImaje.classList.add('popup_open');
+function openImagePop(){
+popupImage.classList.add('popup_open');
 }
+
+function closeImagePop(){
+  popupImage.classList.remove('popup_open');
+}
+
 
 function open() {
     popup.classList.add('popup_open');
@@ -54,8 +59,9 @@ function formSubmitHandler(evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-popupImageOpen.addEventListener('submit' openPopupImage);
+popupImageOpen.addEventListener('click', openImagePop);
 popOpenButton.addEventListener('click', open);
+popClose.addEventListener('click', close);
 popClose.addEventListener('click', close);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
