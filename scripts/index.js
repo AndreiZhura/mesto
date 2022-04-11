@@ -7,6 +7,12 @@ const nameInput = document.getElementById('nameInput');
 const jobInput = document.getElementById('jobInput');
 const popOpenButton = document.querySelector('.profile__button-edit');
 const popClose = document.querySelector('.popup__button');
+const likeWhite = document.querySelector('.element__like_active_white');
+const likeBlack = document.querySelector('.element__like_active_black');
+
+function like(){
+    
+}
 
 function open() {
     popup.classList.add('popup_open');
