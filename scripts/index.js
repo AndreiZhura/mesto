@@ -23,23 +23,14 @@ like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
 
-function openImagePop(){
-popupImage.classList.add('popup_open');
-}
-
-function closeImagePop(){
-  popupImage.classList.remove('popup_open');
-}
-
-
 function open() {
-    popup.classList.add('popup_open');
+    popup.classList.remove('popup_profile');
     nameInput.value = prolileName.textContent;
     jobInput.value = profileProfession.textContent;
 }
 
 function close() {
-    popup.classList.remove('popup_open');
+    popup.classList.add('popup_profile');
 }
 
 function formSubmitHandler(evt) {

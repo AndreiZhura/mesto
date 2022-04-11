@@ -21,8 +21,8 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popupImage/popupImage.css);
-@import url(../blocks/popup/_open/popup_open.css);
+@import url(../blocks/popup/_elements/popup_elements.css);
+@import url(../blocks/popup/_profile/popup_profile.css);
 @import url(../blocks/popup/__button/popup__button.css);
 @import url(../blocks/popup/__main/popup__main.css);
 @import url(../blocks/popup/__container/popup__container.css);
