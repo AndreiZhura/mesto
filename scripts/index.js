@@ -9,10 +9,17 @@ const popOpenButton = document.querySelector('.profile__button-edit');
 const popClose = document.querySelector('.popup__button');
 const likeWhite = document.querySelector('.element__like_active_white');
 const likeBlack = document.querySelector('.element__like_active_black');
+let like = document.querySelectorAll('.element__like');
 
-function like(){
-    
+function likeClick(l) {
+    l.target.classList.toggle('element__like_active_white');
+    l.target.classList.toggle('element__like_active_black');
 }
+
+like.forEach((like) => {
+    like.addEventListener('click', likeClick);
+});
+
 
 function open() {
     popup.classList.add('popup_open');
