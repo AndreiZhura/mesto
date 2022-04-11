@@ -1,5 +1,6 @@
 const popup = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__container');
+const popupElement = document.getElementById('popupElements')
 //кнопки вызывающие попап
 const popupOpenButtonProfile = document.querySelector('.profile__button-edit');
 const popupOpenButtonElements = document.querySelector('.profile__button-add');
@@ -31,7 +32,7 @@ function closeProfilePopup() {
     popup.classList.add('popup_profile');
 }
 function openElementsPopup(){
-  popup.classList.remove('popup_elements');
+  popupElement.classList.remove('popup_elements');
 }
 
 function formSubmitHandler(evt) {
