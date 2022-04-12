@@ -6,12 +6,18 @@ const popupOpenButtonProfile = document.getElementById('popOpenProfile');
 const popupOpenButtonElements = document.getElementById('popOpenElements');
 //кнопки закрывающие попап
 const closeButtonElements = document.getElementById('closeButtonElements');
-const closeButtonProfile = document.getElementById('closeButtonProfile')
-    // Находим поля формы в DOM
+const closeButtonProfile = document.getElementById('closeButtonProfile');
+//кнопка нажатия на картинки в элементах
+const openPhotoPopupButton = document.querySelector('.element__rectangle');
+const photoPopupButtonClose = document.getElementById('photoPopupButtonClose');
+// внутренности попапа профиля
 const prolileName = document.getElementById('profileName');
 const profileProfession = document.getElementById('profileProfession');
 const nameInput = document.getElementById('nameInput');
 const jobInput = document.getElementById('jobInput');
+
+// фотопопап
+const photopopup = document.getElementById('photo-popup')
 
 // лайки
 const likeWhite = document.querySelector('.element__like_active_white');
@@ -25,7 +31,7 @@ function likeClick(l) {
 like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
-//попап профиле
+//попап профиля
 function openProfilePopup() {
     popup.classList.remove('popup_profile');
     nameInput.value = prolileName.textContent;
@@ -35,13 +41,21 @@ function openProfilePopup() {
 function closeProfilePopup() {
     popup.classList.add('popup_profile');
 }
-
+// попап элемента
 function openElementsPopup() {
     popupElement.classList.remove('popup_elements');
 }
 
 function closeElementPopup() {
     popupElement.classList.add('popup_elements');
+}
+// попап с фото
+function openPhotoPopup() {
+    photopopup.classList.remove('photopopup_open');
+}
+
+function closePhotoPopup() {
+    photopopup.classList.add('photopopup_open');
 }
 
 function formSubmitHandler(evt) {
@@ -63,8 +77,12 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 popupOpenButtonProfile.addEventListener('click', openProfilePopup);
 popupOpenButtonElements.addEventListener('click', openElementsPopup);
+
 closeButtonProfile.addEventListener('click', closeProfilePopup);
 closeButtonElements.addEventListener('click', closeElementPopup);
+
+openPhotoPopupButton.addEventListener('click', openPhotoPopup);
+photoPopupButtonClose.addEventListener('click', closePhotoPopup);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
