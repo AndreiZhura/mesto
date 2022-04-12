@@ -1,9 +1,11 @@
 .element {
     display: grid;
     grid-template-rows: 80% 20%;
-    grid-template-areas: "i""g";
+    grid-template-areas: "i" "g";
     width: 100%;
     position: relative;
+    visibility: hidden;
+    opacity: 0;
 }
 
 @media screen and (max-width:320px) {
