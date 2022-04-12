@@ -6,3 +6,17 @@
     align-self: center;
     justify-self: center;
 }
+
+@media screen and (max-width:910px) {
+    .photopopup__main {
+        width: 433px;
+        height: 540px;
+    }
+}
+
+@media screen and (max-width:522px) {
+    .photopopup__main {
+        width: 240px;
+        height: 299px;
+    }
+}
