@@ -2,12 +2,12 @@ const popup = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__container');
 const popupElement = document.getElementById('popupElements');
 //кнопки вызывающие попап
-const popupOpenButtonProfile = document.querySelector('.profile__button-edit');
-const popupOpenButtonElements = document.querySelector('.profile__button-add');
+const popupOpenButtonProfile = document.getElementById('popOpenProfile');
+const popupOpenButtonElements = document.getElementById('popOpenElements');
 //кнопки закрывающие попап
 const closeButtonElements = document.getElementById('closeButtonElements');
-const popClose = document.querySelector('.popup__button');
-// Находим поля формы в DOM
+const closeButtonProfile = document.getElementById('closeButtonProfile')
+    // Находим поля формы в DOM
 const prolileName = document.getElementById('profileName');
 const profileProfession = document.getElementById('profileProfession');
 const nameInput = document.getElementById('nameInput');
@@ -63,7 +63,7 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 popupOpenButtonProfile.addEventListener('click', openProfilePopup);
 popupOpenButtonElements.addEventListener('click', openElementsPopup);
-popClose.addEventListener('click', closeProfilePopup);
+closeButtonProfile.addEventListener('click', closeProfilePopup);
 closeButtonElements.addEventListener('click', closeElementPopup);
 
 // Прикрепляем обработчик к форме:
