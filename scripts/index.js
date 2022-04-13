@@ -36,14 +36,6 @@ like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
 
-function photopopup(p) {
-    p.target.classList.toggle('element__rectangle');
-    p.target.classList.toggle('popup__button');
-};
-openPhotoPopupButton.forEach((openPhoto) => {
-    openPhoto.addEventListener('click', photopopup)
-});
-
 //попап профиля
 function openProfilePopup() {
     popup.classList.remove('popup_profile');
@@ -94,7 +86,13 @@ popupOpenButtonElements.addEventListener('click', openElementsPopup);
 closeButtonProfile.addEventListener('click', closeProfilePopup);
 closeButtonElements.addEventListener('click', closeElementPopup);
 
-
+function photopopup(p) {
+    p.target.classList.toggle('element__rectangle');
+    p.target.classList.toggle('popup__button');
+};
+openPhotoPopupButton.forEach((openPhoto) => {
+    openPhoto.addEventListener('click', photopopup)
+});
 
 
 
