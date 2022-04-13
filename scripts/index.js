@@ -17,7 +17,10 @@ const nameInput = document.getElementById('nameInput');
 const jobInput = document.getElementById('jobInput');
 
 // фотопопап
-const photopopup = document.getElementById('photo-popup')
+const photopopup = document.getElementById('photo-popup');
+const elementBasket = document.querySelector('.element__basket');
+const element = document.querySelector('.element');
+
 
 // лайки
 const likeWhite = document.querySelector('.element__like_active_white');
@@ -28,9 +31,19 @@ function likeClick(l) {
     l.target.classList.toggle('element__like_active_white');
     l.target.classList.toggle('element__like_active_black');
 }
+
 like.forEach((like) => {
     like.addEventListener('click', likeClick);
 });
+
+function photopopup(p) {
+    p.target.classList.toggle('element__rectangle');
+    p.target.classList.toggle('popup__button');
+};
+openPhotoPopupButton.forEach((openPhoto) => {
+    openPhoto.addEventListener('click', photopopup)
+});
+
 //попап профиля
 function openProfilePopup() {
     popup.classList.remove('popup_profile');
@@ -81,8 +94,9 @@ popupOpenButtonElements.addEventListener('click', openElementsPopup);
 closeButtonProfile.addEventListener('click', closeProfilePopup);
 closeButtonElements.addEventListener('click', closeElementPopup);
 
-openPhotoPopupButton.addEventListener('click', openPhotoPopup);
-photoPopupButtonClose.addEventListener('click', closePhotoPopup);
+
+
+
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
