@@ -119,6 +119,6 @@ function handelAddImage(evt) {
     const inputTitleValue = document.getElementById('titleImput').value;
     const inputImage = document.getElementById('linkInput').value
     const elementTitleValue = renderCard({ name: inputTitleValue, link: inputImage });
-    placesContainer.insertAdjacentElement(afterBegin, elementTitleValue);
+
     functionPopCloseElements();
 }
