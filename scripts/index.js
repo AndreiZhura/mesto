@@ -1,29 +1,3 @@
-const initialCards = [{
-        name: "Архыз",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-    },
-    {
-        name: "Челябинская область",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
-    },
-    {
-        name: "Иваново",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
-    },
-    {
-        name: "Камчатка",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
-    },
-    {
-        name: "Холмогорский район",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
-    },
-    {
-        name: "Байкал",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-    }
-];
-
 const popup = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__container');
 const popupElement = document.getElementById('popupElements');
@@ -50,13 +24,6 @@ const likeWhite = document.querySelector('.element__like_active_white');
 const likeBlack = document.querySelector('.element__like_active_black');
 let like = document.querySelectorAll('.element__like');
 //лайк
-
-
-const placesContainer = document.querySelector(".elements");
-const placeTemplate = document.querySelector(".template").content;
-
-
-
 function likeClick(l) {
     l.target.classList.toggle('element__like_active_white');
     l.target.classList.toggle('element__like_active_black');
@@ -105,6 +72,49 @@ function formSubmitHandler(evt) {
     closeProfilePopup();
 }
 
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler);
+popupOpenButtonProfile.addEventListener('click', openProfilePopup);
+popupOpenButtonElements.addEventListener('click', openElementsPopup);
+
+closeButtonProfile.addEventListener('click', closeProfilePopup);
+closeButtonElements.addEventListener('click', closeElementPopup);
+
+photoPopupButtonClose.addEventListener('click', closePhotoPopup);
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+
+const initialCards = [{
+        name: "Архыз",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+    },
+    {
+        name: "Челябинская область",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
+    },
+    {
+        name: "Иваново",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+    },
+    {
+        name: "Камчатка",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
+    },
+    {
+        name: "Холмогорский район",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
+    },
+    {
+        name: "Байкал",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+    }
+];
+
+const placesContainer = document.querySelector(".elements");
+const placeTemplate = document.querySelector(".template").content;
+
 const placeInfo = initialCards.map(function(item) {
     return {
         name: item.name,
@@ -120,25 +130,10 @@ function renderCard({ name, link }) {
     const placeElement = placeTemplate
         .querySelector(".element")
         .cloneNode(true);
-    placeElement.querySelector(".grid-element__title").textContent = name;
+    placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
 
     placesContainer.prepend(placeElement);
 }
 
 render();
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
-popupOpenButtonProfile.addEventListener('click', openProfilePopup);
-popupOpenButtonElements.addEventListener('click', openElementsPopup);
-
-closeButtonProfile.addEventListener('click', closeProfilePopup);
-closeButtonElements.addEventListener('click', closeElementPopup);
-
-openPhotoPopupButton.addEventListener('click', openPhotoPopup);
-photoPopupButtonClose.addEventListener('click', closePhotoPopup);
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
