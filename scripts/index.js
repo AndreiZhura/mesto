@@ -16,6 +16,8 @@ const profileProfession = document.getElementById('profileProfession');
 const nameInput = document.getElementById('nameInput');
 const jobInput = document.getElementById('jobInput');
 
+const popupElementsButtonSave = document.getElementById('popupElementsButtonSave');
+
 // фотопопап
 const photopopup = document.getElementById('photo-popup')
 
@@ -23,6 +25,8 @@ const photopopup = document.getElementById('photo-popup')
 const likeWhite = document.querySelector('.element__like_active_white');
 const likeBlack = document.querySelector('.element__like_active_black');
 let like = document.querySelectorAll('.element__like');
+
+
 //лайк
 function likeClick(l) {
     l.target.classList.toggle('element__like_active_white');
@@ -83,6 +87,8 @@ closeButtonElements.addEventListener('click', closeElementPopup);
 
 photoPopupButtonClose.addEventListener('click', closePhotoPopup);
 
+
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
@@ -127,13 +133,17 @@ function render() {
 }
 
 function renderCard({ name, link }) {
-    const placeElement = placeTemplate
-        .querySelector(".element")
-        .cloneNode(true);
+    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
 
     placesContainer.prepend(placeElement);
 }
 
+function handelAddImage() {
+    const inputTitleValue = document.getElementById('titleImput').value;
+    const elementTitleValue = renderCard({ name: inputTitleValue });
+    placesContainer.prepend(elementTitleValue);
+
+}
 render();
