@@ -1,4 +1,4 @@
-.element__basket {
+.element__basket{
     background-image: url(../../../images/basketbutton.svg);
     position: absolute;
     top: 16px;
@@ -10,9 +10,10 @@
     background-position: center;
     border: none;
     cursor: pointer;
-    border: 1px solid green;
 }
 
-.element__basket:hover {
+.element__basket:hover{
     opacity: 0.5;
 }
+
+
