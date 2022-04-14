@@ -47,6 +47,8 @@ const closeButtonElements = document.getElementById('closeButtonElements');
 const popupElements = document.getElementById('popupElements');
 const titleImput = document.getElementById('titleImput');
 const linkInput = document.getElementById('linkInput');
+const popupElementsButtonSave = document.getElementById('popupElementsButtonSave');
+const bascet = document.querySelector('.element__basket')
 
 function functionPopOpenElements() {
     popupElements.classList.remove('popup_elements');
@@ -58,6 +60,7 @@ function functionPopCloseElements() {
 
 popOpenElements.addEventListener('click', functionPopOpenElements);
 closeButtonElements.addEventListener('click', functionPopCloseElements);
+popupElementsButtonSave.addEventListener('click', handelAddImage);
 
 
 const initialCards = [{
@@ -107,12 +110,15 @@ function renderCard({ name, link }) {
     placeElement.querySelector(".element__rectangle").src = link;
 
     placesContainer.prepend(placeElement);
-}
-
-function handelAddImage() {
-    const inputTitleValue = document.getElementById('titleImput').value;
-    const elementTitleValue = renderCard({ name: inputTitleValue });
-    placesContainer.prepend(elementTitleValue);
 
 }
 render();
+
+function handelAddImage(evt) {
+    evt.preventDefault();
+    const inputTitleValue = document.getElementById('titleImput').value;
+    const inputImage = document.getElementById('linkInput').value
+    const elementTitleValue = renderCard({ name: inputTitleValue, link: inputImage });
+    placesContainer.insertAdjacentElement(afterBegin, elementTitleValue);
+    functionPopCloseElements();
+}
