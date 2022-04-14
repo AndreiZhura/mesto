@@ -86,6 +86,7 @@ closeButtonProfile.addEventListener('click', closeProfilePopup);
 closeButtonElements.addEventListener('click', closeElementPopup);
 
 photoPopupButtonClose.addEventListener('click', closePhotoPopup);
+ButtonRemove.addEventListener('click', removeElements)
 
 
 
@@ -134,10 +135,19 @@ function render() {
 
 function renderCard({ name, link }) {
     const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
+    const ButtonRemove = document.querySelector('.element__basket');
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
 
+
+
     placesContainer.prepend(placeElement);
+}
+
+function removeElements(evt) {
+    const element = evt.target.closest('element_open');
+    element.remove();
+
 }
 
 function handelAddImage() {
