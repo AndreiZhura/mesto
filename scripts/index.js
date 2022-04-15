@@ -109,9 +109,10 @@ function renderCard({ name, link }) {
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
     const bascet = placeElement.querySelector('.element__basket');
-
+    const like = placeElement.querySelector('.element__like')
     placesContainer.prepend(placeElement);
-    bascet.addEventListener('click', handelRemoveElements)
+    bascet.addEventListener('click', handelRemoveElements);
+    like.addEventListener('click', likeClick);
 
 }
 render();
