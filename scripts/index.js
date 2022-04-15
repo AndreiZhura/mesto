@@ -49,7 +49,12 @@ const titleImput = document.getElementById('titleImput');
 const linkInput = document.getElementById('linkInput');
 const popupElementsButtonSave = document.getElementById('popupElementsButtonSave');
 const photopopup = document.getElementById('photo-popup');
-const photoPopupButtonClose = document.getElementById('photoPopupButtonClose')
+const photoPopupButtonClose = document.getElementById('photoPopupButtonClose');
+const elementTitle = document.querySelector('.element__title');
+const elementImage = document.querySelector('.element__rectangle');
+const placesContainer = document.querySelector(".elements");
+const placeTemplate = document.querySelector(".template").content;
+
 
 
 function functionPopOpenElements() {
@@ -93,28 +98,34 @@ const initialCards = [{
 ];
 
 
-const placesContainer = document.querySelector(".elements");
-const placeTemplate = document.querySelector(".template").content;
 
-const placeInfo = initialCards.map(function(item) {
-    return {
-        name: item.name,
-        link: item.link
-    };
+
+const InfoArray = initialCards.map(function(item) {
+    return { name: item.name, link: item.link };
 });
 
 function render() {
-    placeInfo.forEach(renderCard);
+    InfoArray.forEach(renderCard);
 }
 
 function renderCard({ name, link }) {
-    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
-    placeElement.querySelector(".element__title").textContent = name;
-    placeElement.querySelector(".element__rectangle").src = link;
-    const bascet = placeElement.querySelector('.element__basket');
-    const like = placeElement.querySelector('.element__like');
-    const rectangle = placeElement.querySelector('.element__rectangle');
-    placesContainer.prepend(placeElement);
+    const ArrayElement = placeTemplate.querySelector(".element").cloneNode(true);
+    const elementTitleArray = ArrayElement.querySelector(".element__title").textContent = name;
+    const elementImageArray = ArrayElement.querySelector(".element__rectangle").src = link;
+    const bascet = ArrayElement.querySelector('.element__basket');
+    const like = ArrayElement.querySelector('.element__like');
+    const rectangle = ArrayElement.querySelector('.element__rectangle');
+    placesContainer.prepend(ArrayElement);
+
+    function handlePhotopopupOpen(title, image) {
+        photopopup.classList.remove('photopopup_open');
+        const photopopupTitle = document.querySelector('.photopopup__text').textContent = title;
+        const photoPopupImage = document.querySelector('.photopopup__main').src = image;
+        const photoMain = handlePhotopopupOpen(title = name, image = link);
+
+    }
+
+
     rectangle.addEventListener('click', handlePhotopopupOpen);
     bascet.addEventListener('click', handelRemoveElements);
     like.addEventListener('click', likeClick);
@@ -140,11 +151,8 @@ function handelRemoveElements(evt) {
     element.remove();
 }
 
-function handlePhotopopupOpen(evt) {
-    evt.preventDefault();
-    photopopup.classList.remove('photopopup_open');
 
-}
+
 
 function functionPhotoPopupClose() {
     photopopup.classList.add('photopopup_open');
