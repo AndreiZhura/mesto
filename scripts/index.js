@@ -119,7 +119,7 @@ function renderCard({ name, link }) {
 
     function handlePhotopopupOpen() {
         photopopup.classList.remove('photopopup_open');
-        let photoPopupImage = document.querySelector('.photopoup__img');
+        let photoPopupImage = document.querySelector('.photopopup__img');
         let photopopupTitle = document.querySelector('.photopopup__text');
         photoPopupImage.src = link;
         photopopupTitle.textContent = name;
