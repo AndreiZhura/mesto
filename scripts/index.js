@@ -109,20 +109,20 @@ function render() {
 }
 
 function renderCard({ name, link }) {
-    const ArrayElement = placeTemplate.querySelector(".element").cloneNode(true);
-    const elementTitleArray = ArrayElement.querySelector(".element__title").textContent = name;
-    const elementImageArray = ArrayElement.querySelector(".element__rectangle").src = link;
+    let ArrayElement = placeTemplate.querySelector(".element").cloneNode(true);
+    let elementTitleArray = ArrayElement.querySelector(".element__title").textContent = name;
+    let elementImageArray = ArrayElement.querySelector(".element__rectangle").src = link;
     const bascet = ArrayElement.querySelector('.element__basket');
     const like = ArrayElement.querySelector('.element__like');
     const rectangle = ArrayElement.querySelector('.element__rectangle');
     placesContainer.prepend(ArrayElement);
 
-    function handlePhotopopupOpen(title, image) {
+    function handlePhotopopupOpen() {
         photopopup.classList.remove('photopopup_open');
-        const photopopupTitle = document.querySelector('.photopopup__text').textContent = title;
-        const photoPopupImage = document.querySelector('.photopopup__main').src = image;
-        const photoMain = handlePhotopopupOpen(title = name, image = link);
-
+        let photoPopupImage = document.querySelector('.photopoup__img');
+        let photopopupTitle = document.querySelector('.photopopup__text');
+        photoPopupImage.src = link;
+        photopopupTitle.textContent = name;
     }
 
 
