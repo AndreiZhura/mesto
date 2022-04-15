@@ -48,7 +48,7 @@ const popupElements = document.getElementById('popupElements');
 const titleImput = document.getElementById('titleImput');
 const linkInput = document.getElementById('linkInput');
 const popupElementsButtonSave = document.getElementById('popupElementsButtonSave');
-const bascet = document.querySelector('.element__basket')
+
 
 function functionPopOpenElements() {
     popupElements.classList.remove('popup_elements');
@@ -60,7 +60,7 @@ function functionPopCloseElements() {
 
 popOpenElements.addEventListener('click', functionPopOpenElements);
 closeButtonElements.addEventListener('click', functionPopCloseElements);
-popupElementsButtonSave.addEventListener('click', handelAddImage);
+popupElementsButtonSave.addEventListener('click', handelAddImageAndTitle);
 
 
 const initialCards = [{
@@ -108,17 +108,31 @@ function renderCard({ name, link }) {
     const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
+    const bascet = placeElement.querySelector('.element__basket');
 
     placesContainer.prepend(placeElement);
+    bascet.addEventListener('click', handelRemoveElements)
 
 }
 render();
 
-function handelAddImage(evt) {
+function handelAddImageAndTitle(evt) {
     evt.preventDefault();
     const inputTitleValue = document.getElementById('titleImput').value;
     const inputImage = document.getElementById('linkInput').value
     const elementTitleValue = renderCard({ name: inputTitleValue, link: inputImage });
-
     functionPopCloseElements();
+}
+
+function likeClick(l) {
+    l.target.classList.toggle('element__like_active_white');
+    l.target.classList.toggle('element__like_active_black');
+}
+like.forEach((like) => {
+    like.addEventListener('click', likeClick);
+});
+
+function handelRemoveElements(evt) {
+    const element = evt.target.closest('.element_open');
+    element.remove();
 }
