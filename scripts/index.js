@@ -48,6 +48,8 @@ const popupElements = document.getElementById('popupElements');
 const titleImput = document.getElementById('titleImput');
 const linkInput = document.getElementById('linkInput');
 const popupElementsButtonSave = document.getElementById('popupElementsButtonSave');
+const photopopup = document.getElementById('photo-popup');
+const photoPopupButtonClose = document.getElementById('photoPopupButtonClose')
 
 
 function functionPopOpenElements() {
@@ -61,6 +63,7 @@ function functionPopCloseElements() {
 popOpenElements.addEventListener('click', functionPopOpenElements);
 closeButtonElements.addEventListener('click', functionPopCloseElements);
 popupElementsButtonSave.addEventListener('click', handelAddImageAndTitle);
+photoPopupButtonClose.addEventListener('click', functionPhotoPopupClose);
 
 
 const initialCards = [{
@@ -109,8 +112,10 @@ function renderCard({ name, link }) {
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
     const bascet = placeElement.querySelector('.element__basket');
-    const like = placeElement.querySelector('.element__like')
+    const like = placeElement.querySelector('.element__like');
+    const rectangle = placeElement.querySelector('.element__rectangle');
     placesContainer.prepend(placeElement);
+    rectangle.addEventListener('click', handlePhotopopupOpen);
     bascet.addEventListener('click', handelRemoveElements);
     like.addEventListener('click', likeClick);
 
@@ -129,11 +134,18 @@ function likeClick(l) {
     l.target.classList.toggle('element__like_active_white');
     l.target.classList.toggle('element__like_active_black');
 }
-like.forEach((like) => {
-    like.addEventListener('click', likeClick);
-});
 
 function handelRemoveElements(evt) {
     const element = evt.target.closest('.element_open');
     element.remove();
+}
+
+function handlePhotopopupOpen(evt) {
+    evt.preventDefault();
+    photopopup.classList.remove('photopopup_open');
+
+}
+
+function functionPhotoPopupClose() {
+    photopopup.classList.add('photopopup_open');
 }
