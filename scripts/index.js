@@ -125,7 +125,6 @@ function renderCard({ name, link }) {
         photopopupTitle.textContent = name;
     }
 
-
     rectangle.addEventListener('click', handlePhotopopupOpen);
     bascet.addEventListener('click', handelRemoveElements);
     like.addEventListener('click', likeClick);

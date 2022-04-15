@@ -1,4 +1,5 @@
-.popup_profile{
+.popup_profile {
     visibility: hidden;
     opacity: 0;
+    transition: 1s;
 }

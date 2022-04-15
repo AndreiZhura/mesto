@@ -1,4 +1,5 @@
-.popup_elements{
+.popup_elements {
     visibility: hidden;
     opacity: 0;
+    transition: 1s;
 }
