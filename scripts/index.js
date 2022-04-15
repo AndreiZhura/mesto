@@ -124,7 +124,6 @@ function renderCard({ name, link }) {
         photoPopupImage.src = link;
         photopopupTitle.textContent = name;
     }
-
     rectangle.addEventListener('click', handlePhotopopupOpen);
     bascet.addEventListener('click', handelRemoveElements);
     like.addEventListener('click', likeClick);
@@ -149,9 +148,6 @@ function handelRemoveElements(evt) {
     const element = evt.target.closest('.element_open');
     element.remove();
 }
-
-
-
 
 function functionPhotoPopupClose() {
     photopopup.classList.add('photopopup_open');
