@@ -27,7 +27,7 @@
     <footer class="footer">
         <p class="footer__author">&COPY;2022 Mesto Russia</p>
     </footer>
-    <section class="popup popup_profile" id="popupProfile">
+    <section class="popup" id="popupProfile">
         <div class="popup__main">
             <button class="popup__button" type="button" id="closeButtonProfile"></button>
             <form class="popup__container" id="popupContainer" name="conteiner">
@@ -38,7 +38,7 @@
             </form>
         </div>
     </section>
-    <section class="popup popup_elements" id="popupElements">
+    <section class="popup" id="popupElements">
         <div class="popup__main">
             <button class="popup__button" type="button" id="closeButtonElements"></button>
             <form class="popup__container" id="popupContainerElements" name="conteiner">
@@ -49,15 +49,15 @@
             </form>
         </div>
     </section>
-    <section class="photopopup photopopup_open" id="photo-popup">
-        <div class="photopopup__main">
-            <img class="photopopup__img" src="#" alt="Изображение">
-            <button class="photopopup__button" id="photoPopupButtonClose"></button>
-            <h3 class="photopopup__text">Текст</h3>
+    <section class="popup popup_photo" id="popup-photo">
+        <div class="popup__main-image">
+            <img class="popup__img" src="#" alt="Изображение">
+            <button class="popup__button" id="photoPopupButtonClose"></button>
+            <h3 class="popup__text">Текст</h3>
         </div>
     </section>
     <template class="template">
-        <article class="element element_open">
+        <article class="element">
             <img src="#" alt="Картинка" class="element__rectangle" />
             <button class="element__basket" type="button"> </button>
             <div class="element__group">

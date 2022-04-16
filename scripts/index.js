@@ -145,7 +145,7 @@ function likeClick(l) {
 }
 
 function handelRemoveElements(evt) {
-    const element = evt.target.closest('.element_open');
+    const element = evt.target.closest('.element');
     element.remove();
 }
 

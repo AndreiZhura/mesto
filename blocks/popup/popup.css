@@ -4,8 +4,8 @@
     align-self: center;
     justify-self: flex-start;
     display: flex;
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
     align-items: center;
     justify-content: center;
     width: 100%;
