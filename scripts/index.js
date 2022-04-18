@@ -13,13 +13,15 @@ const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 
 
-
+console.log(popups);
 
 function OpenPopups(index) {
     popups[index].classList.add('popup_open');
     if (popups[0]) {
         nameInput.value = prolileName.textContent;
         jobInput.value = profileProfession.textContent;
+    } else if (popups[2]) {
+        handlePhotopopupOpen();
     }
 
 }
@@ -98,8 +100,11 @@ function getElement({ name, link }) {
     elementTemplate.querySelector('.element__rectangle').src = link;
     const elementLike = elementTemplate.querySelector('.element__like');
     const elementBascet = elementTemplate.querySelector('.element__basket');
+    const elementRectangle = elementTemplate.querySelector('.element__rectangle')
     elementBascet.addEventListener('click', handelRemoveElement);
     elementLike.addEventListener('click', likeClick);
+    elementRectangle.addEventListener('click', () => OpenPopups(2))
+
     elements.prepend(elementTemplate);
 }
 
@@ -123,11 +128,19 @@ function handelRemoveElement(bascet) {
     element.remove();
 }
 
+function handlePhotopopupOpen(name, link) {
+
+    let photoPopupImage = document.querySelector('.photopopup__img');
+    let photopopupTitle = document.querySelector('.photopopup__text');
+    photoPopupImage.src = link;
+    photopopupTitle.textContent = name;
+}
 render();
 
 buttonOpenProfile.addEventListener('click', () => OpenPopups(0));
 buttonOpenElement.addEventListener('click', () => OpenPopups(1))
 buttonClosePopup[0].addEventListener('click', () => ClosePopups(0));
 buttonClosePopup[1].addEventListener('click', () => ClosePopups(1));
+buttonClosePopup[2].addEventListener('click', () => ClosePopups(2));
 formElementPopup[0].addEventListener('submit', formSubmitHandler);
 formElementPopup[1].addEventListener('submit', handelAddImageAndTitle);
