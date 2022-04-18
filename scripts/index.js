@@ -20,8 +20,6 @@ function OpenPopups(index) {
     if (popups[0]) {
         nameInput.value = prolileName.textContent;
         jobInput.value = profileProfession.textContent;
-    } else if (popups[2]) {
-        handlePhotopopupOpen();
     }
 
 }
@@ -101,15 +99,15 @@ function getElement({ name, link }) {
     const elementLike = elementTemplate.querySelector('.element__like');
     const elementBascet = elementTemplate.querySelector('.element__basket');
     const elementRectangle = elementTemplate.querySelector('.element__rectangle')
-    elementBascet.addEventListener('click', handelRemoveElement);
+    elementBascet.addEventListener('click', RemoveElement);
     elementLike.addEventListener('click', likeClick);
-    elementRectangle.addEventListener('click', () => OpenPopups(2))
+    elementRectangle.addEventListener('click', () => lookingElement(name, link))
 
     elements.prepend(elementTemplate);
 }
 
 
-function handle(name, link) {
+function lookingElement(name, link) {
     OpenPopups(2);
     let photoPopupImage = document.querySelector('.popup__img');
     let photopopupTitle = document.querySelector('.popup__text');
@@ -123,18 +121,11 @@ function likeClick(like) {
     like.target.classList.toggle('element__like_active_black');
 }
 
-function handelRemoveElement(bascet) {
+function RemoveElement(bascet) {
     const element = bascet.target.closest('.element');
     element.remove();
 }
 
-function handlePhotopopupOpen(name, link) {
-
-    let photoPopupImage = document.querySelector('.photopopup__img');
-    let photopopupTitle = document.querySelector('.photopopup__text');
-    photoPopupImage.src = link;
-    photopopupTitle.textContent = name;
-}
 render();
 
 buttonOpenProfile.addEventListener('click', () => OpenPopups(0));
