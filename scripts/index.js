@@ -47,7 +47,7 @@ function addImageAndTitle(evt) {
     const inputTitleValue = document.querySelector('#titleImput').value;
     const inputImage = document.querySelector('#linkInput').value
     const elementTitleValue = getElement({ name: inputTitleValue, link: inputImage });
-    ClosePopups(1);
+    closePopups(1);
 }
 
 const initialCards = [{
@@ -115,7 +115,6 @@ function lookingElement(name, link) {
 
 
 function likeClick(like) {
-    like.target.classList.toggle('element__like_active_white');
     like.target.classList.toggle('element__like_active_black');
 }
 
