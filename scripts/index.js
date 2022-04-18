@@ -3,7 +3,7 @@ const buttonOpenProfile = document.querySelector('.profile__button-edit');
 const buttonOpenElement = document.querySelector('.profile__button-add')
 const buttonClosePopup = document.querySelectorAll('.popup__button');
 
-const prolileName = document.querySelector('#profileName');
+const profileName = document.querySelector('#profileName');
 const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#nameInput');
 const jobInput = document.querySelector('#jobInput');
@@ -15,34 +15,34 @@ const elements = document.querySelector('.elements');
 
 console.log(popups);
 
-function OpenPopups(index) {
+function openPopups(index) {
     popups[index].classList.add('popup_open');
     if (popups[0]) {
-        nameInput.value = prolileName.textContent;
+        nameInput.value = profileName.textContent;
         jobInput.value = profileProfession.textContent;
     }
 
 }
 
 
-function ClosePopups(index) {
+function closePopups(index) {
     popups[index].classList.remove('popup_open');
 }
 
-function formSubmitHandler(evt) {
+function submitFormHandler(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
     // О том, как это делать, расскажем позже.
 
     // Получите значение полей jobInput и nameInput из свойства value
-    prolileName.textContent = nameInput.value;
+    profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
-    ClosePopups(0);
+    closePopups(0);
     // Вставьте новые значения с помощью textContent
 }
 
-function handelAddImageAndTitle(evt) {
+function addImageAndTitle(evt) {
     evt.preventDefault();
     const inputTitleValue = document.querySelector('#titleImput').value;
     const inputImage = document.querySelector('#linkInput').value
@@ -76,10 +76,10 @@ const initialCards = [{
     }
 ];
 
-const initialCardsRender = initialCards.map(array);
+const initialCardsRender = initialCards.map(getElementsArray);
 
 
-function array(item) {
+function getElementsArray(item) {
     return {
         name: item.name,
         link: item.link
@@ -89,7 +89,6 @@ function array(item) {
 function render() {
     initialCardsRender.forEach(getElement);
 }
-
 
 
 function getElement({ name, link }) {
@@ -102,13 +101,12 @@ function getElement({ name, link }) {
     elementBascet.addEventListener('click', RemoveElement);
     elementLike.addEventListener('click', likeClick);
     elementRectangle.addEventListener('click', () => lookingElement(name, link))
-
     elements.prepend(elementTemplate);
 }
 
 
 function lookingElement(name, link) {
-    OpenPopups(2);
+    openPopups(2);
     let photoPopupImage = document.querySelector('.popup__img');
     let photopopupTitle = document.querySelector('.popup__text');
     photoPopupImage.src = link;
@@ -128,10 +126,10 @@ function RemoveElement(bascet) {
 
 render();
 
-buttonOpenProfile.addEventListener('click', () => OpenPopups(0));
-buttonOpenElement.addEventListener('click', () => OpenPopups(1))
-buttonClosePopup[0].addEventListener('click', () => ClosePopups(0));
-buttonClosePopup[1].addEventListener('click', () => ClosePopups(1));
-buttonClosePopup[2].addEventListener('click', () => ClosePopups(2));
-formElementPopup[0].addEventListener('submit', formSubmitHandler);
-formElementPopup[1].addEventListener('submit', handelAddImageAndTitle);
+buttonOpenProfile.addEventListener('click', () => openPopups(0));
+buttonOpenElement.addEventListener('click', () => openPopups(1))
+buttonClosePopup[0].addEventListener('click', () => closePopups(0));
+buttonClosePopup[1].addEventListener('click', () => closePopups(1));
+buttonClosePopup[2].addEventListener('click', () => closePopups(2));
+formElementPopup[0].addEventListener('submit', submitFormHandler);
+formElementPopup[1].addEventListener('submit', addImageAndTitle);
