@@ -91,13 +91,13 @@ function render() {
 }
 
 function AddNewElement(name, link) {
-    const newObj = CreateElement(name, link);
+    const newObj = createElement(name, link);
 
     elements.prepend(newObj);
 }
 
 
-function CreateElement(name, link) {
+function createElement(name, link) {
     const elementTemplate = template.content.querySelector('.element').cloneNode(true);
     elementTemplate.querySelector('.element__title').textContent = name;
     elementTemplate.querySelector('.element__rectangle').src = link;
@@ -106,7 +106,7 @@ function CreateElement(name, link) {
     const elementBascet = elementTemplate.querySelector('.element__basket');
     const elementRectangle = elementTemplate.querySelector('.element__rectangle');
 
-    elementBascet.addEventListener('click', RemoveElement);
+    elementBascet.addEventListener('click', emoveElement);
     elementLike.addEventListener('click', likeClick);
     elementRectangle.addEventListener('click', () => lookingElement(name, link));
 
@@ -127,7 +127,7 @@ function likeClick(like) {
     like.target.classList.toggle('element__like_active_black');
 }
 
-function RemoveElement(bascet) {
+function removeElement(bascet) {
     const element = bascet.target.closest('.element');
     element.remove();
 }
@@ -141,4 +141,3 @@ buttonClosePopup[1].addEventListener('click', () => closePopups(1));
 buttonClosePopup[2].addEventListener('click', () => closePopups(2));
 formElementPopup[0].addEventListener('submit', submitFormHandler);
 formElementPopup[1].addEventListener('submit', addImageAndTitle);
-y
