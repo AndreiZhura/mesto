@@ -106,7 +106,7 @@ function createElement(name, link) {
     const elementBascet = elementTemplate.querySelector('.element__basket');
     const elementRectangle = elementTemplate.querySelector('.element__rectangle');
 
-    elementBascet.addEventListener('click', emoveElement);
+    elementBascet.addEventListener('click', removeElement);
     elementLike.addEventListener('click', likeClick);
     elementRectangle.addEventListener('click', () => lookingElement(name, link));
 
@@ -141,3 +141,6 @@ buttonClosePopup[1].addEventListener('click', () => closePopups(1));
 buttonClosePopup[2].addEventListener('click', () => closePopups(2));
 formElementPopup[0].addEventListener('submit', submitFormHandler);
 formElementPopup[1].addEventListener('submit', addImageAndTitle);
+
+
+//
