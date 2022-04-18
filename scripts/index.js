@@ -46,7 +46,7 @@ function addImageAndTitle(evt) {
     evt.preventDefault();
     const inputTitleValue = document.querySelector('#titleImput').value;
     const inputImage = document.querySelector('#linkInput').value
-    const elementTitleValue = getElement({ name: inputTitleValue, link: inputImage });
+    AddNewElement(inputTitleValue, inputImage);
     closePopups(1);
 }
 
@@ -77,7 +77,7 @@ const initialCards = [{
 ];
 
 const initialCardsRender = initialCards.map(getElementsArray);
-
+//const initialCards
 
 function getElementsArray(item) {
     return {
@@ -87,21 +87,30 @@ function getElementsArray(item) {
 }
 
 function render() {
-    initialCardsRender.forEach(getElement);
+    initialCardsRender.forEach(s => AddNewElement(s.name, s.link));
+}
+
+function AddNewElement(name, link) {
+    const newObj = CreateElement(name, link);
+
+    elements.prepend(newObj);
 }
 
 
-function getElement({ name, link }) {
+function CreateElement(name, link) {
     const elementTemplate = template.content.querySelector('.element').cloneNode(true);
     elementTemplate.querySelector('.element__title').textContent = name;
     elementTemplate.querySelector('.element__rectangle').src = link;
+
     const elementLike = elementTemplate.querySelector('.element__like');
     const elementBascet = elementTemplate.querySelector('.element__basket');
-    const elementRectangle = elementTemplate.querySelector('.element__rectangle')
+    const elementRectangle = elementTemplate.querySelector('.element__rectangle');
+
     elementBascet.addEventListener('click', RemoveElement);
     elementLike.addEventListener('click', likeClick);
-    elementRectangle.addEventListener('click', () => lookingElement(name, link))
-    elements.prepend(elementTemplate);
+    elementRectangle.addEventListener('click', () => lookingElement(name, link));
+
+    return elementTemplate;
 }
 
 
@@ -132,3 +141,4 @@ buttonClosePopup[1].addEventListener('click', () => closePopups(1));
 buttonClosePopup[2].addEventListener('click', () => closePopups(2));
 formElementPopup[0].addEventListener('submit', submitFormHandler);
 formElementPopup[1].addEventListener('submit', addImageAndTitle);
+y
