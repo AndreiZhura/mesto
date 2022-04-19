@@ -5,7 +5,7 @@ const profileName = document.querySelector('#profileName');
 const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#nameInput');
 const jobInput = document.querySelector('#jobInput');
-let formPopupProfile = document.querySelector('#popupContainerProfile');
+const formPopupProfile = document.querySelector('#popupContainerProfile');
 
 const popupElement = document.querySelector('#popupElements');
 const popupElementOpenButton = document.querySelector('#popOpenElements');
@@ -102,7 +102,6 @@ function addNewElement(name, link) {
     elements.prepend(newObj);
 }
 
-
 function createElement(name, link) {
     const elementTemplate = template.content.querySelector('.element').cloneNode(true);
     const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
@@ -119,13 +118,11 @@ function createElement(name, link) {
     return elementTemplate;
 }
 
-
 function lookingElement(name, link) {
     photoPopupImage.src = link;
     photopopupTitle.textContent = name;
     openPopup(popupPhoto)
 }
-
 
 function likeClick(like) {
     like.target.classList.toggle('element__like_active_black');
