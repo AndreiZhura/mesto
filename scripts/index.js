@@ -1,32 +1,43 @@
-const popups = document.querySelectorAll('.popup');
-const buttonOpenProfile = document.querySelector('.profile__button-edit');
-const buttonOpenElement = document.querySelector('.profile__button-add')
-const buttonClosePopup = document.querySelectorAll('.popup__button');
-
+const popupProfile = document.querySelector('#popupProfile')
+const popupProfileOpenButton = document.querySelector('#popOpenProfile');
+const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
 const profileName = document.querySelector('#profileName');
 const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#nameInput');
 const jobInput = document.querySelector('#jobInput');
-const formElementPopup = document.querySelectorAll('.popup__container');
+const formPopupProfile = document.querySelector('#popupContainerProfile');
+
+
+const popupElement = document.querySelector('#popupProfile');
+const popupElementOpenButton = document.querySelector('#popOpenElements');
+const popupElementCloseButton = document.querySelector('#closeButtonElements');
+const formPopupElement = document.querySelector('#popupContainerElements')
+
+const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave')
+const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave')
+
+const popupPhoto = document.querySelector('#popupPhoto')
+const popupText = document.querySelector('.popup__text')
+const popupPhotoButtonClose = document.querySelector('#photoPopupButtonClose');
 
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 
-const inputTitleValue = document.querySelector('#titleImput');
-const inputImage = document.querySelector('#linkInput')
 
 
 
-
-
-
-function openPopup(index) {
-    popups[index].classList.add('popup_open');
+function popupValue() {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileProfession.textContent;
+    openPopup(popupProfile)
 }
 
+function openPopup(open) {
+    open.classList.add('popup_open');
+}
 
-function closePopup(index) {
-    popups[index].classList.remove('popup_open');
+function closePopup(close) {
+    close.classList.remove('popup_open')
 }
 
 function submitFormHandler(evt) {
@@ -38,16 +49,16 @@ function submitFormHandler(evt) {
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
-    closePopup(0);
+    closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
 }
 
 function addImageAndTitle(evt) {
     evt.preventDefault();
-    inputTitleValue.value
-    inputImage.value
+    const inputTitleValue = document.querySelector('#titleImput').value;
+    const inputImage = document.querySelector('#linkInput').value;
     addNewElement(inputTitleValue, inputImage);
-    closePopup(1);
+    closePopup(popupElement);
 }
 
 const initialCards = [{
@@ -110,11 +121,12 @@ function createElement(name, link) {
 
 
 function lookingElement(name, link) {
-    openPopups(2);
+
     const photoPopupImage = document.querySelector('.popup__img');
     const photopopupTitle = document.querySelector('.popup__text');
     photoPopupImage.src = link;
     photopopupTitle.textContent = name;
+    openPopup(popupPhoto)
 }
 
 
@@ -129,10 +141,9 @@ function removeElement(bascet) {
 
 render();
 
-buttonOpenProfile.addEventListener('click', () => openPopup(0));
-buttonOpenElement.addEventListener('click', () => openPopup(1))
-buttonClosePopup[0].addEventListener('click', () => closePopup(0));
-buttonClosePopup[1].addEventListener('click', () => closePopup(1));
-buttonClosePopup[2].addEventListener('click', () => closePopup(2));
-formElementPopup[0].addEventListener('submit', submitFormHandler);
-formElementPopup[1].addEventListener('submit', addImageAndTitle);
+popupProfileOpenButton.addEventListener('click', popupValue)
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile))
+popupElementOpenButton.addEventListener('click', () => openPopup(popupElement))
+popupPhotoButtonClose.addEventListener('click', () => closePopup(popupPhoto))
+formPopupProfile.addEventListener('submit', submitFormHandler)
+popupElementsButtonSave.addEventListener('submit', addImageAndTitle)
