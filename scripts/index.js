@@ -22,11 +22,11 @@ const popupPhotoButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 
-const inputTitleValue = document.querySelector('#titleImput');
-const inputImage = document.querySelector('#linkInput');
-
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
+
+const inputTitleValue = document.querySelector('#titleImput');
+const inputImage = document.querySelector('#linkInput');
 
 
 
@@ -59,9 +59,9 @@ function submitFormHandler(evt) {
 
 function addImageAndTitle(evt) {
     evt.preventDefault();
-    const inputTitleValue = document.querySelector('#titleImput').value
-    const inputImage = document.querySelector('#linkInput').value
-    addNewElement(inputTitleValue, inputImage);
+    inputTitleValue.value
+    inputImage.value
+    addNewElement(inputTitleValue.value, inputImage.value);
     closePopup(popupElement);
 }
 
@@ -105,8 +105,8 @@ function addNewElement(name, link) {
 
 function createElement(name, link) {
     const elementTemplate = template.content.querySelector('.element').cloneNode(true);
-    elementTemplate.querySelector('.element__title').textContent = name;
-    elementTemplate.querySelector('.element__rectangle').src = link;
+    const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
+    const elementLink = elementTemplate.querySelector('.element__rectangle').src = link;
 
     const elementLike = elementTemplate.querySelector('.element__like');
     const elementBascet = elementTemplate.querySelector('.element__basket');
@@ -143,4 +143,4 @@ popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile)
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupPhotoButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitFormHandler);
-popupElementsButtonSave.addEventListener('click', addImageAndTitle);
+formPopupElement.addEventListener('submit', addImageAndTitle);
