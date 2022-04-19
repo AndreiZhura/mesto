@@ -7,7 +7,6 @@ const nameInput = document.querySelector('#nameInput');
 const jobInput = document.querySelector('#jobInput');
 let formPopupProfile = document.querySelector('#popupContainerProfile');
 
-
 const popupElement = document.querySelector('#popupElements');
 const popupElementOpenButton = document.querySelector('#popOpenElements');
 const popupElementCloseButton = document.querySelector('#closeButtonElements');
@@ -23,6 +22,11 @@ const popupPhotoButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 
+const inputTitleValue = document.querySelector('#titleImput');
+const inputImage = document.querySelector('#linkInput');
+
+const photoPopupImage = document.querySelector('.popup__img');
+const photopopupTitle = document.querySelector('.popup__text');
 
 
 
@@ -55,8 +59,8 @@ function submitFormHandler(evt) {
 
 function addImageAndTitle(evt) {
     evt.preventDefault();
-    const inputTitleValue = document.querySelector('#titleImput').value;
-    const inputImage = document.querySelector('#linkInput').value;
+    const inputTitleValue = document.querySelector('#titleImput').value
+    const inputImage = document.querySelector('#linkInput').value
     addNewElement(inputTitleValue, inputImage);
     closePopup(popupElement);
 }
@@ -88,10 +92,6 @@ const initialCards = [{
 ];
 
 
-
-
-
-
 function render() {
     initialCards.forEach(step => addNewElement(step.name, step.link));
 }
@@ -121,9 +121,6 @@ function createElement(name, link) {
 
 
 function lookingElement(name, link) {
-
-    const photoPopupImage = document.querySelector('.popup__img');
-    const photopopupTitle = document.querySelector('.popup__text');
     photoPopupImage.src = link;
     photopopupTitle.textContent = name;
     openPopup(popupPhoto)
