@@ -6,31 +6,26 @@ const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#nameInput');
 const jobInput = document.querySelector('#jobInput');
 const formPopupProfile = document.querySelector('#popupContainerProfile');
-
 const popupElement = document.querySelector('#popupElements');
 const popupElementOpenButton = document.querySelector('#popOpenElements');
-const popupElementCloseButton = document.querySelector('#closeButtonElements');
+const popupElementCloseButton = document.querySelector('#closeButtonElement');
 const formPopupElement = document.querySelector('#popupContainerElements');
-
 const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
-
 const popupPhoto = document.querySelector('#popupPhoto');
 const popupText = document.querySelector('.popup__text');
-const popupPhotoButtonClose = document.querySelector('#photoPopupButtonClose');
-
+const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
-
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
-
 const inputTitleValue = document.querySelector('#titleImput');
 const inputImage = document.querySelector('#linkInput');
 
 
 
-function popupValue() {
+
+function addPopupValue() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
@@ -135,9 +130,10 @@ function removeElement(bascet) {
 
 render();
 
-popupProfileOpenButton.addEventListener('click', popupValue);
+popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupPhotoButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
