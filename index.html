@@ -22,34 +22,30 @@
             </div>
             <button class="profile__button-add" type="button" id="popOpenElements"></button>
         </section>
-        <div class="elements">
-
-        </div>
+        <div class="elements"></div>
     </main>
-
     <footer class="footer">
         <p class="footer__author">&COPY;2022 Mesto Russia</p>
     </footer>
-
     <section class="popup popup_profile" id="popupProfile">
         <div class="popup__main">
             <button class="popup__button" type="button" id="closeButtonProfile"></button>
-            <form class="popup__container" name="conteiner">
+            <form class="popup__container" id="popupContainer" name="conteiner">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input placeholder="name" type="text" name="namePopup" id="nameInput" class="popup__input" />
                 <input placeholder="profession" type="text" name="proffesionPopup" id="jobInput" class="popup__input" />
-                <button type="submit" class="popup__save" id="popupProfileButtonSave">Сохранить</button>
+                <button class="popup__save" id="popupProfileButtonSave">Сохранить</button>
             </form>
         </div>
     </section>
     <section class="popup popup_elements" id="popupElements">
         <div class="popup__main">
             <button class="popup__button" type="button" id="closeButtonElements"></button>
-            <form class="popup__container" name="conteiner">
+            <form class="popup__container" id="popupContainerElements" name="conteiner">
                 <h2 class="popup__title">Новое место</h2>
                 <input placeholder="Название" type="text" name="namePopup" id="titleImput" class="popup__input" />
                 <input placeholder="Ссылка на картинку" type="text" name="proffesionPopup" id="linkInput" class="popup__input" />
-                <button type="submit" class="popup__save" id="popupElementsButtonSave">Сохранить</button>
+                <button class="popup__save" id="popupElementsButtonSave">Сохранить</button>
             </form>
         </div>
     </section>
@@ -59,11 +55,11 @@
         </div>
     </section>
     <template class="template">
-        <article class="element">
-            <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__rectangle" />
+        <article class="element element_open">
+            <img src="" alt="Картинка" class="element__rectangle" />
             <button class="element__basket" type="button"> </button>
             <div class="element__group">
-                <h2 class="element__title">Карачаево-Черкесская Республика</h2>
+                <h2 class="element__title"></h2>
                 <button class="element__like element__like_active_white" type="button"></button>
             </div>
         </article>

@@ -24,13 +24,7 @@ const likeWhite = document.querySelector('.element__like_active_white');
 const likeBlack = document.querySelector('.element__like_active_black');
 let like = document.querySelectorAll('.element__like');
 //лайк
-function likeClick(l) {
-    l.target.classList.toggle('element__like_active_white');
-    l.target.classList.toggle('element__like_active_black');
-}
-like.forEach((like) => {
-    like.addEventListener('click', likeClick);
-});
+
 //попап профиля
 function openProfilePopup() {
     popup.classList.remove('popup_profile');
@@ -127,9 +121,7 @@ function render() {
 }
 
 function renderCard({ name, link }) {
-    const placeElement = placeTemplate
-        .querySelector(".element")
-        .cloneNode(true);
+    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__rectangle").src = link;
 
@@ -137,3 +129,11 @@ function renderCard({ name, link }) {
 }
 
 render();
+
+function likeClick(l) {
+    l.target.classList.toggle('element__like_active_white');
+    l.target.classList.toggle('element__like_active_black');
+}
+like.forEach((like) => {
+    like.addEventListener('click', likeClick);
+});
