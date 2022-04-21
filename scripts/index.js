@@ -1,139 +1,139 @@
-const popup = document.querySelector('.popup');
-const formElement = document.querySelector('.popup__container');
-const popupElement = document.getElementById('popupElements');
-//кнопки вызывающие попап
-const popupOpenButtonProfile = document.getElementById('popOpenProfile');
-const popupOpenButtonElements = document.getElementById('popOpenElements');
-//кнопки закрывающие попап
-const closeButtonElements = document.getElementById('closeButtonElements');
-const closeButtonProfile = document.getElementById('closeButtonProfile');
-//кнопка нажатия на картинки в элементах
-const openPhotoPopupButton = document.querySelector('.element__rectangle');
-const photoPopupButtonClose = document.getElementById('photoPopupButtonClose');
-// внутренности попапа профиля
-const prolileName = document.getElementById('profileName');
-const profileProfession = document.getElementById('profileProfession');
-const nameInput = document.getElementById('nameInput');
-const jobInput = document.getElementById('jobInput');
+const popupProfile = document.querySelector('#popupProfile');
+const popupProfileOpenButton = document.querySelector('#popOpenProfile');
+const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+const profileName = document.querySelector('#profileName');
+const profileProfession = document.querySelector('#profileProfession');
+const nameInput = document.querySelector('#nameInput');
+const jobInput = document.querySelector('#jobInput');
+const formPopupProfile = document.querySelector('#popupContainerProfile');
+const popupElement = document.querySelector('#popupElements');
+const popupElementOpenButton = document.querySelector('#popOpenElements');
+const popupElementCloseButton = document.querySelector('#closeButtonElement');
+const formPopupElement = document.querySelector('#popupContainerElements');
+const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
+const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
+const popupPhoto = document.querySelector('#popupPhoto');
+const popupText = document.querySelector('.popup__text');
+const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
+const template = document.querySelector('.template');
+const elements = document.querySelector('.elements');
+const photoPopupImage = document.querySelector('.popup__img');
+const photopopupTitle = document.querySelector('.popup__text');
+const inputTitleValue = document.querySelector('#titleImput');
+const inputImage = document.querySelector('#linkInput');
 
-// фотопопап
-const photopopup = document.getElementById('photo-popup')
 
-// лайки
-const likeWhite = document.querySelector('.element__like_active_white');
-const likeBlack = document.querySelector('.element__like_active_black');
-let like = document.querySelectorAll('.element__like');
-//лайк
 
-//попап профиля
-function openProfilePopup() {
-    popup.classList.remove('popup_profile');
-    nameInput.value = prolileName.textContent;
+
+function addPopupValue() {
+    nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
+    openPopup(popupProfile)
 }
 
-function closeProfilePopup() {
-    popup.classList.add('popup_profile');
-}
-// попап элемента
-function openElementsPopup() {
-    popupElement.classList.remove('popup_elements');
+function openPopup(open) {
+    open.classList.add('popup_open');
 }
 
-function closeElementPopup() {
-    popupElement.classList.add('popup_elements');
-}
-// попап с фото
-function openPhotoPopup() {
-    photopopup.classList.remove('photopopup_open');
+function closePopup(close) {
+    close.classList.remove('popup_open')
 }
 
-function closePhotoPopup() {
-    photopopup.classList.add('photopopup_open');
-}
-
-function formSubmitHandler(evt) {
+function submitFormHandler(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
     // О том, как это делать, расскажем позже.
 
     // Получите значение полей jobInput и nameInput из свойства value
-
-    // Выберите элементы, куда должны быть вставлены значения полей
-    prolileName.textContent = nameInput.value;
+    profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
+    // Выберите элементы, куда должны быть вставлены значения полей
+    closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
-    closeProfilePopup();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
-popupOpenButtonProfile.addEventListener('click', openProfilePopup);
-popupOpenButtonElements.addEventListener('click', openElementsPopup);
-
-closeButtonProfile.addEventListener('click', closeProfilePopup);
-closeButtonElements.addEventListener('click', closeElementPopup);
-
-photoPopupButtonClose.addEventListener('click', closePhotoPopup);
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+function addImageAndTitle(evt) {
+    evt.preventDefault();
+    inputTitleValue.value
+    inputImage.value
+    addNewElement(inputTitleValue.value, inputImage.value);
+    closePopup(popupElement);
+}
 
 const initialCards = [{
-        name: "Архыз",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
-        name: "Челябинская область",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
-        name: "Иваново",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     },
     {
-        name: "Камчатка",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-        name: "Холмогорский район",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
-        name: "Байкал",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
 
-const placesContainer = document.querySelector(".elements");
-const placeTemplate = document.querySelector(".template").content;
-
-const placeInfo = initialCards.map(function(item) {
-    return {
-        name: item.name,
-        link: item.link
-    };
-});
 
 function render() {
-    placeInfo.forEach(renderCard);
+    initialCards.forEach(step => addNewElement(step.name, step.link));
 }
 
-function renderCard({ name, link }) {
-    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
-    placeElement.querySelector(".element__title").textContent = name;
-    placeElement.querySelector(".element__rectangle").src = link;
+function addNewElement(name, link) {
+    const newObj = createElement(name, link);
 
-    placesContainer.prepend(placeElement);
+    elements.prepend(newObj);
+}
+
+function createElement(name, link) {
+    const elementTemplate = template.content.querySelector('.element').cloneNode(true);
+    const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
+    const elementLink = elementTemplate.querySelector('.element__rectangle').src = link;
+
+    const elementLike = elementTemplate.querySelector('.element__like');
+    const elementBascet = elementTemplate.querySelector('.element__basket');
+    const elementRectangle = elementTemplate.querySelector('.element__rectangle');
+
+    elementBascet.addEventListener('click', removeElement);
+    elementLike.addEventListener('click', likeClick);
+    elementRectangle.addEventListener('click', () => lookingElement(name, link));
+
+    return elementTemplate;
+}
+
+function lookingElement(name, link) {
+    photoPopupImage.src = link;
+    photopopupTitle.textContent = name;
+    openPopup(popupPhoto)
+}
+
+function likeClick(like) {
+    like.target.classList.toggle('element__like_active_black');
+}
+
+function removeElement(bascet) {
+    const element = bascet.target.closest('.element');
+    element.remove();
 }
 
 render();
 
-function likeClick(l) {
-    l.target.classList.toggle('element__like_active_white');
-    l.target.classList.toggle('element__like_active_black');
-}
-like.forEach((like) => {
-    like.addEventListener('click', likeClick);
-});
+popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+formPopupProfile.addEventListener('submit', submitFormHandler);
+formPopupElement.addEventListener('submit', addImageAndTitle);

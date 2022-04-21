@@ -1,5 +1,4 @@
-.photopopup__main {
-    border: 1px solid green;
+.popup__main-image {
     width: 816px;
     height: 540px;
     position: relative;
@@ -8,14 +7,14 @@
 }
 
 @media screen and (max-width:910px) {
-    .photopopup__main {
+    .popup__main-image {
         width: 433px;
         height: 540px;
     }
 }
 
 @media screen and (max-width:522px) {
-    .photopopup__main {
+    .popup__main-image {
         width: 240px;
         height: 299px;
     }
