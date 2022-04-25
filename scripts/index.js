@@ -130,7 +130,7 @@ function removeElement(bascet) {
 
 render();
 
-popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileOpenButton.addEventListener('keydown', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
