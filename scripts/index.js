@@ -137,3 +137,24 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+
+formPopupProfile.addEventListener('submit', (event) => handleFormSubmit(event));
+formPopupProfile.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
+formPopupElement.addEventListener('submit', (event) => handleFormSubmit(event));
+popupProfile.addEventListener('click', () => closePopup(popupProfile));
+popupElement.addEventListener('click', () => closePopup(popupElement))
+
+function handleFormInput(event) {
+    const inputValid = event.target
+    console.log(inputValid.validity.value)
+}
+
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formPopupProfile.checkValidity()) {
+        alert('Форма валидна')
+    } else {
+        alert('форма не валидна')
+    }
+}
