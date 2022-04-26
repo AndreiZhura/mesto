@@ -159,6 +159,8 @@ function handleFormInput(event) {
     const errorValid = document.querySelector(`#${input.id}-error`)
     console.log(errorValid);
     if (input.validity.value) {
-        console.log('yes')
+        errorValid.textContent = '';
+    } else {
+        errorValid.textContent = input.validationMessage;
     }
 }
