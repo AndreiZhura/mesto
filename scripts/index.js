@@ -19,7 +19,7 @@ const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
-const inputTitleValue = document.querySelector('#title-imput');
+const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 
 
@@ -156,6 +156,9 @@ function handleFormSubmit(event) {
 function handleFormInput(event) {
     const input = event.target
 
-    const errorValid = document.querySelector('#' + input.id + '-error')
+    const errorValid = document.querySelector(`#${input.id}-error`)
     console.log(errorValid);
+    if (input.validity.value) {
+        console.log('yes')
+    }
 }
