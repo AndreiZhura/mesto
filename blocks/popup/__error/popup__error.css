@@ -1,9 +1,11 @@
 .popup__error {
-    border-top: 1px solid red;
+    border-top: 1px solid #FF0000;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
+    margin-top: -1px;
+    margin-left: 4px;
 }
