@@ -141,8 +141,7 @@ formPopupElement.addEventListener('submit', addImageAndTitle);
 formPopupProfile.addEventListener('submit', (event) => handleFormSubmit(event));
 formPopupProfile.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
 formPopupElement.addEventListener('submit', (event) => handleFormSubmit(event));
-popupProfile.addEventListener('click', () => closePopup(popupProfile));
-popupElement.addEventListener('click', () => closePopup(popupElement))
+
 
 function handleFormInput(event) {
     const inputValid = event.target

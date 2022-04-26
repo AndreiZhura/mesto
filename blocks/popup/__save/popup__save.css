@@ -12,7 +12,6 @@
         cursor: pointer;
         align-self: flex-end;
         border: none;
-        margin-top: 50px;
     }
     
     .popup__save:hover {
