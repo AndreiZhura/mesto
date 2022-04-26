@@ -32,10 +32,10 @@
             <button class="popup__button" type="button" id="closeButtonProfile"></button>
             <form class="popup__container" id="popupContainerProfile" name="conteiner">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input requared minlength="2" maxlength="40" required placeholder="name" type="text" name="namePopup" id="nameInput" class="popup__input" />
-                <span class="popup__error" id=nameInputError></span>
-                <input requared minlength="2" maxlength="200" required placeholder="profession" type="text" name="proffesionPopup" id="jobInput" class="popup__input" />
-                <span class="popup__error" id=nameInputError></span>
+                <input novalidate minlength="2" maxlength="40" required placeholder="name" type="text" name="namePopup" id="name-input" class="popup__input" />
+                <span class="popup__error" id=name-input-error></span>
+                <input novalidate minlength="2" maxlength="200" required placeholder="profession" type="text" name="proffesionPopup" id="job-input" class="popup__input" />
+                <span class="popup__error" id=job-input-error></span>
                 <button class="popup__save" type="submit" id="popupProfileButtonSave">Сохранить</button>
             </form>
         </div>
@@ -45,10 +45,10 @@
             <button class="popup__button" type="button" id="closeButtonElement"></button>
             <form class="popup__container" id="popupContainerElements" name="conteiner">
                 <h2 class="popup__title">Новое место</h2>
-                <input requared minlength="2" maxlength="30" required placeholder="Название" type="text" name="namePopup" id="titleImput" class="popup__input" />
-                <span class="popup__error" id=nameInputError></span>
-                <input required placeholder="Ссылка на картинку" type="url" id="linkInput" name="proffesionPopup" class="popup__input" />
-                <span class="popup__error" id=nameInputError> </span>
+                <input novalidate minlength="2" maxlength="30" placeholder="Название" type="text" name="namePopup" id="title-input" class="popup__input" />
+                <span class="popup__error" id=title-input-error></span>
+                <input novalidate placeholder="Ссылка на картинку" type="url" id="link-input" name="proffesionPopup" class="popup__input" />
+                <span class="popup__error" id=link-input-error> </span>
                 <button class="popup__save" type="submit" id="popupElementsButtonSave">Сохранить</button>
             </form>
         </div>

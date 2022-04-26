@@ -3,8 +3,8 @@ const popupProfileOpenButton = document.querySelector('#popOpenProfile');
 const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
 const profileName = document.querySelector('#profileName');
 const profileProfession = document.querySelector('#profileProfession');
-const nameInput = document.querySelector('#nameInput');
-const jobInput = document.querySelector('#jobInput');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#job-input');
 const formPopupProfile = document.querySelector('#popupContainerProfile');
 const popupElement = document.querySelector('#popupElements');
 const popupElementOpenButton = document.querySelector('#popOpenElements');
@@ -19,8 +19,8 @@ const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
-const inputTitleValue = document.querySelector('#titleImput');
-const inputImage = document.querySelector('#linkInput');
+const inputTitleValue = document.querySelector('#title-imput');
+const inputImage = document.querySelector('#link-input');
 
 
 
@@ -141,19 +141,21 @@ formPopupElement.addEventListener('submit', addImageAndTitle);
 formPopupProfile.addEventListener('submit', (event) => handleFormSubmit(event));
 formPopupProfile.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
 formPopupElement.addEventListener('submit', (event) => handleFormSubmit(event));
-
-
-function handleFormInput(event) {
-    const inputValid = event.target
-    console.log(inputValid.validity.value)
-}
-
+formPopupElement.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
 
 function handleFormSubmit(event) {
     event.preventDefault();
     if (formPopupProfile.checkValidity()) {
         alert('Форма валидна')
+
     } else {
         alert('форма не валидна')
     }
+}
+
+function handleFormInput(event) {
+    const input = event.target
+
+    const errorValid = document.querySelector('#' + input.id + '-error')
+    console.log(errorValid);
 }
