@@ -21,7 +21,10 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-const saveButton = document.querySelector('.popup__save')
+const saveButton = document.querySelector('.popup__save');
+const popup = document.querySelector('.popup')
+
+
 
 
 
@@ -140,14 +143,35 @@ function handleFormSubmit(event) {
 
 
 
-
 render();
+// document.addEventListener('keyup', function() {
+//     console.log('Отпустили клавишу');
+//   });
+
+document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+        if (popupProfile) {
+            closePopup(popupProfile)
+        }
+    }
+})
+
+document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+        if (popupElement) {
+            closePopup(popupElement)
+        }
+    }
+})
+
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
 
@@ -227,5 +251,7 @@ const toggleButton = (inputList, buttonElement) => {
         buttonElement.disabled = false
     }
 }
+
+
 
 enableValidationList();
