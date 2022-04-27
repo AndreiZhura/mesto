@@ -152,7 +152,6 @@ formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
 
 
-
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
     inputElement.classList.add('popup__input_type_error');
@@ -177,9 +176,12 @@ const isValid = (formElement, inputElement) => {
 
 function setEventListeners(formElement) {
     let inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+    const buttonElement = formElement.querySelector('.popup__save');
+    toggleButton(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function() {
             isValid(formElement, inputElement)
+            toggleButton(inputList, buttonElement)
         })
     })
 }
@@ -193,8 +195,24 @@ function enableValidation() {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
+
+
         setEventListeners(formElement)
     })
+}
+
+const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid
+    })
+}
+
+const toggleButton = (inputList, buttonElement) => {
+    if (hasInvalidInput(inputList)) {
+        buttonElement.classList.add('popup__save_inactively')
+    } else {
+        buttonElement.classList.remove('popup__save_inactively')
+    }
 }
 
 enableValidation();
