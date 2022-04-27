@@ -150,3 +150,35 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+
+const formElement = document.querySelector('.popup__container')
+const formInput = formElement.querySelector('.popup__input')
+const formError = formElement.querySelector(`.${formInput.id}-error`)
+
+const showInputError = (element, errorMessage) => {
+    element.classList.add('popup__input_type_error');
+    formError.textContent = errorMessage
+    formError.classList.add('popup__error_active')
+}
+
+const hideInputError = (element) => {
+    element.classList.remove('popup__input_type_error')
+    formError.textContent = '';
+    formError.classList.remove('popup__error_active')
+}
+
+const isValid = () => {
+    if (!formInput.validity.valid) {
+        showInputError(formInput, formInput.validationMessage)
+    } else {
+        hideInputError(formInput)
+    }
+}
+
+formElement.addEventListener('submit', function(evt) {
+    // Отменим стандартное поведение по сабмиту
+    evt.preventDefault();
+});
+
+
+formInput.addEventListener('input', isValid)

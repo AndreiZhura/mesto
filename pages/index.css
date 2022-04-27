@@ -35,3 +35,4 @@
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/_inactively/popup__save_inactively.css);
 @import url(../blocks/popup/_type_error/popup__input_type_error.css);
+@import url(../blocks/popup/_active/popup__error_active.css);
