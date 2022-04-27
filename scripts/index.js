@@ -128,14 +128,40 @@ function removeElement(bascet) {
     element.remove();
 }
 
-enableValidation({
+function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formPopupProfile.checkValidity()) {
+        alert('Форма валидна')
+
+    } else {
+        alert('форма не валидна')
+    }
+}
+
+
+
+
+render();
+
+popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+formPopupProfile.addEventListener('submit', submitFormHandler);
+formPopupElement.addEventListener('submit', addImageAndTitle);
+
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+const enableValidation = {
     formSelector: '.popup__container',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-});
+    inactiveButtonClass: '.popup__save_inactively',
+    inputErrorClass: '.popup__input_type_error',
+    errorClass: '.popup__error_active'
+}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
@@ -160,8 +186,8 @@ const isValid = (formElement, inputElement) => {
 }
 
 function setEventListeners(formElement) {
-    let inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector))
-    const buttonElement = formElement.querySelector(enableValidation.submitButtonSelector);
+    let inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+    const buttonElement = formElement.querySelector('.popup__save');
     toggleButton(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function() {
@@ -173,9 +199,9 @@ function setEventListeners(formElement) {
 
 
 
-function enableValidation() {
+function enableValidationList() {
     let formList =
-        Array.from(document.querySelectorAll(enableValidation.formSelector))
+        Array.from(document.querySelectorAll('.popup__container'))
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -202,19 +228,4 @@ const toggleButton = (inputList, buttonElement) => {
     }
 }
 
-
-
-enableValidation();
-
-
-
-
-render();
-
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitFormHandler);
-formPopupElement.addEventListener('submit', addImageAndTitle);
+enableValidationList();
