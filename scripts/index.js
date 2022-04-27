@@ -21,7 +21,7 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-
+const saveButton = document.querySelector('.popup__save')
 
 
 
@@ -128,21 +128,6 @@ function removeElement(bascet) {
     element.remove();
 }
 
-render();
-
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitFormHandler);
-formPopupElement.addEventListener('submit', addImageAndTitle);
-
-formPopupProfile.addEventListener('submit', (event) => handleFormSubmit(event));
-formPopupProfile.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
-formPopupElement.addEventListener('submit', (event) => handleFormSubmit(event));
-formPopupElement.addEventListener('input', (event) => handleFormInput(event, formPopupProfile));
-
 function handleFormSubmit(event) {
     event.preventDefault();
     if (formPopupProfile.checkValidity()) {
@@ -153,14 +138,15 @@ function handleFormSubmit(event) {
     }
 }
 
-function handleFormInput(event) {
-    const input = event.target
 
-    const errorValid = document.querySelector(`#${input.id}-error`)
-    console.log(errorValid);
-    if (input.validity.value) {
-        errorValid.textContent = '';
-    } else {
-        errorValid.textContent = input.validationMessage;
-    }
-}
+
+
+render();
+
+popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+formPopupProfile.addEventListener('submit', submitFormHandler);
+formPopupElement.addEventListener('submit', addImageAndTitle);

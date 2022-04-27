@@ -33,3 +33,5 @@
 @import url(../blocks/popup/__main-image/popup__main-image.css);
 @import url(../blocks/popup/__img/popup__img.css);
 @import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/_inactively/popup__save_inactively.css);
+@import url(../blocks/popup/_type_error/popup__input_type_error.css);
