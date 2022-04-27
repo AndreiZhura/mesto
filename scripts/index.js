@@ -151,34 +151,50 @@ photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
 
-const formElement = document.querySelector('.popup__container')
-const formInput = formElement.querySelector('.popup__input')
-const formError = formElement.querySelector(`.${formInput.id}-error`)
 
-const showInputError = (element, errorMessage) => {
-    element.classList.add('popup__input_type_error');
-    formError.textContent = errorMessage
-    formError.classList.add('popup__error_active')
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    inputElement.classList.add('popup__input_type_error');
+    errorElement.textContent = errorMessage
+    errorElement.classList.add('popup__error_active')
 }
 
-const hideInputError = (element) => {
-    element.classList.remove('popup__input_type_error')
-    formError.textContent = '';
-    formError.classList.remove('popup__error_active')
+const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    inputElement.classList.remove('popup__input_type_error')
+    errorElement.textContent = '';
+    errorElement.classList.remove('popup__error_active')
 }
 
-const isValid = () => {
-    if (!formInput.validity.valid) {
-        showInputError(formInput, formInput.validationMessage)
+const isValid = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+        showInputError(formElement, inputElement, inputElement.validationMessage)
     } else {
-        hideInputError(formInput)
+        hideInputError(formElement, inputElement)
     }
 }
 
-formElement.addEventListener('submit', function(evt) {
-    // Отменим стандартное поведение по сабмиту
-    evt.preventDefault();
-});
+function setEventListeners(formElement) {
+    let inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+    inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', function() {
+            isValid(formElement, inputElement)
+        })
+    })
+}
 
 
-formInput.addEventListener('input', isValid)
+
+function enableValidation() {
+    let formList =
+        Array.from(document.querySelectorAll('.popup__container'))
+    formList.forEach((formElement) => {
+        formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+        setEventListeners(formElement)
+    })
+}
+
+enableValidation();
