@@ -167,13 +167,17 @@ document.addEventListener('keydown', function(evt) {
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-
 formPopupProfile.addEventListener('submit', submitFormHandler);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+popupProfile.addEventListener('click', function(evt) {
+    closePopup(evt.target)
+})
+popupElement.addEventListener('click', function(evt) {
+    closePopup(evt.target)
+})
 
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
