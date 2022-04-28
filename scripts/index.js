@@ -48,16 +48,17 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
+const ESC_CODE = 'Escape';
 
 
 
 function addPopupValue() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
-    openPopup(popupProfile)
+    openedPopup(popupProfile)
 }
 
-function openPopup(open) {
+function openedPopup(open) {
     open.classList.add('popup_opened');
 }
 
@@ -130,22 +131,29 @@ function removeElement(bascet) {
 
 render();
 
-
-document.addEventListener('keydown', function(evt) {
-    if (evt.key === 'Escape') {
-        if (popupProfile) {
-            closePopup(popupProfile)
-        }
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
     }
-})
+}
 
-document.addEventListener('keydown', function(evt) {
-    if (evt.key === 'Escape') {
-        if (popupElement) {
-            closePopup(popupElement)
-        }
-    }
-})
+
+// document.addEventListener('keydown', function(evt) {
+//     if (evt.key === 'Escape') {
+//         if (popupProfile) {
+//             closePopup(popupProfile)
+//         }
+//     }
+// })
+
+// document.addEventListener('keydown', function(evt) {
+//     if (evt.key === 'Escape') {
+//         if (popupElement) {
+//             closePopup(popupElement)
+//         }
+//     }
+// })
 
 document.addEventListener('keydown', function(evt) {
     if (evt.key === 'Enter') {
@@ -158,11 +166,12 @@ document.addEventListener('keydown', function(evt) {
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
+popupElementOpenButton.addEventListener('click', () => openedPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+document.addEventListener('keydown', closeByEsc);
 popupProfile.addEventListener('click', function(evt) {
     closePopup(evt.target)
 })
