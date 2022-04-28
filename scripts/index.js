@@ -50,6 +50,7 @@ const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
+const popup = document.querySelector('.popup')
 
 
 
@@ -151,13 +152,13 @@ function openByEsc(evt) {
 
 
 
-document.addEventListener('keydown', function(evt) {
+function enterClosePopup(evt) {
     if (evt.key === 'Enter') {
         if (popupElement) {
-            closePopup(popupElement)
+            formPopupElement.addEventListener('submit', addImageAndTitle);
         }
     }
-})
+}
 
 function closeByoverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
@@ -173,15 +174,6 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+formPopupElement.addEventListener('submit', enterClosePopup);
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
 popupElement.addEventListener('mousedown', closeByoverlayClick)
-
-
-
-
-popupProfile.addEventListener('click', function(evt) {
-    closePopup(evt.target)
-})
-popupElement.addEventListener('click', function(evt) {
-    closePopup(evt.target)
-})
