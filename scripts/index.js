@@ -179,17 +179,7 @@ popupElement.addEventListener('click', function(evt) {
     closePopup(evt.target)
 })
 
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 
-const enableValidation = {
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: '.popup__input_type_error',
-    errorClass: 'popup__error_active'
-}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
