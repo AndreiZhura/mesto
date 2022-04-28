@@ -72,14 +72,15 @@ function addPopupValue() {
     openedPopup(popupProfile)
 }
 
+
 function openedPopup(open) {
+    document.addEventListener('keydown', closeByEsc)
     open.classList.add('popup_opened');
-    open.addEventListener('keydown', closeByEsc);
-    open.blur();
+
 }
 
 function closePopup(close) {
-    close.removeEventListener("keydown", closeByEsc);
+    document.removeEventListener('keydown', closeByEsc)
     close.classList.remove('popup_opened')
 }
 
@@ -98,8 +99,8 @@ function submitProfileForm(evt) {
 
 function addImageAndTitle(evt) {
     evt.preventDefault()
-    inputTitleValue.value
-    inputImage.value
+        // inputTitleValue.value
+        // inputImage.value
     addNewElement(inputTitleValue.value, inputImage.value);
     closePopup(popupElement);
 }
