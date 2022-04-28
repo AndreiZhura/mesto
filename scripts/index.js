@@ -1,66 +1,3 @@
-const popupProfile = document.querySelector('#popupProfile');
-const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-const profileName = document.querySelector('#profileName');
-const profileProfession = document.querySelector('#profileProfession');
-const nameInput = document.querySelector('#name-input');
-const jobInput = document.querySelector('#job-input');
-const formPopupProfile = document.querySelector('#popupContainerProfile');
-const popupElement = document.querySelector('#popupElements');
-const popupElementOpenButton = document.querySelector('#popOpenElements');
-const popupElementCloseButton = document.querySelector('#closeButtonElement');
-const formPopupElement = document.querySelector('#popupContainerElements');
-const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
-const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
-const popupPhoto = document.querySelector('#popupPhoto');
-const popupText = document.querySelector('.popup__text');
-const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-const template = document.querySelector('.template');
-const elements = document.querySelector('.elements');
-const photoPopupImage = document.querySelector('.popup__img');
-const inputTitleValue = document.querySelector('#title-input');
-const inputImage = document.querySelector('#link-input');
-
-
-
-
-
-
-function addPopupValue() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileProfession.textContent;
-    openPopup(popupProfile)
-}
-
-function openPopup(open) {
-    open.classList.add('popup_open');
-}
-
-function closePopup(close) {
-    close.classList.remove('popup_open')
-}
-
-function submitFormHandler(evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    closePopup(popupProfile);
-    // Вставьте новые значения с помощью textContent
-}
-
-function addImageAndTitle(evt) {
-    evt.preventDefault();
-    inputTitleValue.value
-    inputImage.value
-    addNewElement(inputTitleValue.value, inputImage.value);
-    closePopup(popupElement);
-}
-
 const initialCards = [{
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -87,6 +24,64 @@ const initialCards = [{
     }
 ];
 
+
+const popupProfile = document.querySelector('#popupProfile');
+const popupProfileOpenButton = document.querySelector('#popOpenProfile');
+const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+const profileName = document.querySelector('#profileName');
+const profileProfession = document.querySelector('#profileProfession');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#job-input');
+const formPopupProfile = document.querySelector('#popupContainerProfile');
+const popupElement = document.querySelector('#popupElements');
+const popupElementOpenButton = document.querySelector('#popOpenElements');
+const popupElementCloseButton = document.querySelector('#closeButtonElement');
+const formPopupElement = document.querySelector('#popupContainerElements');
+const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
+const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
+const popupPhoto = document.querySelector('#popupPhoto');
+const popupText = document.querySelector('.popup__text');
+const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
+const template = document.querySelector('.template');
+const elements = document.querySelector('.elements');
+const photoPopupImage = document.querySelector('.popup__img');
+const inputTitleValue = document.querySelector('#title-input');
+const inputImage = document.querySelector('#link-input');
+
+function addPopupValue() {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileProfession.textContent;
+    openPopup(popupProfile)
+}
+
+function openPopup(open) {
+    open.classList.add('popup_open');
+}
+
+function closePopup(close) {
+    close.classList.remove('popup_open')
+}
+
+function submitProfileForm(evt) {
+    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    // Так мы можем определить свою логику отправки.
+    // О том, как это делать, расскажем позже.
+
+    // Получите значение полей jobInput и nameInput из свойства value
+    profileName.textContent = nameInput.value;
+    profileProfession.textContent = jobInput.value;
+    // Выберите элементы, куда должны быть вставлены значения полей
+    closePopup(popupProfile);
+    // Вставьте новые значения с помощью textContent
+}
+
+function addImageAndTitle(evt) {
+    evt.preventDefault();
+    inputTitleValue.value
+    inputImage.value
+    addNewElement(inputTitleValue.value, inputImage.value);
+    closePopup(popupElement);
+}
 
 function render() {
     initialCards.forEach(step => addNewElement(step.name, step.link));
@@ -163,7 +158,7 @@ popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile)
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitFormHandler);
+formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
 popupProfile.addEventListener('click', function(evt) {
     closePopup(evt.target)
