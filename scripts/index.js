@@ -18,11 +18,9 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
-const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-const saveButton = document.querySelector('.popup__save');
-const popup = document.querySelector('.popup')
+
 
 
 
