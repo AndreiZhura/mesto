@@ -45,8 +45,11 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
+const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
+
+
 
 function addPopupValue() {
     nameInput.value = profileName.textContent;
