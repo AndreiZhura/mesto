@@ -55,11 +55,11 @@ function addPopupValue() {
 }
 
 function openPopup(open) {
-    open.classList.add('popup_open');
+    open.classList.add('popup_opened');
 }
 
 function closePopup(close) {
-    close.classList.remove('popup_open')
+    close.classList.remove('popup_opened')
 }
 
 function submitProfileForm(evt) {
