@@ -76,6 +76,7 @@ function addPopupValue() {
 function openedPopup(open) {
     document.addEventListener('keydown', closeByEsc)
     open.classList.add('popup_opened');
+    enableValidationList();
 
 }
 
@@ -99,9 +100,16 @@ function submitProfileForm(evt) {
 
 function addImageAndTitle(evt) {
     evt.preventDefault()
-        // inputTitleValue.value
-        // inputImage.value
     addNewElement(inputTitleValue.value, inputImage.value);
+
+    inputTitleValue.value = '';
+    inputImage.value = '';
+
+    // const elementOne = document.querySelector('#title-input');
+    // const elementTwo = document.querySelector('#link-input');
+    // elementOne.te   //textContent = '';
+    // elementTwo.textContent = '';
+
     closePopup(popupElement);
 }
 
