@@ -48,6 +48,8 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
+
+
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
 
@@ -72,13 +74,13 @@ function addPopupValue() {
 
 function openedPopup(open) {
     open.classList.add('popup_opened');
-
+    open.addEventListener('keydown', closeByEsc);
+    open.blur();
 }
 
 function closePopup(close) {
-    document.addEventListener('keydown', closeByEsc)
+    close.removeEventListener("keydown", closeByEsc);
     close.classList.remove('popup_opened')
-
 }
 
 function submitProfileForm(evt) {
@@ -95,7 +97,7 @@ function submitProfileForm(evt) {
 }
 
 function addImageAndTitle(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
     inputTitleValue.value
     inputImage.value
     addNewElement(inputTitleValue.value, inputImage.value);
@@ -124,6 +126,7 @@ function createElement(name, link) {
     elementBascet.addEventListener('click', removeElement);
     elementLike.addEventListener('click', likeClick);
     elementRectangle.addEventListener('click', () => lookingElement(name, link));
+
 
     return elementTemplate;
 }
