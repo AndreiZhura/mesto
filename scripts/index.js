@@ -50,8 +50,18 @@ const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
-const popup = document.querySelector('.popup')
 
+popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupElementOpenButton.addEventListener('click', () => openedPopup(popupElement));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+formPopupProfile.addEventListener('submit', submitProfileForm);
+formPopupElement.addEventListener('submit', addImageAndTitle);
+formPopupElement.addEventListener('submit', enterClosePopup);
+popupProfile.addEventListener('mousedown', closeByoverlayClick)
+popupElement.addEventListener('mousedown', closeByoverlayClick)
+popupPhoto.addEventListener('mousedown', closeByoverlayClick)
 
 
 function addPopupValue() {
@@ -62,12 +72,12 @@ function addPopupValue() {
 
 function openedPopup(open) {
     open.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEsc);
+
 }
 
 function closePopup(close) {
+    document.addEventListener('keydown', closeByEsc)
     close.classList.remove('popup_opened')
-    document.addEventListener('keydown', closeByEsc);
 
 }
 
@@ -133,27 +143,10 @@ function removeElement(bascet) {
     element.remove();
 }
 
-
 render();
 
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    }
-}
-
-function openByEsc(evt) {
-    if (evt.key === ESC_CODE && openedPopup) {
-        const openedPopup = document.querySelector('.popup_opened');
-        openedPopup(openedPopup);
-    }
-}
-
-
-
 function enterClosePopup(evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === ENTER_CODE) {
         if (popupElement) {
             formPopupElement.addEventListener('submit', addImageAndTitle);
         }
@@ -166,14 +159,9 @@ function closeByoverlayClick(evt) {
     }
 }
 
-
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openedPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitProfileForm);
-formPopupElement.addEventListener('submit', addImageAndTitle);
-formPopupElement.addEventListener('submit', enterClosePopup);
-popupProfile.addEventListener('mousedown', closeByoverlayClick)
-popupElement.addEventListener('mousedown', closeByoverlayClick)
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    }
+}

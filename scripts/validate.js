@@ -41,9 +41,7 @@ function setEventListeners(formElement) {
     })
 }
 
-
-
-function enableValidationList() {
+function enableValidationList(config) {
     const formList =
         Array.from(document.querySelectorAll(enableValidation.formSelector))
     formList.forEach((formElement) => {
@@ -71,7 +69,5 @@ const toggleButton = (inputList, buttonElement) => {
         buttonElement.disabled = false
     }
 }
-
-
 
 enableValidationList();
