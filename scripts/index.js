@@ -13,7 +13,6 @@ const formPopupElement = document.querySelector('#popupContainerElements');
 const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
 const popupPhoto = document.querySelector('#popupPhoto');
-const popupText = document.querySelector('.popup__text');
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
@@ -21,8 +20,6 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-const saveButton = document.querySelector('.popup__save');
-const popup = document.querySelector('.popup')
 
 
 
@@ -35,7 +32,7 @@ function addPopupValue() {
 }
 
 function openPopup(open) {
-    open.classList.add('popup_open');
+    open.classList.add('popup_opened');
 }
 
 function closePopup(close) {
