@@ -131,22 +131,9 @@ function removeElement(bascet) {
     element.remove();
 }
 
-function handleFormSubmit(event) {
-    event.preventDefault();
-    if (formPopupProfile.checkValidity()) {
-        alert('Форма валидна')
-
-    } else {
-        alert('форма не валидна')
-    }
-}
-
-
 
 render();
-// document.addEventListener('keyup', function() {
-//     console.log('Отпустили клавишу');
-//   });
+
 
 document.addEventListener('keydown', function(evt) {
     if (evt.key === 'Escape') {
@@ -158,6 +145,14 @@ document.addEventListener('keydown', function(evt) {
 
 document.addEventListener('keydown', function(evt) {
     if (evt.key === 'Escape') {
+        if (popupElement) {
+            closePopup(popupElement)
+        }
+    }
+})
+
+document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Enter') {
         if (popupElement) {
             closePopup(popupElement)
         }
