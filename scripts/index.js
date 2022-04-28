@@ -45,10 +45,11 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
-const photopopupTitle = document.querySelector('.popup__text');
+const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 const ESC_CODE = 'Escape';
+const ENTER_CODE = 'Enter'
 
 
 
@@ -60,10 +61,13 @@ function addPopupValue() {
 
 function openedPopup(open) {
     open.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEsc);
 }
 
 function closePopup(close) {
     close.classList.remove('popup_opened')
+    document.addEventListener('keydown', closeByEsc);
+
 }
 
 function submitProfileForm(evt) {
@@ -116,7 +120,7 @@ function createElement(name, link) {
 function lookingElement(name, link) {
     photoPopupImage.src = link;
     photopopupTitle.textContent = name;
-    openPopup(popupPhoto)
+    openedPopup(popupPhoto)
 }
 
 function likeClick(like) {
@@ -138,22 +142,14 @@ function closeByEsc(evt) {
     }
 }
 
+function openByEsc(evt) {
+    if (evt.key === ESC_CODE && openedPopup) {
+        const openedPopup = document.querySelector('.popup_opened');
+        openedPopup(openedPopup);
+    }
+}
 
-// document.addEventListener('keydown', function(evt) {
-//     if (evt.key === 'Escape') {
-//         if (popupProfile) {
-//             closePopup(popupProfile)
-//         }
-//     }
-// })
 
-// document.addEventListener('keydown', function(evt) {
-//     if (evt.key === 'Escape') {
-//         if (popupElement) {
-//             closePopup(popupElement)
-//         }
-//     }
-// })
 
 document.addEventListener('keydown', function(evt) {
     if (evt.key === 'Enter') {
@@ -163,6 +159,12 @@ document.addEventListener('keydown', function(evt) {
     }
 })
 
+function closeByoverlayClick(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+    }
+}
+
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
@@ -171,7 +173,12 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
-document.addEventListener('keydown', closeByEsc);
+popupProfile.addEventListener('mousedown', closeByoverlayClick)
+popupElement.addEventListener('mousedown', closeByoverlayClick)
+
+
+
+
 popupProfile.addEventListener('click', function(evt) {
     closePopup(evt.target)
 })
