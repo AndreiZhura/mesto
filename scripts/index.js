@@ -102,7 +102,6 @@ function addImageAndTitle(evt) {
     addNewElement(inputTitleValue.value, inputImage.value);
     inputTitleValue.value = '';
     inputImage.value = '';
-    enableValidationList();
     closePopup(popupElement);
 }
 
