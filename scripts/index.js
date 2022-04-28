@@ -100,14 +100,8 @@ function submitProfileForm(evt) {
 function addImageAndTitle(evt) {
     evt.preventDefault()
     addNewElement(inputTitleValue.value, inputImage.value);
-
     inputTitleValue.value = '';
     inputImage.value = '';
-
-    // const elementOne = document.querySelector('#title-input');
-    // const elementTwo = document.querySelector('#link-input');
-    // elementOne.te   //textContent = '';
-    // elementTwo.textContent = '';
     enableValidationList();
     closePopup(popupElement);
 }
