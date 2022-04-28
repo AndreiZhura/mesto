@@ -7,6 +7,17 @@ const enableValidation = {
     errorClass: 'popup__error_active'
 }
 
+function enableValidationList() {
+    const formList =
+        Array.from(document.querySelectorAll(enableValidation.formSelector))
+    formList.forEach((formElement) => {
+        formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+        setEventListeners(formElement)
+    })
+}
+
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
     inputElement.classList.add(enableValidation.inputErrorClass);
@@ -41,18 +52,7 @@ function setEventListeners(formElement) {
     })
 }
 
-function enableValidationList(config) {
-    const formList =
-        Array.from(document.querySelectorAll(enableValidation.formSelector))
-    formList.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
 
-
-        setEventListeners(formElement)
-    })
-}
 
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {

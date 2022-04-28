@@ -76,7 +76,6 @@ function addPopupValue() {
 function openedPopup(open) {
     document.addEventListener('keydown', closeByEsc)
     open.classList.add('popup_opened');
-    enableValidationList();
 
 }
 
@@ -109,7 +108,7 @@ function addImageAndTitle(evt) {
     // const elementTwo = document.querySelector('#link-input');
     // elementOne.te   //textContent = '';
     // elementTwo.textContent = '';
-
+    enableValidationList();
     closePopup(popupElement);
 }
 
