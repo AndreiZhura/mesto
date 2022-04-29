@@ -74,14 +74,12 @@ function addPopupValue() {
 
 
 function openedPopup(open) {
-    document.addEventListener('keydown', closeByEsc)
+    open.addEventListener('keydown', closeByEsc)
     open.classList.add('popup_opened');
-    enableValidationList();
-
 }
 
 function closePopup(close) {
-    document.removeEventListener('keydown', closeByEsc)
+    close.removeEventListener('keydown', closeByEsc)
     close.classList.remove('popup_opened')
 }
 
@@ -101,15 +99,8 @@ function submitProfileForm(evt) {
 function addImageAndTitle(evt) {
     evt.preventDefault()
     addNewElement(inputTitleValue.value, inputImage.value);
-
     inputTitleValue.value = '';
     inputImage.value = '';
-
-    // const elementOne = document.querySelector('#title-input');
-    // const elementTwo = document.querySelector('#link-input');
-    // elementOne.te   //textContent = '';
-    // elementTwo.textContent = '';
-
     closePopup(popupElement);
 }
 
