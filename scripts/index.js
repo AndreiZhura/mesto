@@ -49,37 +49,25 @@ const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 
 
+
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
-
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openedPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitProfileForm);
-formPopupElement.addEventListener('submit', addImageAndTitle);
-formPopupElement.addEventListener('submit', enterClosePopup);
-popupProfile.addEventListener('mousedown', closeByoverlayClick)
-popupElement.addEventListener('mousedown', closeByoverlayClick)
-popupPhoto.addEventListener('mousedown', closeByoverlayClick)
-
 
 function addPopupValue() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
-    openedPopup(popupProfile)
+    openPopup(popupProfile)
 }
 
 
-function openedPopup(open) {
-    open.addEventListener('keydown', closeByEsc)
-    open.classList.add('popup_opened')
+function openPopup(popup) {
+    popup.addEventListener('keydown', closeByEsc)
+    popup.classList.add('popup_opened')
 }
 
-function closePopup(close) {
-    close.removeEventListener('keydown', closeByEsc)
-    close.classList.remove('popup_opened')
+function closePopup(popup) {
+    popup.removeEventListener('keydown', closeByEsc)
+    popup.classList.remove('popup_opened')
 }
 
 function submitProfileForm(evt) {
@@ -97,10 +85,14 @@ function submitProfileForm(evt) {
 
 function addImageAndTitle(evt) {
     evt.preventDefault()
+
     addNewElement(inputTitleValue.value, inputImage.value);
     inputTitleValue.value = '';
     inputImage.value = '';
+    const popupSave = document.querySelector('#popupElementsButtonSave')
+    popupSave.classList.add('popup__save_inactively')
     closePopup(popupElement);
+
 }
 
 function render() {
@@ -109,7 +101,6 @@ function render() {
 
 function addNewElement(name, link) {
     const newObj = createElement(name, link);
-
     elements.prepend(newObj);
 }
 
@@ -133,7 +124,7 @@ function createElement(name, link) {
 function lookingElement(name, link) {
     photoPopupImage.src = link;
     photopopupTitle.textContent = name;
-    openedPopup(popupPhoto)
+    openPopup(popupPhoto)
 }
 
 function likeClick(like) {
@@ -147,13 +138,6 @@ function removeElement(bascet) {
 
 render();
 
-function enterClosePopup(evt) {
-    if (evt.key === ENTER_CODE) {
-        if (popupElement) {
-            formPopupElement.addEventListener('submit', addImageAndTitle);
-        }
-    }
-}
 
 function closeByoverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
@@ -163,7 +147,18 @@ function closeByoverlayClick(evt) {
 
 function closeByEsc(evt) {
     if (evt.key === ESC_CODE) {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
     }
 }
+
+popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+formPopupProfile.addEventListener('submit', submitProfileForm);
+formPopupElement.addEventListener('submit', addImageAndTitle);
+popupProfile.addEventListener('mousedown', closeByoverlayClick)
+popupElement.addEventListener('mousedown', closeByoverlayClick)
+popupPhoto.addEventListener('mousedown', closeByoverlayClick)

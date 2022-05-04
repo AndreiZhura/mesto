@@ -53,7 +53,6 @@ function setEventListeners(formElement, { inputSelector, submitButtonSelector, i
         inputElement.addEventListener('input', function() {
             isValid(formElement, inputElement, { inputErrorClass, errorClass })
             toggleButton(inputList, buttonElement, { inactiveButtonClass })
-            console.log(inputList)
         })
     })
 }
