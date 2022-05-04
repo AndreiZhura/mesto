@@ -89,11 +89,11 @@ function addImageAndTitle(evt) {
     addNewElement(inputTitleValue.value, inputImage.value);
     inputTitleValue.value = '';
     inputImage.value = '';
-    makesPassiveButton()
+    makePassiveButton()
     closePopup(popupElement);
 }
 
-function makesPassiveButton() {
+function makePassiveButton() {
     const buttonInactively = document.querySelector('#popupElementsButtonSave')
     buttonInactively.classList.add('popup__save_inactively')
 }
