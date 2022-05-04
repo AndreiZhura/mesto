@@ -75,11 +75,7 @@ function addPopupValue() {
 
 function openedPopup(open) {
     open.addEventListener('keydown', closeByEsc)
-    open.classList.add('popup_opened');
-<<<<<<< HEAD
-=======
-
->>>>>>> ab78f8d653a81484f750900afbaa7ddc1858fc0f
+    open.classList.add('popup_opened')
 }
 
 function closePopup(close) {
