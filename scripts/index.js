@@ -47,7 +47,7 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-const buttonInactively = document.querySelector('#popupElementsButtonSave')
+const buttonElementSave = document.querySelector('#popupElementsButtonSave')
 
 
 
@@ -90,7 +90,7 @@ function addImageAndTitle(evt) {
     addNewElement(inputTitleValue.value, inputImage.value);
     inputTitleValue.value = '';
     inputImage.value = '';
-    makePassiveButton(buttonInactively)
+    makePassiveButton(buttonElementSave)
     closePopup(popupElement);
 }
 
