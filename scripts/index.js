@@ -48,7 +48,7 @@ const photopopupTitle = document.querySelector('.popup__text'); //данная �
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 const buttonElementSave = document.querySelector('#popupElementsButtonSave')
-
+console.log(popupProfile.classList)
 
 
 const ESC_CODE = 'Escape';
@@ -159,10 +159,10 @@ function closeByEsc(evt) {
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
-popupProfile.addEventListener('mousedown', closeByoverlayClick)
-popupElement.addEventListener('mousedown', closeByoverlayClick)
-popupPhoto.addEventListener('mousedown', closeByoverlayClick)
+popupProfile.addEventListener('mousedown', closeByoverlayClick);
+popupElement.addEventListener('mousedown', closeByoverlayClick);
+popupPhoto.addEventListener('mousedown', closeByoverlayClick);
