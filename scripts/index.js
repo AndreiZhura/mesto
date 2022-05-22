@@ -1,4 +1,5 @@
 const initialCards = [{
+
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
@@ -24,145 +25,49 @@ const initialCards = [{
     }
 ];
 
-
-const popupProfile = document.querySelector('#popupProfile');
-const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-const profileName = document.querySelector('#profileName');
-const profileProfession = document.querySelector('#profileProfession');
-const nameInput = document.querySelector('#name-input');
-const jobInput = document.querySelector('#job-input');
-const formPopupProfile = document.querySelector('#popupContainerProfile');
-const popupElement = document.querySelector('#popupElements');
-const popupElementOpenButton = document.querySelector('#popOpenElements');
-const popupElementCloseButton = document.querySelector('#closeButtonElement');
-const formPopupElement = document.querySelector('#popupContainerElements');
-const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
-const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
-const popupPhoto = document.querySelector('#popupPhoto');
-const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
-const photoPopupImage = document.querySelector('.popup__img');
-const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
-const inputTitleValue = document.querySelector('#title-input');
-const inputImage = document.querySelector('#link-input');
-const buttonElementSave = document.querySelector('#popupElementsButtonSave')
-console.log(popupProfile.classList)
+const likeActive = document.querySelector('.element__like_active_black')
 
 
-const ESC_CODE = 'Escape';
-const ENTER_CODE = 'Enter'
-
-function addPopupValue() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileProfession.textContent;
-    openPopup(popupProfile)
-}
-
-
-function openPopup(popup) {
-    popup.addEventListener('keydown', closeByEsc)
-    popup.classList.add('popup_opened')
-}
-
-function closePopup(popup) {
-    popup.removeEventListener('keydown', closeByEsc)
-    popup.classList.remove('popup_opened')
-}
-
-function submitProfileForm(evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    closePopup(popupProfile);
-    // Вставьте новые значения с помощью textContent
-}
-
-function addImageAndTitle(evt) {
-    evt.preventDefault()
-
-    addNewElement(inputTitleValue.value, inputImage.value);
-    inputTitleValue.value = '';
-    inputImage.value = '';
-    makePassiveButton(buttonElementSave)
-    closePopup(popupElement);
-}
-
-function makePassiveButton(inactively) {
-    inactively.classList.add('popup__save_inactively');
-    inactively.disabled = true
-}
-
-function render() {
-    initialCards.forEach(step => addNewElement(step.name, step.link));
-}
-
-function addNewElement(name, link) {
-    const newObj = createElement(name, link);
-    elements.prepend(newObj);
-}
-
-function createElement(name, link) {
-    const elementTemplate = template.content.querySelector('.element').cloneNode(true);
-    const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
-    const elementLink = elementTemplate.querySelector('.element__rectangle').src = link;
-
-    const elementLike = elementTemplate.querySelector('.element__like');
-    const elementBascet = elementTemplate.querySelector('.element__basket');
-    const elementRectangle = elementTemplate.querySelector('.element__rectangle');
-
-    elementBascet.addEventListener('click', removeElement);
-    elementLike.addEventListener('click', likeClick);
-    elementRectangle.addEventListener('click', () => lookingElement(name, link));
-
-
-    return elementTemplate;
-}
-
-function lookingElement(name, link) {
-    photoPopupImage.src = link;
-    photopopupTitle.textContent = name;
-    openPopup(popupPhoto)
-}
-
-function likeClick(like) {
-    like.target.classList.toggle('element__like_active_black');
-}
-
-function removeElement(bascet) {
-    const element = bascet.target.closest('.element');
-    element.remove();
-}
-
-render();
-
-
-function closeByoverlayClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
+class Card {
+    constructor(name, link) {
+        this._name = name
+        this._link = link
     }
-}
 
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openPopup = document.querySelector('.popup_opened');
-        closePopup(openPopup);
+    _getTemplateElement() {
+        const cardElement = document
+            .querySelector('.template')
+            .content
+            .querySelector('.element')
+            .cloneNode(true)
+        return cardElement
     }
+    generateCard() {
+        this._element = this._getTemplateElement()
+        this._element.querySelector('.element__title').textContent = this._name
+        this._element.querySelector('.element__rectangle').src = this._link
+        const elementLike = this._element.querySelector('.element__like');
+        const elementBascet = this._element.querySelector('.element__basket');
+        const elementRectangle = this._element.querySelector('.element__rectangle');
+        elementBascet.addEventListener('click', this._delClickHandler)
+        elementLike.addEventListener('click', this._likeClick)
+
+        return this._element
+    }
+    _delClickHandler = () => {
+        this._element.remove();
+    }
+
+    _likeClick = () => {
+        this._element.toggle()
+    }
+
+
 }
 
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitProfileForm);
-formPopupElement.addEventListener('submit', addImageAndTitle);
-popupProfile.addEventListener('mousedown', closeByoverlayClick);
-popupElement.addEventListener('mousedown', closeByoverlayClick);
-popupPhoto.addEventListener('mousedown', closeByoverlayClick);
+initialCards.forEach((element) => {
+    const card = new Card(element.name, element.link)
+    const cardElement = card.generateCard();
+    elements.prepend(cardElement)
+})
