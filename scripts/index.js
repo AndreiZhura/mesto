@@ -52,6 +52,7 @@ const elements = document.querySelector('.elements');
 const likeActive = document.querySelector('.element__like_active_black');
 const popupPhoto = document.querySelector('#popupPhoto');
 const photopopupTitle = document.querySelector('.popup__text');
+const photoPopupImage = document.querySelector('.popup__img');
 
 
 function openPopup(popup) {
@@ -90,6 +91,24 @@ function closeByEsc(evt) {
     }
 }
 
+function addPopupValue() {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileProfession.textContent;
+    openPopup(popupProfile)
+}
+
+
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
+    }
+}
+
+
+
+
+popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
@@ -102,14 +121,15 @@ popupPhoto.addEventListener('mousedown', closeByoverlayClick);
 
 
 class Card {
-    constructor(name, link) {
-        this._name = name
-        this._link = link
+    constructor(data, cardSelector) {
+        this._name = data.name
+        this._link = data.link
+        this._cardSelector = cardSelector;
     }
 
     _getTemplateElement() {
         const cardElement = document
-            .querySelector('.template')
+            .querySelector(this._cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true)
@@ -119,9 +139,11 @@ class Card {
         this._element = this._getTemplateElement()
         this._element.querySelector('.element__title').textContent = this._name
         this._element.querySelector('.element__rectangle').src = this._link
-        this._elementLike = this._element.querySelector('.element__like');
-        this._elementBascet = this._element.querySelector('.element__basket');
-        this._elementRectangle = this._element.querySelector('.element__rectangle');
+        this._elementLike = this._element.querySelector('.element__like')
+        this._elementBascet = this._element.querySelector('.element__basket')
+        this._elementRectangle = this._element.querySelector('.element__rectangle')
+
+
 
         this._elementBascet.addEventListener('click', this._delClickHandler)
         this._elementLike.addEventListener('click', this._likeClick)
@@ -139,14 +161,15 @@ class Card {
 
     _lookingElement = () => {
         photopopupTitle.textContent = this._name
-        popupPhoto.src = this._link
-
+        photoPopupImage.src = this._link
+        openPopup(popupPhoto)
     }
+
 
 }
 
 initialCards.forEach((element) => {
-    const card = new Card(element.name, element.link)
+    const card = new Card(element, '.template')
     const cardElement = card.generateCard();
     elements.prepend(cardElement)
 })
