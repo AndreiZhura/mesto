@@ -38,7 +38,7 @@ const formPopupProfile = document.querySelector('#popupContainerProfile');
 const popupElement = document.querySelector('#popupElements');
 const popupElementOpenButton = document.querySelector('#popOpenElements');
 const popupElementCloseButton = document.querySelector('#closeButtonElement');
-const formPopupElement = document.querySelector('#popupContainerElements');
+
 const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
 const popupPhoto = document.querySelector('#popupPhoto');
@@ -99,19 +99,14 @@ function addPopupValue() {
     openPopup(popupProfile)
 }
 
-function addImageAndTitle(evt) {
-    evt.preventDefault()
-    render(inputTitleValue.value, inputImage.value);
-    inputTitleValue.value = '';
-    inputImage.value = '';
-    makePassiveButton(buttonElementSave)
-    closePopup(popupElement);
-}
+
 
 function makePassiveButton(inactively) {
     inactively.classList.add('popup__save_inactively');
     inactively.disabled = true
 }
+
+
 
 function render() {
     initialCards.forEach((element) => {
@@ -121,16 +116,28 @@ function render() {
     })
 }
 
+function enterClosePopup(evt) {
+    if (evt.key === ENTER_CODE) {
+        if (popupElement) {
+            formPopupElement.addEventListener('submit', card._addImageAndTitle);
+        }
+    }
+}
+
+
+
+
+
+render()
+
+
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
-formPopupElement.addEventListener('submit', addImageAndTitle);
+
 popupProfile.addEventListener('mousedown', closeByoverlayClick);
 popupElement.addEventListener('mousedown', closeByoverlayClick);
 popupPhoto.addEventListener('mousedown', closeByoverlayClick);
-
-
-render()

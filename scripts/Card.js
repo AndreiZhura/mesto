@@ -25,9 +25,12 @@ class Card {
         this._elementBascet = this._element.querySelector('.element__basket')
         this._elementRectangle = this._element.querySelector('.element__rectangle')
 
+
         this._elementBascet.addEventListener('click', this._delClickHandler)
         this._elementLike.addEventListener('click', this._likeClick)
         this._elementRectangle.addEventListener('click', this._lookingElement)
+
+
 
         return this._element
     }
@@ -44,6 +47,14 @@ class Card {
         photopopupTitle.textContent = this._name
         photoPopupImage.src = this._link
         openPopup(popupPhoto)
+    }
+
+    _addImageAndTitle(evt) {
+        evt.preventDefault()
+        inputTitleValue.value = '';
+        inputImage.value = '';
+        makePassiveButton(buttonElementSave)
+        closePopup(popupElement);
     }
 
 
