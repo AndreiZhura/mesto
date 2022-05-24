@@ -1,3 +1,5 @@
+import { Card } from "./Card";
+
 const initialCards = [{
 
         name: 'Архыз',
@@ -39,20 +41,20 @@ const popupElementCloseButton = document.querySelector('#closeButtonElement');
 const formPopupElement = document.querySelector('#popupContainerElements');
 const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
-
+const popupPhoto = document.querySelector('#popupPhoto');
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const template = document.querySelector('.template');
-
+const elements = document.querySelector('.elements');
+const photoPopupImage = document.querySelector('.popup__img');
+const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
 const buttonElementSave = document.querySelector('#popupElementsButtonSave')
 
 
-const elements = document.querySelector('.elements');
-const likeActive = document.querySelector('.element__like_active_black');
-const popupPhoto = document.querySelector('#popupPhoto');
-const photopopupTitle = document.querySelector('.popup__text');
-const photoPopupImage = document.querySelector('.popup__img');
+
+const ESC_CODE = 'Escape';
+const ENTER_CODE = 'Enter'
 
 
 function openPopup(popup) {
@@ -97,16 +99,27 @@ function addPopupValue() {
     openPopup(popupProfile)
 }
 
-
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openPopup = document.querySelector('.popup_opened');
-        closePopup(openPopup);
-    }
+function addImageAndTitle(evt) {
+    evt.preventDefault()
+    render(inputTitleValue.value, inputImage.value);
+    inputTitleValue.value = '';
+    inputImage.value = '';
+    makePassiveButton(buttonElementSave)
+    closePopup(popupElement);
 }
 
+function makePassiveButton(inactively) {
+    inactively.classList.add('popup__save_inactively');
+    inactively.disabled = true
+}
 
-
+function render() {
+    initialCards.forEach((element) => {
+        const card = new Card(element, '.template')
+        const cardElement = card.generateCard();
+        elements.prepend(cardElement)
+    })
+}
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
@@ -114,62 +127,10 @@ popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
 popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
+formPopupElement.addEventListener('submit', addImageAndTitle);
 popupProfile.addEventListener('mousedown', closeByoverlayClick);
 popupElement.addEventListener('mousedown', closeByoverlayClick);
 popupPhoto.addEventListener('mousedown', closeByoverlayClick);
 
 
-
-class Card {
-    constructor(data, cardSelector) {
-        this._name = data.name
-        this._link = data.link
-        this._cardSelector = cardSelector;
-    }
-
-    _getTemplateElement() {
-        const cardElement = document
-            .querySelector(this._cardSelector)
-            .content
-            .querySelector('.element')
-            .cloneNode(true)
-        return cardElement
-    }
-    generateCard() {
-        this._element = this._getTemplateElement()
-        this._element.querySelector('.element__title').textContent = this._name
-        this._element.querySelector('.element__rectangle').src = this._link
-        this._elementLike = this._element.querySelector('.element__like')
-        this._elementBascet = this._element.querySelector('.element__basket')
-        this._elementRectangle = this._element.querySelector('.element__rectangle')
-
-
-
-        this._elementBascet.addEventListener('click', this._delClickHandler)
-        this._elementLike.addEventListener('click', this._likeClick)
-        this._elementRectangle.addEventListener('click', this._lookingElement)
-
-        return this._element
-    }
-    _delClickHandler = () => {
-        this._element.remove();
-    }
-
-    _likeClick = () => {
-        this._elementLike.classList.toggle('element__like_active_black')
-    }
-
-    _lookingElement = () => {
-        photopopupTitle.textContent = this._name
-        photoPopupImage.src = this._link
-        openPopup(popupPhoto)
-    }
-
-
-}
-
-initialCards.forEach((element) => {
-    const card = new Card(element, '.template')
-    const cardElement = card.generateCard();
-    elements.prepend(cardElement)
-})
+render()
