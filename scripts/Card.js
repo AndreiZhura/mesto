@@ -1,5 +1,7 @@
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text');
+const popupPhoto = document.querySelector('#popupPhoto');
+
 
 class Card {
     _name
