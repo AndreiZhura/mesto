@@ -1,3 +1,5 @@
+import { Card } from './Card.js'
+
 const initialCards = [{
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -52,6 +54,7 @@ const buttonElementSave = document.querySelector('#popupElementsButtonSave')
 
 
 
+
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
 
@@ -80,8 +83,7 @@ function submitProfileForm(evt) {
     // Получите значение полей jobInput и nameInput из свойства value
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
-    makePassiveButton(popupProfileButtonSave)
-        // Выберите элементы, куда должны быть вставлены значения полей
+    // Выберите элементы, куда должны быть вставлены значения полей
     closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
 }
@@ -102,14 +104,16 @@ function makePassiveButton(inactively) {
 }
 
 function render() {
-    initialCards.forEach(step => addNewElement(step.name, step.link));
+
+    initialCards.forEach(step => addNewElement(step));
 }
 
-function addNewElement(name, link) {
-    const newObj = createElement(name, link);
+function addNewElement(data) {
+    const card = new Card(data, '.template')
+    const newObj = card.generateCard();
     elements.prepend(newObj);
 }
-
+/*
 function createElement(name, link) {
     const elementTemplate = template.content.querySelector('.element').cloneNode(true);
     const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
@@ -141,6 +145,7 @@ function removeElement(bascet) {
     const element = bascet.target.closest('.element');
     element.remove();
 }
+*/
 
 render();
 
@@ -157,6 +162,7 @@ function closeByEsc(evt) {
         closePopup(openPopup);
     }
 }
+
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
