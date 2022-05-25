@@ -1,5 +1,3 @@
-import { Card } from "./Card";
-
 const initialCards = [{
 
         name: 'Архыз',
@@ -27,117 +25,102 @@ const initialCards = [{
     }
 ];
 
-const popupProfile = document.querySelector('#popupProfile');
-const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-const profileName = document.querySelector('#profileName');
-const profileProfession = document.querySelector('#profileProfession');
-const nameInput = document.querySelector('#name-input');
-const jobInput = document.querySelector('#job-input');
+
+const popOpenProfile = document.querySelector('#popOpenProfile')
+const popOpenElements = document.querySelector('#popOpenElements')
+const popupProfile = document.querySelector('#popupProfile')
+const elements = document.querySelector('.elements')
+const template = document.querySelector('.template')
+const closeButtonProfile = document.querySelector('#closeButtonProfile')
 const formPopupProfile = document.querySelector('#popupContainerProfile');
-const popupElement = document.querySelector('#popupElements');
-const popupElementOpenButton = document.querySelector('#popOpenElements');
-const popupElementCloseButton = document.querySelector('#closeButtonElement');
+const popupProfileInputName = document.querySelector('#name-input')
+const popupProfileInputJob = document.querySelector('#job-input')
+const profileName = document.querySelector('#profileName')
+const profileProfession = document.querySelector('#profileProfession')
+const popupElements = document.querySelector('#popupElements')
+const popupcloseButtonElement = document.querySelector('#closeButtonElement')
+const popupElementInputName = document.querySelector('#title-input')
+const popupElementInputURL = document.querySelector('#link-input')
+const formPopupElement = document.querySelector('#popupContainerElements')
+const elementLike = document.querySelector('.element__like')
+const photoPopupImg = document.querySelector('.popup__img')
+const photoPopupTitle = document.querySelector('.popup__text')
+const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose')
+const popupPhoto = document.querySelector('#popupPhoto')
+const formSelector = document.querySelectorAll('.popup__container')
 
-const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
-const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
-const popupPhoto = document.querySelector('#popupPhoto');
-const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-const template = document.querySelector('.template');
-const elements = document.querySelector('.elements');
-const photoPopupImage = document.querySelector('.popup__img');
-const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
-const inputTitleValue = document.querySelector('#title-input');
-const inputImage = document.querySelector('#link-input');
-const buttonElementSave = document.querySelector('#popupElementsButtonSave')
+console.log(formSelector)
 
-
-
-const ESC_CODE = 'Escape';
-const ENTER_CODE = 'Enter'
-
-
-function openPopup(popup) {
-    popup.addEventListener('keydown', closeByEsc)
-    popup.classList.add('popup_opened')
-}
-
-function closePopup(popup) {
-    popup.removeEventListener('keydown', closeByEsc)
-    popup.classList.remove('popup_opened')
-}
-
-function submitProfileForm(evt) {
+function submitPopupProfile(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    closePopup(popupProfile);
-    // Вставьте новые значения с помощью textContent
-}
-
-function closeByoverlayClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
-    }
-}
-
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openPopup = document.querySelector('.popup_opened');
-        closePopup(openPopup);
-    }
-}
-
-function addPopupValue() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileProfession.textContent;
-    openPopup(popupProfile)
+    profileName.textContent = popupProfileInputName.value
+    profileProfession.textContent = popupProfileInputJob.value
+    closePopup(popupProfile)
 }
 
 
 
-function makePassiveButton(inactively) {
-    inactively.classList.add('popup__save_inactively');
-    inactively.disabled = true
+function openPopup(open) {
+    open.classList.add('popup_opened')
+    popupProfileInputName.value = profileName.textContent
+    popupProfileInputJob.value = profileProfession.textContent
 }
 
-
+function closePopup(close) {
+    close.classList.remove('popup_opened')
+}
 
 function render() {
-    initialCards.forEach((element) => {
-        const card = new Card(element, '.template')
-        const cardElement = card.generateCard();
-        elements.prepend(cardElement)
-    })
+    initialCards.forEach(object => addNewElement(object.name, object.link))
 }
 
-function enterClosePopup(evt) {
-    if (evt.key === ENTER_CODE) {
-        if (popupElement) {
-            formPopupElement.addEventListener('submit', card._addImageAndTitle);
-        }
-    }
+function addNewElement(name, link) {
+    const newObject = createElement(name, link)
+    elements.prepend(newObject)
 }
 
+function addImageAndTitle(evt) {
+    evt.preventDefault()
+    addNewElement(popupElementInputName.value, popupElementInputURL.value)
+    closePopup(popupElements)
+}
 
+function likeClick(like) {
+    like.target.classList.toggle('element__like_active_black')
+}
 
+function removeElement(basket) {
+    const bascetElement = basket.target.closest('.element')
+    bascetElement.remove()
+}
+
+function lookingElement(name, link) {
+    photoPopupTitle.textContent = name
+    photoPopupImg.src = link
+    openPopup(popupPhoto)
+}
+
+function createElement(name, link) {
+    const elementTemplate = template.content.querySelector('.element').cloneNode(true);
+    const elementTitle = elementTemplate.querySelector('.element__title').textContent = name
+    const elementLink = elementTemplate.querySelector('.element__rectangle').src = link
+    const elementBascet = elementTemplate.querySelector('.element__basket')
+    const elementLike = elementTemplate.querySelector('.element__like')
+    const elementRectangle = elementTemplate.querySelector('.element__rectangle')
+    elementLike.addEventListener('click', likeClick)
+    elementBascet.addEventListener('click', removeElement)
+    elementRectangle.addEventListener('click', () => lookingElement(name, link))
+
+    return elementTemplate
+}
+
+popOpenProfile.addEventListener('click', () => openPopup(popupProfile))
+closeButtonProfile.addEventListener('click', () => closePopup(popupProfile))
+popOpenElements.addEventListener('click', () => openPopup(popupElements))
+popupcloseButtonElement.addEventListener('click', () => closePopup(popupElements))
+photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto))
+formPopupProfile.addEventListener('submit', submitPopupProfile)
+formPopupElement.addEventListener('submit', addImageAndTitle)
 
 
 render()
-
-
-popupProfileOpenButton.addEventListener('click', addPopupValue);
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement));
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-formPopupProfile.addEventListener('submit', submitProfileForm);
-
-popupProfile.addEventListener('mousedown', closeByoverlayClick);
-popupElement.addEventListener('mousedown', closeByoverlayClick);
-popupPhoto.addEventListener('mousedown', closeByoverlayClick);

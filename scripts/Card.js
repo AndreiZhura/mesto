@@ -1,3 +1,5 @@
+export { Card }
+
 class Card {
     _name
     _link
@@ -24,11 +26,16 @@ class Card {
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
         this._elementRectangle = this._element.querySelector('.element__rectangle')
-
+        this._formPopupElement = this._element.querySelector('.#popupContainerElements')
 
         this._elementBascet.addEventListener('click', this._delClickHandler)
         this._elementLike.addEventListener('click', this._likeClick)
         this._elementRectangle.addEventListener('click', this._lookingElement)
+        this._formPopupElement.addEventListener('submit', (evt) => {
+            evt.preventDefault()
+
+        })
+
 
 
 
@@ -59,5 +66,3 @@ class Card {
 
 
 }
-
-export { Card }
