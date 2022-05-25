@@ -51,6 +51,7 @@ const buttonElementSave = document.querySelector('#popupElementsButtonSave')
 
 
 
+
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
 
@@ -79,7 +80,8 @@ function submitProfileForm(evt) {
     // Получите значение полей jobInput и nameInput из свойства value
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
+    makePassiveButton(popupProfileButtonSave)
+        // Выберите элементы, куда должны быть вставлены значения полей
     closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
 }
