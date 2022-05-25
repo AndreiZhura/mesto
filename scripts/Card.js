@@ -1,4 +1,5 @@
-export { Card }
+const photoPopupImage = document.querySelector('.popup__img');
+const photopopupTitle = document.querySelector('.popup__text');
 
 class Card {
     _name
@@ -26,16 +27,11 @@ class Card {
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
         this._elementRectangle = this._element.querySelector('.element__rectangle')
-        this._formPopupElement = this._element.querySelector('.#popupContainerElements')
+
 
         this._elementBascet.addEventListener('click', this._delClickHandler)
         this._elementLike.addEventListener('click', this._likeClick)
         this._elementRectangle.addEventListener('click', this._lookingElement)
-        this._formPopupElement.addEventListener('submit', (evt) => {
-            evt.preventDefault()
-
-        })
-
 
 
 
@@ -56,13 +52,8 @@ class Card {
         openPopup(popupPhoto)
     }
 
-    _addImageAndTitle(evt) {
-        evt.preventDefault()
-        inputTitleValue.value = '';
-        inputImage.value = '';
-        makePassiveButton(buttonElementSave)
-        closePopup(popupElement);
-    }
 
 
 }
+
+export { Card }
