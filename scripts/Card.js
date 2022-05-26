@@ -10,14 +10,14 @@ class Card {
 
     constructor(data, cardSelector) {
         this._name = data.name
-        this._link = data._link
-        this._cardSelector = cardSelector
+        this._link = data.link
+        this.__cardSelector = cardSelector
 
     }
 
     _getTemplateElement() {
         const cardElement = document
-            .querySelector(this._cardSelector)
+            .querySelector(this.__cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true)

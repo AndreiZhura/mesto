@@ -1,4 +1,5 @@
 import { Card } from './Card.js'
+import { EnableValidation } from './Formvalidation.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -105,7 +106,9 @@ function makePassiveButton(inactively) {
 
 function render() {
 
-    initialCards.forEach(step => addNewElement(step));
+    initialCards.forEach((step) => addNewElement(step));
+
+
 }
 
 function addNewElement(data) {
@@ -113,39 +116,7 @@ function addNewElement(data) {
     const newObj = card.generateCard();
     elements.prepend(newObj);
 }
-/*
-function createElement(name, link) {
-    const elementTemplate = template.content.querySelector('.element').cloneNode(true);
-    const elementTitle = elementTemplate.querySelector('.element__title').textContent = name;
-    const elementLink = elementTemplate.querySelector('.element__rectangle').src = link;
 
-    const elementLike = elementTemplate.querySelector('.element__like');
-    const elementBascet = elementTemplate.querySelector('.element__basket');
-    const elementRectangle = elementTemplate.querySelector('.element__rectangle');
-
-    elementBascet.addEventListener('click', removeElement);
-    elementLike.addEventListener('click', likeClick);
-    elementRectangle.addEventListener('click', () => lookingElement(name, link));
-
-
-    return elementTemplate;
-}
-
-function lookingElement(name, link) {
-    photoPopupImage.src = link;
-    photopopupTitle.textContent = name;
-    openPopup(popupPhoto)
-}
-
-function likeClick(like) {
-    like.target.classList.toggle('element__like_active_black');
-}
-
-function removeElement(bascet) {
-    const element = bascet.target.closest('.element');
-    element.remove();
-}
-*/
 
 render();
 
@@ -162,6 +133,28 @@ function closeByEsc(evt) {
         closePopup(openPopup);
     }
 }
+/*
+const enableValidationList = ({ formSelector, ...rest }) => {
+    const validation = new EnableValidation(formSelector, rest)
+    const form = Array.from(document.querySelectorAll(formSelector))
+
+    .forEach((formElement) => {
+        formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+        validation._setEventListeners()
+    })
+}
+
+
+enableValidationList({
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactively',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_active'
+});*/
 
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);
