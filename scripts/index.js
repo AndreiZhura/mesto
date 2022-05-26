@@ -67,12 +67,12 @@ function addPopupValue() {
 
 
 function openPopup(popup) {
-    popup.addEventListener('keydown', closeByEsc)
+    //  popup.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
 }
 
 function closePopup(popup) {
-    popup.removeEventListener('keydown', closeByEsc)
+    // popup.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
 
@@ -105,11 +105,11 @@ function makePassiveButton(inactively) {
 }
 
 function render() {
-    initialCards.forEach((step) => addNewElement(step));
+    initialCards.forEach((step) => addNewElement(step.name, step.link));
 }
 
-function addNewElement(data) {
-    const card = new Card(data, '.template')
+function addNewElement(name, link) {
+    const card = new Card(name, link)
     const newObj = card.generateCard();
     elements.prepend(newObj);
 }
@@ -129,15 +129,9 @@ function enableValidationList() {
     validation._form()
 }
 
-
-
-
-
-
-
 render();
-
 enableValidationList()
+
 
 
 function closeByoverlayClick(evt) {
@@ -161,6 +155,8 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
+
+
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
 popupElement.addEventListener('mousedown', closeByoverlayClick)
 popupPhoto.addEventListener('mousedown', closeByoverlayClick)

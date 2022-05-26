@@ -8,16 +8,16 @@ class Card {
     _link
     _cardSelector
 
-    constructor(data, cardSelector) {
-        this._name = data.name
-        this._link = data.link
-        this.__cardSelector = cardSelector
+    constructor(name, link) {
+        this._name = name
+        this._link = link
+
 
     }
 
     _getTemplateElement() {
         const cardElement = document
-            .querySelector(this.__cardSelector)
+            .querySelector('.template')
             .content
             .querySelector('.element')
             .cloneNode(true)

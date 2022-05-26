@@ -9,10 +9,20 @@ class EnableValidation {
 
     }
 
+    _form() {
+        const form = Array.from(document.querySelectorAll(this._inputSelector))
+        form.forEach((fotmElement) => {
+            fotmElement.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            })
+            this._setEventListeners()
+        })
+    }
+
     _setEventListeners() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
         const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-        toggleButton(inputList, buttonElement, { inactiveButtonClass });
+        toggleButton(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', function() {
                 this._isValid(this._formElement, inputElement, )
@@ -20,15 +30,7 @@ class EnableValidation {
             })
         })
     }
-    _form() {
-        const form = Array.from(document.querySelectorAll(this._inputSelector))
-        form.forEach((fotmElement) => {
-            fotmElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            })
-            this._setEventListeners
-        })
-    }
+
 
     _toggleButton(inputList, buttonElement) {
         if (hasInvalidInput(inputList)) {
