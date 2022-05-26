@@ -27,6 +27,15 @@ const initialCards = [{
     }
 ];
 
+const enableValidationList = [{
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactively',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_active'
+}]
+
 
 const popupProfile = document.querySelector('#popupProfile');
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
@@ -115,6 +124,24 @@ function addNewElement(name, link) {
 }
 
 
+enableValidationList.forEach((step) => {
+    const card = new EnableValidation(step, '.popup__container')
+    card._form();
+
+})
+
+
+/*\\\
+
+initialCards.forEach((step)=>{
+    const card = new Card(step, 'template')
+    const newObj = card.generateCard();
+    elements.prepend(newObj);
+})*/
+
+
+
+/*
 function enableValidationList() {
     const validation = new EnableValidation({
 
@@ -127,11 +154,8 @@ function enableValidationList() {
 
     })
     validation._form()
-}
-
+}*/
 render();
-enableValidationList()
-
 
 
 function closeByoverlayClick(evt) {
