@@ -20,6 +20,16 @@ class EnableValidation {
             })
         })
     }
+    _form() {
+        const form = Array.from(document.querySelectorAll(this._inputSelector))
+        form.forEach((fotmElement) => {
+            fotmElement.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            })
+            this._setEventListeners
+        })
+    }
+
     _toggleButton(inputList, buttonElement) {
         if (hasInvalidInput(inputList)) {
             buttonElement.classList.add(this._inactiveButtonClass);

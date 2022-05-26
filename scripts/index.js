@@ -114,37 +114,30 @@ function addNewElement(data) {
     elements.prepend(newObj);
 }
 
-render();
 
-const enableValidationList = () => {
+function enableValidationList() {
     const validation = new EnableValidation({
+
         formSelector: '.popup__container',
         inputSelector: '.popup__input',
         submitButtonSelector: '.popup__save',
         inactiveButtonClass: 'popup__save_inactively',
         inputErrorClass: 'popup__input_type_error',
         errorClass: 'popup__error_active'
-    })
-    const form = Array.from(document.querySelectorAll('.popup__container'))
 
-    form.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-        validation._setEventListeners()
     })
+    validation._form()
 }
 
 
-enableValidationList({
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-});
 
+
+
+
+
+render();
+
+enableValidationList()
 
 
 function closeByoverlayClick(evt) {
