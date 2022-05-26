@@ -105,10 +105,7 @@ function makePassiveButton(inactively) {
 }
 
 function render() {
-
     initialCards.forEach((step) => addNewElement(step));
-
-
 }
 
 function addNewElement(data) {
@@ -117,28 +114,20 @@ function addNewElement(data) {
     elements.prepend(newObj);
 }
 
-
 render();
 
+const enableValidationList = () => {
+    const validation = new EnableValidation({
+        formSelector: '.popup__container',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactively',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_active'
+    })
+    const form = Array.from(document.querySelectorAll('.popup__container'))
 
-function closeByoverlayClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
-    }
-}
-
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openPopup = document.querySelector('.popup_opened');
-        closePopup(openPopup);
-    }
-}
-/*
-const enableValidationList = ({ formSelector, ...rest }) => {
-    const validation = new EnableValidation(formSelector, rest)
-    const form = Array.from(document.querySelectorAll(formSelector))
-
-    .forEach((formElement) => {
+    form.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
@@ -154,7 +143,22 @@ enableValidationList({
     inactiveButtonClass: 'popup__save_inactively',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_active'
-});*/
+});
+
+
+
+function closeByoverlayClick(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+    }
+}
+
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
+    }
+}
 
 
 popupProfileOpenButton.addEventListener('click', addPopupValue);

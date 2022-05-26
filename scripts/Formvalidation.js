@@ -1,11 +1,11 @@
 class EnableValidation {
-    constructor(formElement, rest) {
+    constructor(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) {
         this._formElement = formElement,
-            this._inputSelector = rest.inputSelector,
-            this._submitButtonSelector = rest.submitButtonSelector,
-            this._inactiveButtonClass = rest.inactiveButtonClass,
-            this._inputErrorClass = rest.inputErrorClass,
-            this._errorClass = rest.errorClass
+            this._inputSelector = inputSelector,
+            this._submitButtonSelector = submitButtonSelector,
+            this._inactiveButtonClass = inactiveButtonClass,
+            this._inputErrorClass = inputErrorClass,
+            this._errorClass = errorClass
 
     }
 
