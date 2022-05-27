@@ -126,8 +126,16 @@ function enableValidationList() {
         errorClass: 'popup__error_active'
 
     })
-    validation._form()
+
+    const form = Array.from(document.querySelectorAll('.popup__container'))
+    form.forEach((fotmElement) => {
+        fotmElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+        validation._setEventListeners()
+    })
 }
+
 
 render();
 enableValidationList()
