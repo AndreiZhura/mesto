@@ -1,23 +1,16 @@
 class EnableValidation {
-    constructor(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) {
-        this._formElement = formElement,
-            this._inputSelector = inputSelector,
-            this._submitButtonSelector = submitButtonSelector,
-            this._inactiveButtonClass = inactiveButtonClass,
-            this._inputErrorClass = inputErrorClass,
-            this._errorClass = errorClass
+    constructor(rest, formElement) {
+
+        this._inputSelector = rest.inputSelector,
+            this._submitButtonSelector = rest.submitButtonSelector,
+            this._inactiveButtonClass = rest.inactiveButtonClass,
+            this._inputErrorClass = rest.inputErrorClass,
+            this._errorClass = rest.errorClass,
+            this._formElement = formElement
 
     }
 
-    _form() {
-        const form = Array.from(document.querySelectorAll(this._inputSelector))
-        form.forEach((fotmElement) => {
-            fotmElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            })
-            this._setEventListeners()
-        })
-    }
+
 
     _setEventListeners() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
@@ -25,7 +18,7 @@ class EnableValidation {
         toggleButton(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', function() {
-                this._isValid(this._formElement, inputElement, )
+                this._isValid(this._formElement, inputElement)
                 this._toggleButton(inputList, buttonElement)
             })
         })
@@ -69,6 +62,15 @@ class EnableValidation {
         errorElement.textContent = errorMessage
         errorElement.classList.add(errorClass)
     }
+
+    _form() {
+
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+        this._setEventListeners()
+    }
+
 }
 
 export { EnableValidation }
