@@ -13,7 +13,7 @@ export default class Valid {
     _showInputError(inputElement) {
         const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`)
         inputElement.classList.add(this._inputErrorClass);
-        errorElement.textContent = this._errorClass
+        errorElement.textContent = inputElement.validationMessage
         errorElement.classList.add(this._errorClass)
     }
 
