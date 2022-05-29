@@ -3,21 +3,21 @@ const photopopupTitle = document.querySelector('.popup__text');
 const popupPhoto = document.querySelector('#popupPhoto');
 const popupCloseButton = document.querySelector('.popup__close');
 
-class Card {
+export default class Card {
     _name
     _link
     _cardSelector
 
-    constructor(data, cardSelector) {
-        this._name = data.name
-        this._link = data.link
-        this.__cardSelector = cardSelector
+    constructor(name, link) {
+        this._name = name
+        this._link = link
+
 
     }
 
     _getTemplateElement() {
         const cardElement = document
-            .querySelector(this.__cardSelector)
+            .querySelector('.template')
             .content
             .querySelector('.element')
             .cloneNode(true)
@@ -81,5 +81,3 @@ class Card {
         */
 
 }
-
-export { Card }

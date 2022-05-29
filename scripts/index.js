@@ -1,5 +1,5 @@
-import { Card } from './Card.js'
-import { EnableValidation } from './Formvalidation.js';
+import Card from './Card.js'
+import Valid from './Formvalidation.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -26,15 +26,17 @@ const initialCards = [{
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+/*
+const validation = new Validate({
 
-const enableValidationList = [{
     formSelector: '.popup__container',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save',
     inactiveButtonClass: 'popup__save_inactively',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_active'
-}]
+
+})*/
 
 
 const popupProfile = document.querySelector('#popupProfile');
@@ -124,52 +126,23 @@ function addNewElement(name, link) {
 }
 
 
-enableValidationList.forEach((step) => {
-    const card = new EnableValidation(step, '.popup__container')
-    card._form();
-
-})
 
 
-/*\\\
-
-initialCards.forEach((step)=>{
-    const card = new Card(step, 'template')
-    const newObj = card.generateCard();
-    elements.prepend(newObj);
-})*/
-
-
-
-/*
-function enableValidationList() {
-    const validation = new EnableValidation({
-
-        formSelector: '.popup__container',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__save',
-        inactiveButtonClass: 'popup__save_inactively',
-        inputErrorClass: 'popup__input_type_error',
-        errorClass: 'popup__error_active'
-
+const enableValidation = ({ formSelector, ...rest }) => {
+    const formList = Array.from(document.querySelectorAll(formSelector))
+    formList.forEach((formElement) => {
+        const valid = new Valid(rest, formElement)
+        valid.enableValidation()
     })
-<<<<<<< HEAD
 
-    const form = Array.from(document.querySelectorAll('.popup__container'))
-    form.forEach((fotmElement) => {
-        fotmElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-        validation._setEventListeners()
-    })
+
+
+
 }
 
 
-=======
-    validation._form()
-}*/
->>>>>>> cb66c9206005a4b7b782290f44c583f03a92bece
-render();
+
+
 
 
 function closeByoverlayClick(evt) {
@@ -198,3 +171,13 @@ formPopupElement.addEventListener('submit', addImageAndTitle);
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
 popupElement.addEventListener('mousedown', closeByoverlayClick)
 popupPhoto.addEventListener('mousedown', closeByoverlayClick)
+
+render();
+enableValidation({
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactively',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_active'
+})
