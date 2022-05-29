@@ -24,7 +24,6 @@ export default class Valid {
         errorElement.classList.remove(this._errorClass)
     }
 
-
     _isValid(inputElement) {
         if (!inputElement.validity.valid) {
             this._showInputError(inputElement, inputElement.validationMessage)
@@ -42,7 +41,6 @@ export default class Valid {
             this._buttonElement.disabled = false
         }
     }
-
 
     _hasInvalidInput() {
         return this._inputList.some((inputElement) => {
@@ -65,8 +63,6 @@ export default class Valid {
             })
         })
     }
-
-
 
     _addValidElement() {
         this._formElement.addEventListener('submit', (evt) => {

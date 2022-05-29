@@ -26,17 +26,7 @@ const initialCards = [{
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-/*
-const validation = new Validate({
 
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-
-})*/
 
 
 const popupProfile = document.querySelector('#popupProfile');
@@ -61,10 +51,7 @@ const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImage = document.querySelector('#link-input');
-const buttonElementSave = document.querySelector('#popupElementsButtonSave')
-
-
-
+const buttonElementSave = document.querySelector('#popupElementsButtonSave');
 
 
 const ESC_CODE = 'Escape';
@@ -78,12 +65,12 @@ function addPopupValue() {
 
 
 function openPopup(popup) {
-    //  popup.addEventListener('keydown', closeByEsc)
+    popup.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
 }
 
 function closePopup(popup) {
-    // popup.removeEventListener('keydown', closeByEsc)
+    popup.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
 
@@ -126,24 +113,13 @@ function addNewElement(name, link) {
 }
 
 
-
-
 const enableValidation = ({ formSelector, ...rest }) => {
     const formList = Array.from(document.querySelectorAll(formSelector))
     formList.forEach((formElement) => {
         const valid = new Valid(rest, formElement)
         valid.enableValidation()
     })
-
-
-
-
 }
-
-
-
-
-
 
 function closeByoverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
@@ -166,8 +142,6 @@ popupElementCloseButton.addEventListener('click', () => closePopup(popupElement)
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formPopupElement.addEventListener('submit', addImageAndTitle);
-
-
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
 popupElement.addEventListener('mousedown', closeByoverlayClick)
 popupPhoto.addEventListener('mousedown', closeByoverlayClick)
