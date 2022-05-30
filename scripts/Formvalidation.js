@@ -1,4 +1,4 @@
-export default class Valid {
+export default class Formvalidation {
     constructor(element, formElement) {
         this._inputSelector = element.inputSelector
         this._submitButtonSelector = element.submitButtonSelector
@@ -7,7 +7,6 @@ export default class Valid {
         this._errorClass = element.errorClass
 
         this._formElement = formElement
-
     }
 
     _showInputError(inputElement) {
@@ -52,8 +51,6 @@ export default class Valid {
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
         this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
         this._toggleButton();
-
-
 
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {

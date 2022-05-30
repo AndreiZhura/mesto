@@ -1,5 +1,5 @@
 import Card from './Card.js'
-import Valid from './Formvalidation.js';
+import Formvalidation from './Formvalidation.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -37,11 +37,11 @@ const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#name-input');
 const jobInput = document.querySelector('#job-input');
 const formPopupProfile = document.querySelector('#popupContainerProfile');
-const popupElement = document.querySelector('#popupElements');
-const popupElementOpenButton = document.querySelector('#popOpenElements');
-const popupElementCloseButton = document.querySelector('#closeButtonElement');
-const formPopupElement = document.querySelector('#popupContainerElements');
-const popupElementsButtonSave = document.querySelector('#popupElementsButtonSave');
+const cardPopup = document.querySelector('#popupElements');
+const cardPopupOpenButton = document.querySelector('#popOpenElements');
+const cardPopupCloseButton = document.querySelector('#closeButtonElement');
+const formCardPopup = document.querySelector('#popupContainerElements');
+const cardPopupButtonSave = document.querySelector('#popupElementsButtonSave');
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
 const popupPhoto = document.querySelector('#popupPhoto');
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
@@ -57,7 +57,7 @@ const buttonElementSave = document.querySelector('#popupElementsButtonSave');
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
 
-function addPopupValue() {
+function openProfilePopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
@@ -65,12 +65,12 @@ function addPopupValue() {
 
 
 function openPopup(popup) {
-    popup.addEventListener('keydown', closeByEsc)
+    document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
 }
 
 function closePopup(popup) {
-    popup.removeEventListener('keydown', closeByEsc)
+    document.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
 
@@ -87,14 +87,13 @@ function submitProfileForm(evt) {
     // Вставьте новые значения с помощью textContent
 }
 
-function addImageAndTitle(evt) {
+function handleCardFormSubmit(evt) {
     evt.preventDefault()
 
     addNewElement(inputTitleValue.value, inputImage.value);
-    inputTitleValue.value = '';
-    inputImage.value = '';
+    evt.target.reset()
     makePassiveButton(buttonElementSave)
-    closePopup(popupElement);
+    closePopup(cardPopup);
 }
 
 function makePassiveButton(inactively) {
@@ -116,7 +115,7 @@ function addNewElement(name, link) {
 const enableValidation = ({ formSelector, ...rest }) => {
     const formList = Array.from(document.querySelectorAll(formSelector))
     formList.forEach((formElement) => {
-        const valid = new Valid(rest, formElement)
+        const valid = new Formvalidation(rest, formElement)
         valid.enableValidation()
     })
 }
@@ -135,15 +134,15 @@ function closeByEsc(evt) {
 }
 
 
-popupProfileOpenButton.addEventListener('click', addPopupValue);
+popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupElementOpenButton.addEventListener('click', () => openPopup(popupElement));
-popupElementCloseButton.addEventListener('click', () => closePopup(popupElement))
+cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup));
+cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
-formPopupElement.addEventListener('submit', addImageAndTitle);
+formCardPopup.addEventListener('submit', handleCardFormSubmit);
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
-popupElement.addEventListener('mousedown', closeByoverlayClick)
+cardPopup.addEventListener('mousedown', closeByoverlayClick)
 popupPhoto.addEventListener('mousedown', closeByoverlayClick)
 
 render();
