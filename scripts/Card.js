@@ -7,14 +7,16 @@ export default class Card {
     _name
     _link
 
-    constructor(name, link) {
-        this._name = name
-        this._link = link
+    constructor(data, cardSelector, handleCardClick) {
+        this._name = data.name
+        this._link = data.link
+        this._cardSelector = cardSelector
+        this._handleCardClick = handleCardClick
     }
 
     _getTemplateElement() {
         const cardElement = document
-            .querySelector('.template')
+            .querySelector(this._cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true)
@@ -28,23 +30,23 @@ export default class Card {
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
         this._elementRectangle = this._element.querySelector('.element__rectangle')
-        this._elementBascet.addEventListener('click', this._delClickHandler)
-        this._elementLike.addEventListener('click', this._likeClick)
+        this._elementBascet.addEventListener('click', this._handleDelete)
+        this._elementLike.addEventListener('click', this._toggleLike)
         this._elementRectangle.addEventListener('click', this._lookingPopupOpen)
 
         return this._element
     }
 
-    _delClickHandler = () => {
+    _handleDelete = () => {
         this._element.remove();
     }
 
-    _likeClick = () => {
+    _toggleLike = () => {
         this._elementLike.classList.toggle('element__like_active_black')
     }
 
 
-    _lookingPopupOpen = () => {
+    _handleImageClick = () => {
         photopopupTitle.textContent = this._name
         photoPopupImage.src = this._link
         popupPhoto.classList.add('popup_opened')
