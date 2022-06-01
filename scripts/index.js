@@ -67,7 +67,8 @@ function openProfilePopup() {
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
-        //  valid()
+    resetValid();
+
 }
 
 function closePopup(popup) {
@@ -115,17 +116,26 @@ function addNewElement(name, link) {
     elements.prepend(newObj);
 }
 
-function valid() {
-    const validate = new Formvalidation()
-    const resetButton = validate.resetValidation()
+function resetValid() {
+    const validate = new Formvalidation({
+        formSelector: '.popup__container',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactively',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_active'
+    })
+    const resetButton = validate.makePassiveButton()
     return resetButton
 }
+
+
 
 const enableValidation = ({ formSelector, ...rest }) => {
     const formList = Array.from(document.querySelectorAll(formSelector))
     formList.forEach((formElement) => {
-        const valid = new Formvalidation(rest, formElement)
-        valid.enableValidation()
+        const validate = new Formvalidation(rest, formElement)
+        validate.enableValidation()
     })
 }
 

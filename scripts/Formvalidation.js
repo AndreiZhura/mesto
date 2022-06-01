@@ -57,27 +57,26 @@ export default class Formvalidation {
             inputElement.addEventListener('input', () => {
                 this._isValid(inputElement)
                 this._toggleButton()
-
             })
         })
     }
 
     _addValidElement() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-    }
+            this._formElement.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            })
+        }
+        /*
+            resetValidation = () => {
+                this._toggleButton()
 
-    resetValidation = () => {
-        this._toggleButton()
+                this._inputList.forEach((inputElement) => {
+                    this._hideInputError(inputElement)
+                })
 
-        this._inputList.forEach((inputElement) => {
-            this._hideInputError(inputElement)
-        })
+            }*/
 
-    }
-
-    makePassiveButton() {
+    makePassiveButton = () => {
         this._buttonElementSave = document.querySelector('#popupElementsButtonSave');
         this._buttonElementSave.classList.add('popup__save_inactively');
         this._buttonElementSave.disabled = true
