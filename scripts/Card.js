@@ -3,6 +3,7 @@ const photopopupTitle = document.querySelector('.popup__text');
 const popupPhoto = document.querySelector('#popupPhoto');
 
 
+
 export default class Card {
 
     _name
@@ -29,10 +30,14 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplateElement()
         this._element.querySelector('.element__title').textContent = this._name
-        this._element.querySelector('.element__rectangle').src = this._link
+
+        this._elementRectangle = this._element.querySelector('.element__rectangle')
+        this._elementRectangle.src = this._link
+        this._elementRectangle.alt = this._name
+
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
-        this._elementRectangle = this._element.querySelector('.element__rectangle')
+
         this._setEventListeners()
 
         return this._element
@@ -55,11 +60,8 @@ export default class Card {
     _handleImageClick = () => {
         photopopupTitle.textContent = this._name
         photoPopupImage.src = this._link
-        photopopupTitle.textContent = photoPopupImage.alt
+        photoPopupImage.alt = this._name
+
         this._openPopup(popupPhoto);
     }
-
-
-
-
 }

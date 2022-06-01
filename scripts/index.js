@@ -65,13 +65,13 @@ function openProfilePopup() {
 
 
 function openPopup(popup) {
-    // document.addEventListener('keydown', closeByEsc)
+    document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
-    valid()
+        //  valid()
 }
 
 function closePopup(popup) {
-    //document.removeEventListener('keydown', closeByEsc)
+    document.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
 
@@ -131,18 +131,18 @@ const enableValidation = ({ formSelector, ...rest }) => {
 
 
 
-// function closeByoverlayClick(evt) {
-//     if (evt.target.classList.contains('popup')) {
-//         closePopup(evt.target);
-//     }
-// }
+function closeByoverlayClick(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+    }
+}
 
-// function closeByEsc(evt) {
-//     if (evt.key === ESC_CODE) {
-//         const openPopup = document.querySelector('.popup_opened');
-//         closePopup(openPopup);
-//     }
-// }
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
+    }
+}
 
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
@@ -153,9 +153,9 @@ photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
 
-//popupProfile.addEventListener('mousedown', closeByoverlayClick)
-//cardPopup.addEventListener('mousedown', closeByoverlayClick)
-//popupPhoto.addEventListener('mousedown', closeByoverlayClick)
+popupProfile.addEventListener('mousedown', closeByoverlayClick)
+cardPopup.addEventListener('mousedown', closeByoverlayClick)
+popupPhoto.addEventListener('mousedown', closeByoverlayClick)
 
 render();
 enableValidation({
