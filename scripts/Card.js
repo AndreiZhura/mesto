@@ -30,11 +30,9 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplateElement()
         this._element.querySelector('.element__title').textContent = this._name
-
         this._elementRectangle = this._element.querySelector('.element__rectangle')
         this._elementRectangle.src = this._link
         this._elementRectangle.alt = this._name
-
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
 

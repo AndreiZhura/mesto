@@ -41,17 +41,12 @@ const cardPopup = document.querySelector('#popupElements');
 const cardPopupOpenButton = document.querySelector('#popOpenElements');
 const cardPopupCloseButton = document.querySelector('#closeButtonElement');
 const formCardPopup = document.querySelector('#popupContainerElements');
-const cardPopupButtonSave = document.querySelector('#popupElementsButtonSave');
-const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
 const popupPhoto = document.querySelector('#popupPhoto');
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-const template = document.querySelector('.template');
 const elements = document.querySelector('.elements');
-const photoPopupImage = document.querySelector('.popup__img');
-const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
 const inputImageValue = document.querySelector('#link-input');
-const buttonElementSave = document.querySelector('#popupElementsButtonSave');
+
 
 
 const ESC_CODE = 'Escape';
@@ -162,7 +157,6 @@ cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
-
 popupProfile.addEventListener('mousedown', closeByoverlayClick)
 cardPopup.addEventListener('mousedown', closeByoverlayClick)
 popupPhoto.addEventListener('mousedown', closeByoverlayClick)
