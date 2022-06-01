@@ -37,17 +37,11 @@ const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#name-input');
 const jobInput = document.querySelector('#job-input');
 const formPopupProfile = document.querySelector('#popupContainerProfile');
-
 const cardPopup = document.querySelector('#popupElements');
-
 const cardPopupOpenButton = document.querySelector('#popOpenElements');
-
 const cardPopupCloseButton = document.querySelector('#closeButtonElement');
-
 const formCardPopup = document.querySelector('#popupContainerElements');
-
 const cardPopupButtonSave = document.querySelector('#popupElementsButtonSave');
-
 const popupProfileButtonSave = document.querySelector('#popupProfileButtonSave');
 const popupPhoto = document.querySelector('#popupPhoto');
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
@@ -56,16 +50,12 @@ const elements = document.querySelector('.elements');
 const photoPopupImage = document.querySelector('.popup__img');
 const photopopupTitle = document.querySelector('.popup__text'); //данная переменная используется без нее не откроется попап при клиике на картинку
 const inputTitleValue = document.querySelector('#title-input');
-const inputImage = document.querySelector('#link-input');
+const inputImageValue = document.querySelector('#link-input');
+const buttonElementSave = document.querySelector('#popupElementsButtonSave');
 
 
-
-
-const ESC_CODE = 'Escape'
+const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
-
-
-
 
 function openProfilePopup() {
     nameInput.value = profileName.textContent;
@@ -77,10 +67,11 @@ function openProfilePopup() {
 function openPopup(popup) {
     // document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
+    valid()
 }
 
 function closePopup(popup) {
-    //  document.removeEventListener('keydown', closeByEsc)
+    //document.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
 
@@ -99,33 +90,23 @@ function submitProfileForm(evt) {
 
 function handleCardFormSubmit(evt) {
     evt.preventDefault()
-
-    addNewElement();
-    evt.target.reset() //Спасибо :)
-
+    addNewElement(inputTitleValue.value, inputImageValue.value);
+    evt.target.reset()
 
     closePopup(cardPopup);
 }
 
 
-// function handleCardClick(name, link) {
-
-//     // устанавливаем ссылку
-//     //устанавливаем подпись картинке
-//     //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
-// }
-
-
-function createCard(item) {
+function createCard(name, link) {
     // тут создаете карточку и возвращаете ее
-    const card = new Card(item, ".template")
+    const card = new Card(name, link, ".template", openPopup)
     const cardElement = card.generateCard();
     return cardElement
 }
 
 
 function render() {
-    initialCards.forEach((step) => addNewElement(step));
+    initialCards.forEach((step) => addNewElement(step.name, step.link));
 }
 
 function addNewElement(name, link) {
@@ -134,28 +115,34 @@ function addNewElement(name, link) {
     elements.prepend(newObj);
 }
 
+function valid() {
+    const validate = new Formvalidation()
+    const resetButton = validate.resetValidation()
+    return resetButton
+}
 
 const enableValidation = ({ formSelector, ...rest }) => {
-        const formList = Array.from(document.querySelectorAll(formSelector))
-        formList.forEach((formElement) => {
-            const valid = new Formvalidation(rest, formElement)
-            valid.enableValidation()
-        })
-    }
-    /*
-    function closeByOverlayClick(evt) {
-        if (evt.target.classList.contains('popup')) {
-            closePopup(evt.target);
-        }
-    }
+    const formList = Array.from(document.querySelectorAll(formSelector))
+    formList.forEach((formElement) => {
+        const valid = new Formvalidation(rest, formElement)
+        valid.enableValidation()
+    })
+}
 
-    function closeByEsc(evt) {
-        if (evt.key === ESC_CODE) {
-            const openPopup = document.querySelector('.popup_opened');
-            closePopup(openPopup);
-        }
-    }
-    */
+
+
+// function closeByoverlayClick(evt) {
+//     if (evt.target.classList.contains('popup')) {
+//         closePopup(evt.target);
+//     }
+// }
+
+// function closeByEsc(evt) {
+//     if (evt.key === ESC_CODE) {
+//         const openPopup = document.querySelector('.popup_opened');
+//         closePopup(openPopup);
+//     }
+// }
 
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
@@ -165,9 +152,10 @@ cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
-//popupProfile.addEventListener('mousedown', closeByOverlayClick)
-//cardPopup.addEventListener('mousedown', closeByOverlayClick)
-//popupPhoto.addEventListener('mousedown', closeByOverlayClick)
+
+//popupProfile.addEventListener('mousedown', closeByoverlayClick)
+//cardPopup.addEventListener('mousedown', closeByoverlayClick)
+//popupPhoto.addEventListener('mousedown', closeByoverlayClick)
 
 render();
 enableValidation({

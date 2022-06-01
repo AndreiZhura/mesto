@@ -41,6 +41,7 @@ export default class Formvalidation {
         }
     }
 
+
     _hasInvalidInput() {
         return this._inputList.some((inputElement) => {
             return !inputElement.validity.valid
@@ -61,16 +62,25 @@ export default class Formvalidation {
         })
     }
 
-    makePassiveButton() {
-        this._buttonElementSave = document.querySelector('#popupElementsButtonSave');
-        this._buttonElementSave.classList.add('popup__save_inactively');
-        this._buttonElementSave.disabled = true
-    }
-
     _addValidElement() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
+    }
+
+    resetValidation = () => {
+        this._toggleButton()
+
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+        })
+
+    }
+
+    makePassiveButton() {
+        this._buttonElementSave = document.querySelector('#popupElementsButtonSave');
+        this._buttonElementSave.classList.add('popup__save_inactively');
+        this._buttonElementSave.disabled = true
     }
 
     enableValidation() {
