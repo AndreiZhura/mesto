@@ -107,17 +107,6 @@ function addNewElement(name, link) {
     elements.prepend(newObj);
 }
 
-
-
-/*
-const enableValidation = ({ formSelector, ...rest }) => {
-    const formList = Array.from(document.querySelectorAll(formSelector))
-    formList.forEach((formElement) => {
-        const validate = new Formvalidation(rest, formElement)
-        validate.enableValidation()
-    })
-}*/
-
 function closeByOverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.target);

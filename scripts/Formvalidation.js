@@ -70,9 +70,6 @@ export default class Formvalidation {
         })
     }
 
-    toggleButtonState = () => {
-        this._toggleButton();
-    }
 
 
     resetValidation() {
