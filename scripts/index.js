@@ -109,14 +109,14 @@ function addNewElement(name, link) {
 
 
 
-
+/*
 const enableValidation = ({ formSelector, ...rest }) => {
     const formList = Array.from(document.querySelectorAll(formSelector))
     formList.forEach((formElement) => {
         const validate = new Formvalidation(rest, formElement)
         validate.enableValidation()
     })
-}
+}*/
 
 function closeByOverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
@@ -131,8 +131,41 @@ function closeByEsc(evt) {
     }
 }
 
+const formValidators = {
 
-popupProfileOpenButton.addEventListener('click', openProfilePopup);
+    formSelector: '.popup__container',
+
+    inputSelector: '.popup__input',
+
+    submitButtonSelector: '.popup__save',
+
+    inactiveButtonClass: 'popup__save_inactively',
+
+    inputErrorClass: 'popup__input_type_error',
+
+    errorClass: 'popup__error_active'
+
+}
+
+// Включение валидации
+const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach((formElement) => {
+        const validator = new FormValidator(formElement, config)
+            // получаем данные из атрибута `name` у формы
+        const formName = formElement.getAttribute('name')
+
+        // вот тут в объект записываем под именем формы
+        formValidators[formName] = validator;
+        validator.enableValidation();
+    });
+};
+
+enableValidation(config);
+
+
+
+
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
@@ -145,23 +178,10 @@ popupPhoto.addEventListener('mousedown', closeByOverlayClick)
 
 cardPopupOpenButton.addEventListener('click', () => {
     openPopup(cardPopup)
-    enableValidation({
-        formSelector: '.popup__container',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__save',
-        inactiveButtonClass: 'popup__save_inactively',
-        inputErrorClass: 'popup__input_type_error',
-        errorClass: 'popup__error_active'
-    })
+
 
 })
+
+popupProfileOpenButton.addEventListener('click', openProfilePopup);
 
 render();
-enableValidation({
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-})
