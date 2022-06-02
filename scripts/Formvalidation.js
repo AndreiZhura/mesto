@@ -6,7 +6,11 @@ export default class Formvalidation {
         this._inputErrorClass = element.inputErrorClass
         this._errorClass = element.errorClass
 
+
         this._formElement = formElement
+
+        this._inputList = Array.from(formElement.querySelectorAll(element.inputSelector))
+        this._buttonElement = this._formElement.querySelector(element.submitButtonSelector);
     }
 
     _showInputError(inputElement) {
@@ -49,8 +53,7 @@ export default class Formvalidation {
     }
 
     _setEventListeners() {
-        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
-        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+
         this._toggleButton();
 
         this._inputList.forEach((inputElement) => {
@@ -61,15 +64,15 @@ export default class Formvalidation {
         })
     }
 
-    _addValidElement() {
-            this._formElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            })
-        }
-        /*
-            toggleButtonState = () => {
-                this._toggleButton();
-            }*/
+    _addValidElement = () => {
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        })
+    }
+
+    toggleButtonState = () => {
+        this._toggleButton();
+    }
 
 
     resetValidation() {
@@ -79,13 +82,9 @@ export default class Formvalidation {
             this._hideInputError(inputElement)
 
         });
-
     }
 
-
-
-
-    enableValidation() {
+    enableValidationList = () => {
         this._addValidElement()
         this._setEventListeners()
     }

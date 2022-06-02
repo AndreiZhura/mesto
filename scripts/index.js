@@ -52,7 +52,7 @@ const inputImageValue = document.querySelector('#link-input');
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter'
 
-function openProfilePopup() {
+function openProfilePopup(popupProfile) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
@@ -131,43 +131,27 @@ function closeByEsc(evt) {
     }
 }
 
-const formValidators = {
-
+const formValidators = ({
     formSelector: '.popup__container',
-
     inputSelector: '.popup__input',
-
     submitButtonSelector: '.popup__save',
-
     inactiveButtonClass: 'popup__save_inactively',
-
     inputErrorClass: 'popup__input_type_error',
-
     errorClass: 'popup__error_active'
+})
 
-}
 
-// Включение валидации
-const enableValidation = (config) => {
-    const formList = Array.from(document.querySelectorAll(config.formSelector))
+const enableValidation = ({ formSelector, ...rest }) => {
+    const formList = Array.from(document.querySelectorAll(formSelector))
     formList.forEach((formElement) => {
-        const validator = new FormValidator(formElement, config)
-            // получаем данные из атрибута `name` у формы
-        const formName = formElement.getAttribute('name')
+        const validator = new Formvalidation(rest, formElement)
 
-        // вот тут в объект записываем под именем формы
-        formValidators[formName] = validator;
-        validator.enableValidation();
+        validator.enableValidationList();
     });
 };
 
-enableValidation(config);
-
-
-
 
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
@@ -179,9 +163,35 @@ popupPhoto.addEventListener('mousedown', closeByOverlayClick)
 cardPopupOpenButton.addEventListener('click', () => {
     openPopup(cardPopup)
 
+    const enableValidCard = ({ formSelector, ...rest }) => {
+        const formList = Array.from(document.querySelectorAll(formSelector))
+        formList.forEach((formElement) => {
+            const validatorCard = new Formvalidation(rest, formElement)
+            validatorCard.resetValidation();
+        });
+    };
+
+    enableValidCard(formValidators)
 
 })
 
-popupProfileOpenButton.addEventListener('click', openProfilePopup);
+popupProfileOpenButton.addEventListener('click', () => {
+    openProfilePopup(popupProfile)
 
-render();
+    const enableValidProfile = ({ formSelector, ...rest }) => {
+        const formList = Array.from(document.querySelectorAll(formSelector))
+        formList.forEach((formElement) => {
+            const validatorProfile = new Formvalidation(rest, formElement)
+            validatorProfile.resetValidation();
+        });
+    };
+
+    enableValidProfile(formValidators)
+})
+
+
+
+
+
+render()
+enableValidation(formValidators);
