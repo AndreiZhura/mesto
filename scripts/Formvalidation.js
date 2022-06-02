@@ -62,16 +62,28 @@ export default class Formvalidation {
     }
 
     _addValidElement() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
+            this._formElement.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            })
+        }
+        /*
+            toggleButtonState = () => {
+                this._toggleButton();
+            }*/
+
+
+    resetValidation() {
+        this._toggleButton();
+
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+
+        });
+
     }
 
-    makePassiveButton = () => {
-        this._buttonElementSave = document.querySelector('#popupElementsButtonSave');
-        this._buttonElementSave.classList.add('popup__save_inactively');
-        this._buttonElementSave.disabled = true
-    }
+
+
 
     enableValidation() {
         this._addValidElement()

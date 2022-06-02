@@ -62,8 +62,6 @@ function openProfilePopup() {
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
-    resetValid();
-
 }
 
 function closePopup(popup) {
@@ -88,7 +86,6 @@ function handleCardFormSubmit(evt) {
     evt.preventDefault()
     addNewElement(inputTitleValue.value, inputImageValue.value);
     evt.target.reset()
-
     closePopup(cardPopup);
 }
 
@@ -106,23 +103,10 @@ function render() {
 }
 
 function addNewElement(name, link) {
-
     const newObj = createCard(name, link)
     elements.prepend(newObj);
 }
 
-function resetValid() {
-    const validate = new Formvalidation({
-        formSelector: '.popup__container',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__save',
-        inactiveButtonClass: 'popup__save_inactively',
-        inputErrorClass: 'popup__input_type_error',
-        errorClass: 'popup__error_active'
-    })
-    const resetButton = validate.makePassiveButton()
-    return resetButton
-}
 
 
 
@@ -134,9 +118,7 @@ const enableValidation = ({ formSelector, ...rest }) => {
     })
 }
 
-
-
-function closeByoverlayClick(evt) {
+function closeByOverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.target);
     }
@@ -152,14 +134,27 @@ function closeByEsc(evt) {
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup));
+
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
-popupProfile.addEventListener('mousedown', closeByoverlayClick)
-cardPopup.addEventListener('mousedown', closeByoverlayClick)
-popupPhoto.addEventListener('mousedown', closeByoverlayClick)
+popupProfile.addEventListener('mousedown', closeByOverlayClick)
+cardPopup.addEventListener('mousedown', closeByOverlayClick)
+popupPhoto.addEventListener('mousedown', closeByOverlayClick)
+
+cardPopupOpenButton.addEventListener('click', () => {
+    openPopup(cardPopup)
+    enableValidation({
+        formSelector: '.popup__container',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactively',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_active'
+    })
+
+})
 
 render();
 enableValidation({
