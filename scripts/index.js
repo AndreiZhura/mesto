@@ -1,5 +1,5 @@
 import Card from './Card.js'
-import Formvalidation from './Formvalidation.js';
+import FormValidator from './Formvalidation.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -28,7 +28,6 @@ const initialCards = [{
 ];
 
 
-
 const popupProfile = document.querySelector('#popupProfile');
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
 const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
@@ -47,10 +46,48 @@ const elements = document.querySelector('.elements');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImageValue = document.querySelector('#link-input');
 
+const popupFormProfile = document.querySelector('#popupProfile');
+const popupFormCard = document.querySelector('#popupElements');
+
+const popupProfileValid = popupFormProfile.querySelector('.popup__container')
+
+
+const popupCard = popupFormCard.querySelector('.popup__container');
+
+
 
 
 const ESC_CODE = 'Escape';
-const ENTER_CODE = 'Enter'
+const ENTER_CODE = 'Enter';
+
+
+const formValidators = {
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactively',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_active'
+}
+
+
+
+
+
+
+
+
+
+const validatorProfile = new FormValidator(formValidators, popupProfileValid)
+validatorProfile.enableValidation()
+
+
+const validatorCard = new FormValidator(formValidators, popupCard)
+validatorCard.enableValidation()
+
+
+
+
+
 
 function openProfilePopup(popupProfile) {
     nameInput.value = profileName.textContent;
@@ -78,6 +115,7 @@ function submitProfileForm(evt) {
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
+    validatorProfile.disableSubmitButton()
     closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
 }
@@ -86,6 +124,7 @@ function handleCardFormSubmit(evt) {
     evt.preventDefault()
     addNewElement(inputTitleValue.value, inputImageValue.value);
     evt.target.reset()
+    validatorCard.disableSubmitButton()
     closePopup(cardPopup);
 }
 
@@ -120,24 +159,9 @@ function closeByEsc(evt) {
     }
 }
 
-const formValidators = ({
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-})
 
 
-const enableValidation = ({ formSelector, ...rest }) => {
-    const formList = Array.from(document.querySelectorAll(formSelector))
-    formList.forEach((formElement) => {
-        const validator = new Formvalidation(rest, formElement)
 
-        validator.enableValidationList();
-    });
-};
 
 
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
@@ -152,35 +176,11 @@ popupPhoto.addEventListener('mousedown', closeByOverlayClick)
 cardPopupOpenButton.addEventListener('click', () => {
     openPopup(cardPopup)
 
-    const enableValidCard = ({ formSelector, ...rest }) => {
-        const formList = Array.from(document.querySelectorAll(formSelector))
-        formList.forEach((formElement) => {
-            const validatorCard = new Formvalidation(rest, formElement)
-            validatorCard.resetValidation();
-        });
-    };
-
-    enableValidCard(formValidators)
-
 })
 
 popupProfileOpenButton.addEventListener('click', () => {
     openProfilePopup(popupProfile)
-
-    const enableValidProfile = ({ formSelector, ...rest }) => {
-        const formList = Array.from(document.querySelectorAll(formSelector))
-        formList.forEach((formElement) => {
-            const validatorProfile = new Formvalidation(rest, formElement)
-            validatorProfile.resetValidation();
-        });
-    };
-
-    enableValidProfile(formValidators)
 })
 
 
-
-
-
 render()
-enableValidation(formValidators);
