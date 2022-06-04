@@ -51,11 +51,10 @@ const popupFormCard = document.querySelector('#popupElements');
 
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 
-const popupCard = popupFormCard.querySelector('.popup__container');
+const popupCardValid = popupFormCard.querySelector('.popup__container');
 
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
-
 
 const formValidators = {
     inputSelector: '.popup__input',
@@ -69,15 +68,16 @@ const validatorProfile = new FormValidator(formValidators, popupProfileValid)
 validatorProfile.enableValidation()
 
 
-const validatorCard = new FormValidator(formValidators, popupCard)
+const validatorCard = new FormValidator(formValidators, popupCardValid)
 validatorCard.enableValidation()
 
 
-function openProfilePopup() {
+function openProfilePopup(popupProfile) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
 }
+
 
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
@@ -98,7 +98,7 @@ function submitProfileForm(evt) {
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
-    validatorProfile.disableSubmitButton()
+    validatorProfile.disableButton()
     closePopup(popupProfile);
     // Вставьте новые значения с помощью textContent
 }
@@ -107,7 +107,7 @@ function handleCardFormSubmit(evt) {
     evt.preventDefault()
     addNewElement(inputTitleValue.value, inputImageValue.value);
     evt.target.reset()
-    validatorCard.disableSubmitButton()
+    validatorCard.disableButton()
     closePopup(cardPopup);
 }
 
@@ -142,6 +142,11 @@ function closeByEsc(evt) {
     }
 }
 
+
+
+
+
+
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
@@ -151,9 +156,14 @@ popupProfile.addEventListener('mousedown', closeByOverlayClick)
 cardPopup.addEventListener('mousedown', closeByOverlayClick)
 popupPhoto.addEventListener('mousedown', closeByOverlayClick)
 
-cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup))
+cardPopupOpenButton.addEventListener('click', () => {
+    openPopup(cardPopup)
 
-popupProfileOpenButton.addEventListener('click', () => openProfilePopup())
+})
+
+popupProfileOpenButton.addEventListener('click', () => {
+    openProfilePopup(popupProfile)
+})
 
 
 render()
