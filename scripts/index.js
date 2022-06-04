@@ -27,7 +27,6 @@ const initialCards = [{
     }
 ];
 
-
 const popupProfile = document.querySelector('#popupProfile');
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
 const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
@@ -45,12 +44,9 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const elements = document.querySelector('.elements');
 const inputTitleValue = document.querySelector('#title-input');
 const inputImageValue = document.querySelector('#link-input');
-
 const popupFormProfile = document.querySelector('#popupProfile');
 const popupFormCard = document.querySelector('#popupElements');
-
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
-
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 
 const ESC_CODE = 'Escape';
@@ -72,7 +68,7 @@ const validatorCard = new FormValidator(formValidators, popupCardValid)
 validatorCard.enableValidation()
 
 
-function openProfilePopup(popupProfile) {
+function openProfilePopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
@@ -119,7 +115,6 @@ function createCard(name, link) {
     return cardElement
 }
 
-
 function render() {
     initialCards.forEach((step) => addNewElement(step.name, step.link));
 }
@@ -142,11 +137,6 @@ function closeByEsc(evt) {
     }
 }
 
-
-
-
-
-
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
@@ -155,15 +145,7 @@ formCardPopup.addEventListener('submit', handleCardFormSubmit);
 popupProfile.addEventListener('mousedown', closeByOverlayClick)
 cardPopup.addEventListener('mousedown', closeByOverlayClick)
 popupPhoto.addEventListener('mousedown', closeByOverlayClick)
-
-cardPopupOpenButton.addEventListener('click', () => {
-    openPopup(cardPopup)
-
-})
-
-popupProfileOpenButton.addEventListener('click', () => {
-    openProfilePopup(popupProfile)
-})
-
+cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup))
+popupProfileOpenButton.addEventListener('click', () => openProfilePopup())
 
 render()
