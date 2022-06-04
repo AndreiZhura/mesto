@@ -51,11 +51,7 @@ const popupFormCard = document.querySelector('#popupElements');
 
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 
-
 const popupCard = popupFormCard.querySelector('.popup__container');
-
-
-
 
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
@@ -69,14 +65,6 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-
-
-
-
-
-
-
-
 const validatorProfile = new FormValidator(formValidators, popupProfileValid)
 validatorProfile.enableValidation()
 
@@ -85,16 +73,11 @@ const validatorCard = new FormValidator(formValidators, popupCard)
 validatorCard.enableValidation()
 
 
-
-
-
-
-function openProfilePopup(popupProfile) {
+function openProfilePopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
     openPopup(popupProfile)
 }
-
 
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
@@ -159,11 +142,6 @@ function closeByEsc(evt) {
     }
 }
 
-
-
-
-
-
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
@@ -173,14 +151,9 @@ popupProfile.addEventListener('mousedown', closeByOverlayClick)
 cardPopup.addEventListener('mousedown', closeByOverlayClick)
 popupPhoto.addEventListener('mousedown', closeByOverlayClick)
 
-cardPopupOpenButton.addEventListener('click', () => {
-    openPopup(cardPopup)
+cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup))
 
-})
-
-popupProfileOpenButton.addEventListener('click', () => {
-    openProfilePopup(popupProfile)
-})
+popupProfileOpenButton.addEventListener('click', () => openProfilePopup())
 
 
 render()
