@@ -18,10 +18,16 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.js$/,
-            use: 'babel-loader',
-            exclude: /node_modules/
-        }]
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                // регулярное выражение, которое ищет все файлы с такими расширениями
+                test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+                type: 'asset/resource'
+            },
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
