@@ -1,7 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './Formvalidation.js';
-import '../pages/index.css'
-import Popup from './Popup.js';
+import Popup from './Popup.js'
 
 const initialCards = [{
         name: 'Архыз',
@@ -69,24 +68,26 @@ validatorProfile.enableValidation()
 const validatorCard = new FormValidator(formValidators, popupCardValid)
 validatorCard.enableValidation()
 
+const popupClassCard = new Popup('#popupElements')
+
+const popupClassProfile = new Popup('#popupProfile')
 
 function openProfilePopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileProfession.textContent;
-    openPopup(popupProfile)
 }
 
-/*
+
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
 }
-
+/*
 function closePopup(popup) {
     document.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
-}
-*/
+}*/
+
 function submitProfileForm(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
@@ -97,7 +98,7 @@ function submitProfileForm(evt) {
     profileProfession.textContent = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
     validatorProfile.disableButton()
-    closePopup(popupProfile);
+    popupClassProfile.closePopup()
     // Вставьте новые значения с помощью textContent
 }
 
@@ -106,7 +107,7 @@ function handleCardFormSubmit(evt) {
     addNewElement(inputTitleValue.value, inputImageValue.value);
     evt.target.reset()
     validatorCard.disableButton()
-    closePopup(cardPopup);
+    popupClassCard.closePopup()
 }
 
 
@@ -125,7 +126,7 @@ function addNewElement(name, link) {
     const newObj = createCard(name, link)
     elements.prepend(newObj);
 }
-
+/*
 function closeByOverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.target);
@@ -137,29 +138,36 @@ function closeByEsc(evt) {
         const openPopup = document.querySelector('.popup_opened');
         closePopup(openPopup);
     }
-}
+}*/
 
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
+
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-
 
 
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
+/*
 popupProfile.addEventListener('mousedown', closeByOverlayClick)
 cardPopup.addEventListener('mousedown', closeByOverlayClick)
-popupPhoto.addEventListener('mousedown', closeByOverlayClick)
-
+popupPhoto.addEventListener('mousedown', closeByOverlayClick)*/
 
 cardPopupOpenButton.addEventListener('click', () => {
-
-    const popup = new Popup()
-    popup.openPopup(cardPopup)
-
+    popupClassCard.openPopup()
 })
 
 
-popupProfileOpenButton.addEventListener('click', () => openProfilePopup())
+popupProfileOpenButton.addEventListener('click', () => {
+    popupClassProfile.openPopup()
+    openProfilePopup()
+})
+
+popupProfileCloseButton.addEventListener('click', () => {
+    popupClassProfile.closePopup()
+});
+
+cardPopupCloseButton.addEventListener('click', () => {
+    popupClassCard.closePopup()
+})
+
 
 render()
