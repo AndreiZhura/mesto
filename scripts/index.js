@@ -1,5 +1,7 @@
 import Card from './Card.js'
 import FormValidator from './Formvalidation.js';
+import '../pages/index.css'
+import Popup from './Popup.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -74,7 +76,7 @@ function openProfilePopup() {
     openPopup(popupProfile)
 }
 
-
+/*
 function openPopup(popup) {
     document.addEventListener('keydown', closeByEsc)
     popup.classList.add('popup_opened')
@@ -84,7 +86,7 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closeByEsc)
     popup.classList.remove('popup_opened')
 }
-
+*/
 function submitProfileForm(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
@@ -140,12 +142,24 @@ function closeByEsc(evt) {
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 cardPopupCloseButton.addEventListener('click', () => closePopup(cardPopup))
 photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
+
+
+
 formPopupProfile.addEventListener('submit', submitProfileForm);
 formCardPopup.addEventListener('submit', handleCardFormSubmit);
 popupProfile.addEventListener('mousedown', closeByOverlayClick)
 cardPopup.addEventListener('mousedown', closeByOverlayClick)
 popupPhoto.addEventListener('mousedown', closeByOverlayClick)
-cardPopupOpenButton.addEventListener('click', () => openPopup(cardPopup))
+
+
+cardPopupOpenButton.addEventListener('click', () => {
+
+    const popup = new Popup()
+    popup.openPopup(cardPopup)
+
+})
+
+
 popupProfileOpenButton.addEventListener('click', () => openProfilePopup())
 
 render()
