@@ -1,6 +1,7 @@
 import Card from './Card.js'
 import FormValidator from './Formvalidation.js';
 import Popup from './Popup.js'
+import Section from './Section.js';
 
 const initialCards = [{
         name: 'Архыз',
@@ -28,27 +29,31 @@ const initialCards = [{
     }
 ];
 
-const popupProfile = document.querySelector('#popupProfile');
-const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-const profileName = document.querySelector('#profileName');
-const profileProfession = document.querySelector('#profileProfession');
-const nameInput = document.querySelector('#name-input');
-const jobInput = document.querySelector('#job-input');
-const formPopupProfile = document.querySelector('#popupContainerProfile');
-const cardPopup = document.querySelector('#popupElements');
-const cardPopupOpenButton = document.querySelector('#popOpenElements');
-const cardPopupCloseButton = document.querySelector('#closeButtonElement');
-const formCardPopup = document.querySelector('#popupContainerElements');
-const popupPhoto = document.querySelector('#popupPhoto');
-const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-const elements = document.querySelector('.elements');
-const inputTitleValue = document.querySelector('#title-input');
-const inputImageValue = document.querySelector('#link-input');
-const popupFormProfile = document.querySelector('#popupProfile');
-const popupFormCard = document.querySelector('#popupElements');
-const popupProfileValid = popupFormProfile.querySelector('.popup__container')
-const popupCardValid = popupFormCard.querySelector('.popup__container');
+export const popupProfile = document.querySelector('#popupProfile');
+export const popupProfileOpenButton = document.querySelector('#popOpenProfile');
+export const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+export const profileName = document.querySelector('#profileName');
+export const profileProfession = document.querySelector('#profileProfession');
+export const nameInput = document.querySelector('#name-input');
+export const jobInput = document.querySelector('#job-input');
+export const formPopupProfile = document.querySelector('#popupContainerProfile');
+export const cardPopup = document.querySelector('#popupElements');
+export const cardPopupOpenButton = document.querySelector('#popOpenElements');
+export const cardPopupCloseButton = document.querySelector('#closeButtonElement');
+export const formCardPopup = document.querySelector('#popupContainerElements');
+export const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
+export const elements = document.querySelector('.elements');
+export const inputTitleValue = document.querySelector('#title-input');
+export const inputImageValue = document.querySelector('#link-input');
+export const popupFormProfile = document.querySelector('#popupProfile');
+export const popupFormCard = document.querySelector('#popupElements');
+export const popupProfileValid = popupFormProfile.querySelector('.popup__container')
+export const popupCardValid = popupFormCard.querySelector('.popup__container');
+export const photoPopupImage = document.querySelector('.popup__img');
+export const photopopupTitle = document.querySelector('.popup__text');
+export const popupPhoto = document.querySelector('#popupPhoto');
+export const template = document.querySelector('.template')
+
 
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
@@ -99,7 +104,7 @@ function submitProfileForm(evt) {
     // Выберите элементы, куда должны быть вставлены значения полей
     validatorProfile.disableButton()
     popupClassProfile.closePopup()
-    // Вставьте новые значения с помощью textContent
+        // Вставьте новые значения с помощью textContent
 }
 
 function handleCardFormSubmit(evt) {
@@ -110,16 +115,31 @@ function handleCardFormSubmit(evt) {
     popupClassCard.closePopup()
 }
 
+const renderCard = (place) => {
+    const newPlaceCard = new Card(place, '.template' /*handleCardClick*/ );
 
+    return newPlaceCard.generateCard();
+}
+
+const cardsCatalogue = new Section({
+    items: initialCards.reverse(),
+    renderer: (place) => {
+        cardsCatalogue.addItem(renderCard(place))
+    }
+}, elements)
+cardsCatalogue.renderItems();
+
+/*
 function createCard(name, link) {
     // тут создаете карточку и возвращаете ее
-    const card = new Card(name, link, ".template", openPopup)
+    const card = new Card({ name, link },
+        ".template")
     const cardElement = card.generateCard();
     return cardElement
 }
 
-function render() {
-    initialCards.forEach((step) => addNewElement(step.name, step.link));
+function render(element) {
+    element.forEach((step) => addNewElement(step.name, step.link));
 }
 
 function addNewElement(name, link) {
@@ -170,4 +190,4 @@ cardPopupCloseButton.addEventListener('click', () => {
 })
 
 
-render()
+render(initialCards)
