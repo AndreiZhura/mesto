@@ -1,7 +1,5 @@
-import Card from './Card.js'
-import FormValidator from './Formvalidation.js';
-import Popup from './Popup.js'
-import Section from './Section.js';
+import Card from "./Card.js";
+import Section from "./Section.js";
 
 const initialCards = [{
         name: 'Архыз',
@@ -29,31 +27,27 @@ const initialCards = [{
     }
 ];
 
-export const popupProfile = document.querySelector('#popupProfile');
-export const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-export const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-export const profileName = document.querySelector('#profileName');
-export const profileProfession = document.querySelector('#profileProfession');
-export const nameInput = document.querySelector('#name-input');
-export const jobInput = document.querySelector('#job-input');
-export const formPopupProfile = document.querySelector('#popupContainerProfile');
-export const cardPopup = document.querySelector('#popupElements');
-export const cardPopupOpenButton = document.querySelector('#popOpenElements');
-export const cardPopupCloseButton = document.querySelector('#closeButtonElement');
-export const formCardPopup = document.querySelector('#popupContainerElements');
-export const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
-export const elements = document.querySelector('.elements');
-export const inputTitleValue = document.querySelector('#title-input');
-export const inputImageValue = document.querySelector('#link-input');
-export const popupFormProfile = document.querySelector('#popupProfile');
-export const popupFormCard = document.querySelector('#popupElements');
-export const popupProfileValid = popupFormProfile.querySelector('.popup__container')
-export const popupCardValid = popupFormCard.querySelector('.popup__container');
-export const photoPopupImage = document.querySelector('.popup__img');
-export const photopopupTitle = document.querySelector('.popup__text');
-export const popupPhoto = document.querySelector('#popupPhoto');
-export const template = document.querySelector('.template')
-
+const popupProfile = document.querySelector('#popupProfile');
+const popupProfileOpenButton = document.querySelector('#popOpenProfile');
+const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+const profileName = document.querySelector('#profileName');
+const profileProfession = document.querySelector('#profileProfession');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#job-input');
+const formPopupProfile = document.querySelector('#popupContainerProfile');
+const cardPopup = document.querySelector('#popupElements');
+const cardPopupOpenButton = document.querySelector('#popOpenElements');
+const cardPopupCloseButton = document.querySelector('#closeButtonElement');
+const formCardPopup = document.querySelector('#popupContainerElements');
+const popupPhoto = document.querySelector('#popupPhoto');
+const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
+const elements = document.querySelector('.elements');
+const inputTitleValue = document.querySelector('#title-input');
+const inputImageValue = document.querySelector('#link-input');
+const popupFormProfile = document.querySelector('#popupProfile');
+const popupFormCard = document.querySelector('#popupElements');
+const popupProfileValid = popupFormProfile.querySelector('.popup__container')
+const popupCardValid = popupFormCard.querySelector('.popup__container');
 
 const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
@@ -66,57 +60,24 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-const validatorProfile = new FormValidator(formValidators, popupProfileValid)
-validatorProfile.enableValidation()
 
-
-const validatorCard = new FormValidator(formValidators, popupCardValid)
-validatorCard.enableValidation()
-
-const popupClassCard = new Popup('#popupElements')
-
-const popupClassProfile = new Popup('#popupProfile')
-
-function openProfilePopup() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileProfession.textContent;
+const createCard = (item) => {
+    const newCard = new Card(item, '.template')
+    return newCard.generateCard()
 }
 
+const renderCard = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        renderCard.addItem(createCard(item))
+    }
 
-function openPopup(popup) {
-    document.addEventListener('keydown', closeByEsc)
-    popup.classList.add('popup_opened')
-}
+}, elements)
+renderCard.renderer()
+
 /*
-function closePopup(popup) {
-    document.removeEventListener('keydown', closeByEsc)
-    popup.classList.remove('popup_opened')
-}*/
-
-function submitProfileForm(evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    validatorProfile.disableButton()
-    popupClassProfile.closePopup()
-        // Вставьте новые значения с помощью textContent
-}
-
-function handleCardFormSubmit(evt) {
-    evt.preventDefault()
-    addNewElement(inputTitleValue.value, inputImageValue.value);
-    evt.target.reset()
-    validatorCard.disableButton()
-    popupClassCard.closePopup()
-}
-
 const renderCard = (place) => {
-    const newPlaceCard = new Card(place, '.template' /*handleCardClick*/ );
+    const newPlaceCard = new Card(place, '.template');
 
     return newPlaceCard.generateCard();
 }
@@ -127,67 +88,4 @@ const cardsCatalogue = new Section({
         cardsCatalogue.addItem(renderCard(place))
     }
 }, elements)
-cardsCatalogue.renderItems();
-
-/*
-function createCard(name, link) {
-    // тут создаете карточку и возвращаете ее
-    const card = new Card({ name, link },
-        ".template")
-    const cardElement = card.generateCard();
-    return cardElement
-}
-
-function render(element) {
-    element.forEach((step) => addNewElement(step.name, step.link));
-}
-
-function addNewElement(name, link) {
-    const newObj = createCard(name, link)
-    elements.prepend(newObj);
-}
-/*
-function closeByOverlayClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
-    }
-}
-
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
-        const openPopup = document.querySelector('.popup_opened');
-        closePopup(openPopup);
-    }
-}*/
-
-
-photoPopupButtonClose.addEventListener('click', () => closePopup(popupPhoto));
-
-
-formPopupProfile.addEventListener('submit', submitProfileForm);
-formCardPopup.addEventListener('submit', handleCardFormSubmit);
-/*
-popupProfile.addEventListener('mousedown', closeByOverlayClick)
-cardPopup.addEventListener('mousedown', closeByOverlayClick)
-popupPhoto.addEventListener('mousedown', closeByOverlayClick)*/
-
-cardPopupOpenButton.addEventListener('click', () => {
-    popupClassCard.openPopup()
-})
-
-
-popupProfileOpenButton.addEventListener('click', () => {
-    popupClassProfile.openPopup()
-    openProfilePopup()
-})
-
-popupProfileCloseButton.addEventListener('click', () => {
-    popupClassProfile.closePopup()
-});
-
-cardPopupCloseButton.addEventListener('click', () => {
-    popupClassCard.closePopup()
-})
-
-
-render(initialCards)
+cardsCatalogue.renderer();*/
