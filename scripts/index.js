@@ -1,5 +1,7 @@
 import Card from "./Card.js";
+import Popup from "./Popup.js";
 import Section from "./Section.js";
+
 
 const initialCards = [{
         name: 'Архыз',
@@ -60,6 +62,10 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
+const popupClassCard = new Popup('#popupElements')
+
+const popupClassProfile = new Popup('#popupProfile')
+
 
 const createCard = (item) => {
     const newCard = new Card(item, '.template')
@@ -75,17 +81,12 @@ const renderCard = new Section({
 }, elements)
 renderCard.renderer()
 
-/*
-const renderCard = (place) => {
-    const newPlaceCard = new Card(place, '.template');
 
-    return newPlaceCard.generateCard();
-}
 
-const cardsCatalogue = new Section({
-    items: initialCards.reverse(),
-    renderer: (place) => {
-        cardsCatalogue.addItem(renderCard(place))
-    }
-}, elements)
-cardsCatalogue.renderer();*/
+popupProfileOpenButton.addEventListener('click', () => {
+    popupClassProfile.popupOpen()
+})
+
+cardPopupOpenButton.addEventListener('click', () => {
+    popupClassCard.popupOpen()
+})
