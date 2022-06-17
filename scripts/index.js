@@ -1,8 +1,7 @@
 import Card from "./Card.js";
 import Popup from "./Popup.js";
 import Section from "./Section.js";
-import FormValidator from "./Formvalidation.js"
-import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 
 const initialCards = [{
@@ -33,7 +32,8 @@ const initialCards = [{
 
 const popupProfile = document.querySelector('#popupProfile');
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+export const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+export const popupButton = document.querySelector('.popup__button')
 const profileName = document.querySelector('#profileName');
 const profileProfession = document.querySelector('#profileProfession');
 const nameInput = document.querySelector('#name-input');
@@ -64,21 +64,13 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-
-const validatorProfile = new FormValidator(formValidators, popupProfileValid)
-validatorProfile.enableValidation()
-
-
-const validatorCard = new FormValidator(formValidators, popupCardValid)
-validatorCard.enableValidation()
-
 const popupClassCard = new Popup('#popupElements')
 
 const popupClassProfile = new Popup('#popupProfile')
 
 
 const createCard = (item) => {
-    const newCard = new Card({ item: item, }, '.template')
+    const newCard = new Card(item, '.template')
     return newCard.generateCard()
 }
 
@@ -89,9 +81,12 @@ const renderCard = new Section({
     }
 
 }, elements)
-renderCard.rendererCard()
+renderCard.renderer()
 
 
+const popupProfileWithForm = new PopupWithForm({
+    
+})
 
 popupProfileOpenButton.addEventListener('click', () => {
     popupClassProfile.popupOpen()

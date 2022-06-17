@@ -6,13 +6,13 @@ export default class Section {
         this._container = containerSelector;
     }
 
-    rendererCard() {
+    renderer() {
         this._items.forEach(item =>
             this._renderer(item)
         );
     }
 
     addItem(element) {
-        this._container.prepend(element)
+        this._container.append(element)
     }
 }
