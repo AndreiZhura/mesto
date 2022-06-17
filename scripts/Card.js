@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(data, cardElement) {
-        this._name = data.name
-        this._link = data.link
-
-        this._cardElement = cardElement
+    constructor({ data, handleCardClick }, cardElement) {
+        this._name = data.name;
+        this._link = data.link;
+        this._handleCardClick = handleCardClick;
+        this._cardElement = cardElement;
     }
 
     _getTemplateElement() {
@@ -24,12 +24,12 @@ export default class Card {
         this._elementLike = this._element.querySelector('.element__like')
         this._elementBascet = this._element.querySelector('.element__basket')
 
-        this._setEventListeners()
+        this.setEventListeners()
 
         return this._element
     }
 
-    _setEventListeners() {
+    setEventListeners() {
         this._elementBascet.addEventListener('click', this._handleDelete)
         this._elementLike.addEventListener('click', this._toggleLike)
         this._elementRectangle.addEventListener('click', this._handleImageClick)
