@@ -40,10 +40,10 @@ export default class Card {
     }
 
     _toggleLike = () => {
-            this._elementLike.classList.toggle('element__like_active_black')
-        }
-        /*
-            _handleImageClick = () => {
-               this._elementRectangle.addEventListener('click',)
-            }*/
+        this._elementLike.classList.toggle('element__like_active_black')
+    }
+
+    _handleImageClick = () => {
+        this._handleCardClick(this._name, this._link)
+    }
 }

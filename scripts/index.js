@@ -73,7 +73,7 @@ const popupClassProfile = new Popup('#popupProfile')
 const createCard = (data) => {
     const newCard = new Card({
         data: data,
-        handleCardClick: (data) => {
+        handleCardClick: (name, link) => {
             const popupWithImage = new PopupWithImage("#popupPhoto")
             popupWithImage.popupOpen(data)
         }
