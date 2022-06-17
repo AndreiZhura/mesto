@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import Popup from "./Popup.js";
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 
 const initialCards = [{
@@ -69,29 +70,35 @@ const popupClassCard = new Popup('#popupElements')
 const popupClassProfile = new Popup('#popupProfile')
 
 
-const createCard = (item) => {
-    const newCard = new Card(item, '.template')
+const createCard = (data) => {
+    const newCard = new Card({
+        data: data,
+        handleCardClick: (data) => {
+            const popupWithImage = new PopupWithImage("#popupPhoto")
+            popupWithImage.popupOpen(data)
+        }
+    }, '.template')
     return newCard.generateCard()
 }
 
-const renderCard = new Section({
+const section = new Section({
     items: initialCards,
     renderer: (item) => {
-        renderCard.addItem(createCard(item))
+        section.addItem(createCard(item))
     }
 
 }, elements)
-renderCard.renderer()
+section.rendererCardFunction()
 
-
+/*
 const popupProfileWithForm = new PopupWithForm({
-    
-})
 
-popupProfileOpenButton.addEventListener('click', () => {
-    popupClassProfile.popupOpen()
-})
+    })
+    /*
+    popupProfileOpenButton.addEventListener('click', () => {
+        popupClassProfile.popupOpen()
+    })
 
-cardPopupOpenButton.addEventListener('click', () => {
-    popupClassCard.popupOpen()
-})
+    cardPopupOpenButton.addEventListener('click', () => {
+        popupClassCard.popupOpen()
+    })*/

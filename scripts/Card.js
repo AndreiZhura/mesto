@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(data, cardElement) {
-        this._name = data.name
-        this._link = data.link
-
-        this._cardElement = cardElement
+    constructor({ data, handleCardClick }, cardElement) {
+        this._name = data.name;
+        this._link = data.link;
+        this._handleCardClick = handleCardClick;
+        this._cardElement = cardElement;
     }
 
     _getTemplateElement() {
@@ -40,12 +40,10 @@ export default class Card {
     }
 
     _toggleLike = () => {
-        this._elementLike.classList.toggle('element__like_active_black')
-    }
-
-    _handleImageClick = () => {
-        photopopupTitle.textContent = this._name
-        photoPopupImage.src = this._link
-        photoPopupImage.alt = this._name
-    }
+            this._elementLike.classList.toggle('element__like_active_black')
+        }
+        /*
+            _handleImageClick = () => {
+               this._elementRectangle.addEventListener('click',)
+            }*/
 }
