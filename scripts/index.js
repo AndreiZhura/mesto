@@ -1,8 +1,9 @@
 import Card from "./Card.js";
 import Popup from "./Popup.js";
 import Section from "./Section.js";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
+//import PopupWithForm from "./PopupWithForm.js";
+//import PopupWithImage from "./PopupWithImage.js";
+
 
 
 const initialCards = [{
@@ -30,31 +31,50 @@ const initialCards = [{
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
+// константы ***************************************************************************************************************
+// секция попапа профиля
 const popupProfile = document.querySelector('#popupProfile');
+// кнопка открытия попапа профиля
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
-export const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
-export const popupButton = document.querySelector('.popup__button')
+//кнопка закрытия попапа профиля
+const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
+// экспортируем иконку закрытия попапа
+export const popupClose = document.querySelector('.popup__button')
+    // имя профиля
 const profileName = document.querySelector('#profileName');
+//профессия профиля
 const profileProfession = document.querySelector('#profileProfession');
+// ввод имени профиля
 const nameInput = document.querySelector('#name-input');
+// профессия имени профиля
 const jobInput = document.querySelector('#job-input');
+// контайнер попапа профиля
 const formPopupProfile = document.querySelector('#popupContainerProfile');
+// попап создания карточки
 const cardPopup = document.querySelector('#popupElements');
+// кнопка открытия попапа карточки
 const cardPopupOpenButton = document.querySelector('#popOpenElements');
+//кнопка закрытия попапа карточки
 const cardPopupCloseButton = document.querySelector('#closeButtonElement');
+// форма контэйнера попапа карточки
 const formCardPopup = document.querySelector('#popupContainerElements');
+// попап с  картинкой и текстом
 const popupPhoto = document.querySelector('#popupPhoto');
+// кнопка его закрития
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
+// div вставки карточки
 const elements = document.querySelector('.elements');
+// значение первого поля карточки попапа 
 const inputTitleValue = document.querySelector('#title-input');
 const inputImageValue = document.querySelector('#link-input');
+
 const popupFormProfile = document.querySelector('#popupProfile');
 const popupFormCard = document.querySelector('#popupElements');
+// валидация
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 
-const ESC_CODE = 'Escape';
+export const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
 
 const formValidators = {
@@ -65,22 +85,20 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-const popupClassCard = new Popup('#popupElements')
-
-const popupClassProfile = new Popup('#popupProfile')
-
+//создаем карточку**************************************************************************************************************************
 
 const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-            const popupWithImage = new PopupWithImage("#popupPhoto")
-            popupWithImage.popupOpen(data)
+            //const popupWithImage = new PopupWithImage("#popupPhoto")
+            //popupWithImage.popupOpen(data)
         }
     }, '.template')
     return newCard.generateCard()
 }
 
+// отрисовываем карточку****************************************************************************************************************
 const section = new Section({
     items: initialCards,
     renderer: (item) => {
@@ -88,17 +106,23 @@ const section = new Section({
     }
 
 }, elements)
-section.rendererCardFunction()
+section.rendererValue()
 
-/*
-const popupProfileWithForm = new PopupWithForm({
 
-    })
-    /*
-    popupProfileOpenButton.addEventListener('click', () => {
-        popupClassProfile.popupOpen()
-    })
+// сами попапы **********************************************************************************************************************
+const popupClassProfile = new Popup(popupProfile)
+    // обработчики событий попапа профиля
+popupClassProfile.setEventListeners()
+const popupClassCard = new Popup(cardPopup)
+    // обработчики событий попапа Карточки
+popupClassCard.setEventListeners()
 
-    cardPopupOpenButton.addEventListener('click', () => {
-        popupClassCard.popupOpen()
-    })*/
+//Функционал кнопок открытия попапа************************************************************************************************
+
+popupProfileOpenButton.addEventListener('click', () => {
+    popupClassProfile.open()
+})
+
+cardPopupOpenButton.addEventListener('click', () => {
+    popupClassCard.open()
+})
