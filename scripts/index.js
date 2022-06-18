@@ -2,7 +2,7 @@ import Card from "./Card.js";
 import Popup from "./Popup.js";
 import Section from "./Section.js";
 //import PopupWithForm from "./PopupWithForm.js";
-//import PopupWithImage from "./PopupWithImage.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 
 
@@ -74,6 +74,9 @@ const popupFormCard = document.querySelector('#popupElements');
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 
+export const popupImg = document.querySelector('.popup__img')
+export const popupTitle = document.querySelector('.popup__text')
+
 export const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
 
@@ -91,8 +94,8 @@ const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-            //const popupWithImage = new PopupWithImage("#popupPhoto")
-            //popupWithImage.popupOpen(data)
+            const popupWithImage = new PopupWithImage(popupPhoto)
+            popupWithImage.open(name, link)
         }
     }, '.template')
     return newCard.generateCard()
