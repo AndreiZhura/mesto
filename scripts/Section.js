@@ -3,7 +3,7 @@ export default class Section {
             this._items = items;
             this._renderer = renderer;
             // селектор класса div куда мы передаем карточки
-            this._containerSelector = containerSelector;
+            this._containerSelector = document.querySelector(containerSelector);
 
         }
         // рендерим данные
@@ -18,6 +18,6 @@ export default class Section {
         //Метод prepend позволяет вставить 
         //в начало какого-либо элемента другой элемент.
         //append в конец
-        this._containerSelector.append(element)
+        this._containerSelector.prepend(element)
     }
 }

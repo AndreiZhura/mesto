@@ -90,10 +90,9 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-const valueTitleAndImage = {
-    name: inputTitleValue.value,
-    link: inputImageValue.value
-}
+
+
+
 
 
 //создаем карточку**************************************************************************************************************************
@@ -116,7 +115,7 @@ const section = new Section({
         section.addItem(createCard(item))
     }
 
-}, elements)
+}, '.elements')
 section.rendererValue()
 
 
@@ -147,14 +146,32 @@ const PopupWithFormClassCard = new PopupWithForm({
     selectorPopup: cardPopup,
     buttonClose: cardPopupCloseButton,
     popupForm: popupCardValid,
-    submitForm: (form) => {
-        const card = createCard(form)
-        const cardElement = card.renderCard()
-        cardList.addItem(cardElement)
-        cardAddFormValidator.disableSubmitButton()
+    submitForm: (item) => {
+        section.rendererValue(item)
+        PopupWithFormClassCard.closePopup()
     }
 })
+
 PopupWithFormClassCard.setEventListeners()
+    /*
+    const PopupWithFormClassCard = new PopupWithForm({
+        selectorPopup: cardPopup,
+        buttonClose: cardPopupCloseButton,
+        popupForm: popupCardValid,
+        submitForm: () => {
+            const card = new Card({
+                data: valueInput,
+                handleCardClick: (name, link) => {
+                    const popupImage = new PopupWithImage(popupPhoto)
+                    popupImage.open(name, link)
+                }
+
+            })
+            const newCardTable = card.generateCard()
+            section.addItem(newCardTable())
+        }
+    })
+    PopupWithFormClassCard.setEventListeners()*/
 
 
 
