@@ -148,21 +148,18 @@ const PopupWithFormClassCard = new PopupWithForm({
     buttonClose: cardPopupCloseButton,
     popupForm: popupCardValid,
     submitForm: (form) => {
-        newSection.rendererValue(form)
+        const card = createCard(form)
+        const cardElement = card.renderCard()
+        cardList.addItem(cardElement)
+        cardAddFormValidator.disableSubmitButton()
     }
 })
-const newSection = new Section({
-    items: valueTitleAndImage,
-    renderer: (item) => {
-        newSection.addItem(createCard(item))
-    }
-
-}, elements)
-
-
-
 PopupWithFormClassCard.setEventListeners()
-    // класс UserInfo******************************************************************************************************************
+
+
+
+
+// класс UserInfo******************************************************************************************************************
 const userInfo = new UserInfo({
         profileName: "#profileName",
         profileProfession: "#profileProfession",
