@@ -1,8 +1,10 @@
 import Card from "./Card.js";
 import Popup from "./Popup.js";
 import Section from "./Section.js";
-//import PopupWithForm from "./PopupWithForm.js";
+import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from './UserInfo.js'
+//import FormValidator from './FormValidator.js'
 
 
 
@@ -88,6 +90,14 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
+/*
+const validatorProfile = new FormValidator(formValidators, popupProfileValid)
+validatorProfile.enableValidation()
+
+
+const validatorCard = new FormValidator(formValidators, popupCardValid)
+validatorCard.enableValidation()
+*/
 //создаем карточку**************************************************************************************************************************
 
 const createCard = (data) => {
@@ -113,6 +123,16 @@ section.rendererValue()
 
 
 // сами попапы **********************************************************************************************************************
+const PopupWithFormClassProfile = new PopupWithForm({
+    selectorPopup: popupProfile,
+    submitForm: (form) => {
+        section.addItem(createCard(form))
+        PopupWithFormClassProfile.closePopup()
+    }
+})
+
+PopupWithFormClassProfile.setEventListeners()
+
 const popupClassProfile = new Popup(popupProfile)
     // обработчики событий попапа профиля
 popupClassProfile.setEventListeners()
@@ -120,9 +140,17 @@ const popupClassCard = new Popup(cardPopup)
     // обработчики событий попапа Карточки
 popupClassCard.setEventListeners()
 
+
+// класс UserInfo******************************************************************************************************************
+
 //Функционал кнопок открытия попапа************************************************************************************************
 
 popupProfileOpenButton.addEventListener('click', () => {
+    const userInfo = new UserInfo({
+        profileName: "#profileName",
+        profileProfession: "#profileProfession",
+    })
+    userInfo.getUserInfo()
     popupClassProfile.open()
 })
 

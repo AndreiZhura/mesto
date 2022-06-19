@@ -8,8 +8,13 @@
 import { popupClose, ESC_CODE } from "./index.js"
 
 export default class Popup {
-    constructor(selectorPopop) {
-        this._selectorPopup = selectorPopop
+
+    _selectorPopup
+
+    constructor(selectorPopup) {
+        this._selectorPopup = selectorPopup;
+        this.closeButtonPopup = this._selectorPopup.querySelector('.popup__button');
+
     }
     open() {
         this._selectorPopup.classList.add("popup_opened")
@@ -18,8 +23,8 @@ export default class Popup {
         this._selectorPopup.classList.remove("popup_opened")
     }
     setEventListeners() {
-        popupClose.addEventListener('click', () => {
-            this.close()
+        this.closeButtonPopup.addEventListener('click', (evt) => {
+            this.close(evt)
         })
         this._selectorPopup.addEventListener('mousedown', (evt) => {
             if (evt.target.classList.contains('popup')) {
