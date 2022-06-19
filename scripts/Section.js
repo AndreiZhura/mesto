@@ -18,6 +18,6 @@ export default class Section {
         //Метод prepend позволяет вставить 
         //в начало какого-либо элемента другой элемент.
         //append в конец
-        this._containerSelector.prepend(element)
+        this._containerSelector.append(element)
     }
 }

@@ -4,7 +4,7 @@ import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
 import UserInfo from './UserInfo.js'
-//import FormValidator from './FormValidator.js'
+import FormValidator from './FormValidator.js'
 
 
 
@@ -90,14 +90,12 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-/*
-const validatorProfile = new FormValidator(formValidators, popupProfileValid)
-validatorProfile.enableValidation()
+const valueTitleAndImage = {
+    name: inputTitleValue.value,
+    link: inputImageValue.value
+}
 
 
-const validatorCard = new FormValidator(formValidators, popupCardValid)
-validatorCard.enableValidation()
-*/
 //создаем карточку**************************************************************************************************************************
 
 const createCard = (data) => {
@@ -139,21 +137,31 @@ const PopupWithFormClassProfile = new PopupWithForm({
 PopupWithFormClassProfile.setEventListeners()
 
 
-// обработчики событий попапа профиля
+
 
 const popupClassCard = new Popup(cardPopup)
     // обработчики событий попапа Карточки
 popupClassCard.setEventListeners()
-    /*
-    const popupFormClassProfile = new PopupWithForm({
-        popupProfile: popupProfile,
-        submitForm: (info) => {
-            userInfo.setUserInfo(info)
-            popupFormClassProfile.closePopup()
-        }
-    })
-    popupFormClassProfile.setEventListeners()
-    */
+
+const PopupWithFormClassCard = new PopupWithForm({
+    selectorPopup: cardPopup,
+    buttonClose: cardPopupCloseButton,
+    popupForm: popupCardValid,
+    submitForm: (form) => {
+        newSection.rendererValue(form)
+    }
+})
+const newSection = new Section({
+    items: valueTitleAndImage,
+    renderer: (item) => {
+        newSection.addItem(createCard(item))
+    }
+
+}, elements)
+
+
+
+PopupWithFormClassCard.setEventListeners()
     // класс UserInfo******************************************************************************************************************
 const userInfo = new UserInfo({
         profileName: "#profileName",
@@ -169,3 +177,10 @@ popupProfileOpenButton.addEventListener('click', () => {
 cardPopupOpenButton.addEventListener('click', () => {
     popupClassCard.open()
 })
+
+const validatorProfile = new FormValidator(formValidators, popupProfileValid)
+validatorProfile.enableValidation()
+
+
+const validatorCard = new FormValidator(formValidators, popupCardValid)
+validatorCard.enableValidation()
