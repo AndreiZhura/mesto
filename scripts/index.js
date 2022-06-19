@@ -123,33 +123,45 @@ section.rendererValue()
 
 
 // сами попапы **********************************************************************************************************************
+
+const popupClassProfile = new Popup(popupProfile)
+popupClassProfile.setEventListeners()
+
 const PopupWithFormClassProfile = new PopupWithForm({
     selectorPopup: popupProfile,
+    buttonClose: popupProfileCloseButton,
+    popupForm: popupProfileValid,
     submitForm: (form) => {
-        section.addItem(createCard(form))
+        userInfo.setUserInfo(form)
         PopupWithFormClassProfile.closePopup()
     }
 })
-
 PopupWithFormClassProfile.setEventListeners()
 
-const popupClassProfile = new Popup(popupProfile)
-    // обработчики событий попапа профиля
-popupClassProfile.setEventListeners()
+
+// обработчики событий попапа профиля
+
 const popupClassCard = new Popup(cardPopup)
     // обработчики событий попапа Карточки
 popupClassCard.setEventListeners()
-
-
-// класс UserInfo******************************************************************************************************************
-
-//Функционал кнопок открытия попапа************************************************************************************************
-
-popupProfileOpenButton.addEventListener('click', () => {
-    const userInfo = new UserInfo({
+    /*
+    const popupFormClassProfile = new PopupWithForm({
+        popupProfile: popupProfile,
+        submitForm: (info) => {
+            userInfo.setUserInfo(info)
+            popupFormClassProfile.closePopup()
+        }
+    })
+    popupFormClassProfile.setEventListeners()
+    */
+    // класс UserInfo******************************************************************************************************************
+const userInfo = new UserInfo({
         profileName: "#profileName",
         profileProfession: "#profileProfession",
     })
+    //Функционал кнопок открытия попапа************************************************************************************************
+
+popupProfileOpenButton.addEventListener('click', () => {
     userInfo.getUserInfo()
     popupClassProfile.open()
 })

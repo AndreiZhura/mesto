@@ -13,22 +13,15 @@ export default class UserInfo {
     constructor({ profileName, profileProfession }) {
         this._profileName = document.querySelector(profileName);
         this._profileProfession = document.querySelector(profileProfession);
-        this._nameInput = document.querySelector('#name-input')
-        this._jobInput = document.querySelector('#job-input')
+        this._nameInput = document.querySelector('#name-input');
+        this._jobInput = document.querySelector('#job-input');
     }
     getUserInfo() {
-        /*
-        return this._valueText = {
-            profileName: this._profileName.textContent,
-            profileProfession: this._profileProfession.textContent
-        }*/
-
         this._nameInput.value = this._profileName.textContent;
         this._jobInput.value = this._profileProfession.textContent;
-
     }
     setUserInfo() {
-        this.profileName.textContent = this.nameInput.value;
-        this.profileProfession.textContent = this.jobInput.value;
+        this._profileName.textContent = this._nameInput.value;
+        this._profileProfession.textContent = this._jobInput.value;
     }
 }
