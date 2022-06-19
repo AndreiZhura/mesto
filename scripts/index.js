@@ -67,8 +67,8 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 // div вставки карточки
 const elements = document.querySelector('.elements');
 // значение первого поля карточки попапа 
-const inputTitleValue = document.querySelector('#title-input');
-const inputImageValue = document.querySelector('#link-input');
+export const inputTitleValue = document.querySelector('#title-input');
+export const inputImageValue = document.querySelector('#link-input');
 
 const popupFormProfile = document.querySelector('#popupProfile');
 const popupFormCard = document.querySelector('#popupElements');
@@ -117,6 +117,13 @@ const section = new Section({
 
 }, '.elements')
 section.rendererValue()
+    /*
+    const sectionNewData = new Section({
+        items: newInputValue,
+        renderer: (item) => {
+            sectionNewData.addItem(createCard(item))
+        }
+    })*/
 
 
 // сами попапы **********************************************************************************************************************
@@ -131,6 +138,7 @@ const PopupWithFormClassProfile = new PopupWithForm({
     submitForm: (form) => {
         userInfo.setUserInfo(form)
         PopupWithFormClassProfile.closePopup()
+        validatorProfile.disableButton()
     }
 })
 PopupWithFormClassProfile.setEventListeners()
@@ -147,8 +155,9 @@ const PopupWithFormClassCard = new PopupWithForm({
     buttonClose: cardPopupCloseButton,
     popupForm: popupCardValid,
     submitForm: (item) => {
-        section.rendererValue(item)
+        section.addItem(createCard(item))
         PopupWithFormClassCard.closePopup()
+        validatorCard.disableButton()
     }
 })
 
