@@ -41,8 +41,8 @@ const popupProfileOpenButton = document.querySelector('#popOpenProfile');
 //кнопка закрытия попапа профиля
 const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
 // экспортируем иконку закрытия попапа
-export const popupClose = document.querySelector('.popup__button')
-    // имя профиля
+
+// имя профиля
 const profileName = document.querySelector('#profileName');
 //профессия профиля
 const profileProfession = document.querySelector('#profileProfession');
@@ -67,8 +67,7 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 // div вставки карточки
 const elements = document.querySelector('.elements');
 // значение первого поля карточки попапа 
-export const inputTitleValue = document.querySelector('#title-input');
-export const inputImageValue = document.querySelector('#link-input');
+
 
 const popupFormProfile = document.querySelector('.popupProfile');
 const popupFormCard = document.querySelector('.popupElements');
@@ -76,8 +75,6 @@ const popupFormCard = document.querySelector('.popupElements');
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 
-export const popupImg = document.querySelector('.popup__img')
-export const popupTitle = document.querySelector('.popup__text')
 
 export const ESC_CODE = 'Escape';
 const ENTER_CODE = 'Enter';
