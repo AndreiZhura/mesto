@@ -15,34 +15,34 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
     constructor({ selectorPopup, buttonClose, popupForm, submitForm }) {
-            super(selectorPopup)
-            this.buttonClose = buttonClose;
-            this.submitForm = submitForm;
-            this.formPopup = popupForm
-            this._popupForm = this._selectorPopup.querySelector('.popup__container');
-            this._inputList = this._popupForm.querySelectorAll('.popup__input');
-        }
-        /*
+        super(selectorPopup)
+        this.buttonClose = buttonClose;
+        this.submitForm = submitForm;
+        this.formPopup = popupForm
+        this._popupForm = this._selectorPopup.querySelector('.popup__container');
+        this._inputList = this._popupForm.querySelectorAll('.popup__input');
+    }
 
-            _getInputValues() {
-                this._formValues = {};
-                this._inputList.forEach(input => {
-                    this._formValues[input.name] = input.value;
-                })
 
-                return this._formValues;
-            }
+    _getInputValues() {
+        this._formValues = {};
+        this._inputList.forEach(input => {
+            this._formValues[input.name] = input.value;
+        })
 
-            setEventListeners() {
-                super.setEventListeners()
-                this.formPopup.addEventListener('submit', (evt) => {
-                    evt.preventDefault();
+        return this._formValues;
+    }
 
-                    this.submitForm(this._getInputValues());
-                })
-            }
-            closePopup() {
-                super.close()
-                this.formPopup.reset();
-            }
-        }
+    setEventListeners() {
+        super.setEventListeners()
+        this.formPopup.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+
+            this.submitForm(this._getInputValues());
+        })
+    }
+    closePopup() {
+        super.close()
+        this.formPopup.reset();
+    }
+}
