@@ -14,11 +14,9 @@ PopupWithForm должен не только добавлять обработч
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-    constructor({ selectorPopup, buttonClose, popupForm, submitForm }) {
+    constructor({ selectorPopup, submitForm }) {
         super(selectorPopup)
-        this.buttonClose = buttonClose;
         this.submitForm = submitForm;
-        this.formPopup = popupForm
         this._popupForm = this._selectorPopup.querySelector('.popup__container');
         this._inputList = this._popupForm.querySelectorAll('.popup__input');
     }
@@ -35,14 +33,14 @@ export default class PopupWithForm extends Popup {
 
     setEventListeners() {
         super.setEventListeners()
-        this.formPopup.addEventListener('submit', (evt) => {
+        this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
 
             this.submitForm(this._getInputValues());
         })
     }
-    closePopup() {
+    close() {
         super.close()
-        this.formPopup.reset();
+        this._popupForm.reset();
     }
 }

@@ -7,32 +7,29 @@
 
 import { ESC_CODE } from "./index.js"
 export default class Popup {
-
-    _selectorPopup
-
     constructor(selectorPopup) {
-        this._selectorPopup = selectorPopup;
-        this._close = this._selectorPopup.querySelector('.popup__button')
+        this._selectorPopup = document.querySelector(selectorPopup);
+        this._buttonClose = this._selectorPopup.querySelector('.popup__button')
     }
     open() {
         this._selectorPopup.classList.add("popup_opened")
+        document.addEventListener('keydown', (evt) => { this._handleEscClose(evt) })
     }
     close() {
         this._selectorPopup.classList.remove("popup_opened")
+        document.addEventListener('keydown', (evt) => { this._handleEscClose(evt) })
     }
     setEventListeners() {
-        this._close.addEventListener('click', () => {
-            this.close()
-        })
+        this._buttonClose.addEventListener('click', () => {
+                this.close()
+            })
+            /*
+                    this._selectorPopup.addEventListener('mousedown', (event) => {
+                        if (event.target.classList.contains('popup')) {
+                            this.close();
+                        }
+                    });*/
 
-        this._selectorPopup.addEventListener('mousedown', (event) => {
-            if (event.target.classList.contains('popup')) {
-                this.close();
-            }
-        });
-        document.addEventListener('keydown', (evt) => {
-            this._handleEscClose(evt)
-        })
     }
     _handleEscClose(evt) {
         if (evt.key === ESC_CODE) {

@@ -13,15 +13,21 @@ export default class UserInfo {
     constructor({ profileName, profileProfession }) {
         this._profileName = document.querySelector(profileName);
         this._profileProfession = document.querySelector(profileProfession);
-        this._nameInput = document.querySelector('#name-input');
-        this._jobInput = document.querySelector('#job-input');
     }
+
+    //Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя.
+    //Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
     getUserInfo() {
-        this._nameInput.value = this._profileName.textContent;
-        this._jobInput.value = this._profileProfession.textContent;
+        return this.data = {
+            name: this._profileName.textContent,
+            profession: this._profileProfession.textContent
+        };
+
     }
-    setUserInfo() {
-        this._profileName.textContent = this._nameInput.value;
-        this._profileProfession.textContent = this._jobInput.value;
+
+    //  Содержит публичный метод setUserInfo, который принимает новые данные пользователя и добавляет их на страницу.
+    setUserInfo(data) {
+        this._profileName.textContent = data.nameProfile;
+        this._profileProfession.textContent = data.info;
     }
 }

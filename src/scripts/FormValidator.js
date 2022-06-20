@@ -1,12 +1,5 @@
 export default class FormValidator {
-    _inputSelector
-    _submitButtonSelector
-    _inactiveButtonClass
-    _inputErrorClass
-    _errorClass
-    _formElement
-    _inputList
-    _buttonElement
+
 
     constructor(data, formElement) {
         this._inputSelector = data.inputSelector
@@ -43,8 +36,8 @@ export default class FormValidator {
             this._hideError(inputElement)
     }
 
-    _hasInvalidInput(inputList) {
-        return inputList.some((inputElement) => {
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
             return !inputElement.validity.valid
         })
     }

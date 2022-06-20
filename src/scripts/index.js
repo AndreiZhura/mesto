@@ -35,7 +35,7 @@ const initialCards = [{
 ];
 // константы ***************************************************************************************************************
 // секция попапа профиля
-const popupProfile = document.querySelector('#popupProfile');
+const popupProfile = document.querySelector('.popupProfile');
 // кнопка открытия попапа профиля
 const popupProfileOpenButton = document.querySelector('#popOpenProfile');
 //кнопка закрытия попапа профиля
@@ -53,7 +53,7 @@ const jobInput = document.querySelector('#job-input');
 // контайнер попапа профиля
 const formPopupProfile = document.querySelector('#popupContainerProfile');
 // попап создания карточки
-const cardPopup = document.querySelector('#popupElements');
+const cardPopup = document.querySelector('.popupElements');
 // кнопка открытия попапа карточки
 const cardPopupOpenButton = document.querySelector('#popOpenElements');
 //кнопка закрытия попапа карточки
@@ -61,7 +61,7 @@ const cardPopupCloseButton = document.querySelector('#closeButtonElement');
 // форма контэйнера попапа карточки
 const formCardPopup = document.querySelector('#popupContainerElements');
 // попап с  картинкой и текстом
-const popupPhoto = document.querySelector('#popupPhoto');
+const popupPhoto = document.querySelector('.popupPhoto');
 // кнопка его закрития
 const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 // div вставки карточки
@@ -70,8 +70,8 @@ const elements = document.querySelector('.elements');
 export const inputTitleValue = document.querySelector('#title-input');
 export const inputImageValue = document.querySelector('#link-input');
 
-const popupFormProfile = document.querySelector('#popupProfile');
-const popupFormCard = document.querySelector('#popupElements');
+const popupFormProfile = document.querySelector('.popupProfile');
+const popupFormCard = document.querySelector('.popupElements');
 // валидация
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
@@ -90,18 +90,23 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-
+const userInfo = new UserInfo({
+    profileName: ".profile__name",
+    profileProfession: ".profile__profession",
+})
+const userNameAndProfession = userInfo.getUserInfo()
 
 
 
 
 //создаем карточку**************************************************************************************************************************
+const popupWithImage = new PopupWithImage('.popupPhoto')
 
 const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-            const popupWithImage = new PopupWithImage(popupPhoto)
+
             popupWithImage.open(name, link)
         }
     }, '.template')
@@ -117,88 +122,51 @@ const section = new Section({
 
 }, '.elements')
 section.rendererValue()
-    /*
-    const sectionNewData = new Section({
-        items: newInputValue,
-        renderer: (item) => {
-            sectionNewData.addItem(createCard(item))
-        }
-    })*/
+
 
 
 // сами попапы **********************************************************************************************************************
 
-const popupClassProfile = new Popup(popupProfile)
-popupClassProfile.setEventListeners()
 
-const PopupWithFormClassProfile = new PopupWithForm({
-    selectorPopup: popupProfile,
-    buttonClose: popupProfileCloseButton,
-    popupForm: popupProfileValid,
+
+const popupWithFormClassProfile = new PopupWithForm({
+    selectorPopup: '.popupProfile',
+
     submitForm: (form) => {
         userInfo.setUserInfo(form)
-        PopupWithFormClassProfile.closePopup()
+        profileName.value =
+            popupWithFormClassProfile.close()
         validatorProfile.disableButton()
     }
 })
-PopupWithFormClassProfile.setEventListeners()
+popupWithFormClassProfile.setEventListeners()
 
+const popupWithFormClassCard = new PopupWithForm({
+    selectorPopup: '.popupElements',
 
-
-
-const popupClassCard = new Popup(cardPopup)
-    // обработчики событий попапа Карточки
-popupClassCard.setEventListeners()
-
-const PopupWithFormClassCard = new PopupWithForm({
-    selectorPopup: cardPopup,
-    buttonClose: cardPopupCloseButton,
-    popupForm: popupCardValid,
     submitForm: (item) => {
         section.addItem(createCard(item))
-        PopupWithFormClassCard.closePopup()
+        popupWithFormClassCard.close()
         validatorCard.disableButton()
     }
 })
 
-PopupWithFormClassCard.setEventListeners()
-    /*
-    const PopupWithFormClassCard = new PopupWithForm({
-        selectorPopup: cardPopup,
-        buttonClose: cardPopupCloseButton,
-        popupForm: popupCardValid,
-        submitForm: () => {
-            const card = new Card({
-                data: valueInput,
-                handleCardClick: (name, link) => {
-                    const popupImage = new PopupWithImage(popupPhoto)
-                    popupImage.open(name, link)
-                }
-
-            })
-            const newCardTable = card.generateCard()
-            section.addItem(newCardTable())
-        }
-    })
-    PopupWithFormClassCard.setEventListeners()*/
-
-
+popupWithFormClassCard.setEventListeners()
 
 
 // класс UserInfo******************************************************************************************************************
-const userInfo = new UserInfo({
-        profileName: "#profileName",
-        profileProfession: "#profileProfession",
-    })
-    //Функционал кнопок открытия попапа************************************************************************************************
+
+//Функционал кнопок открытия попапа************************************************************************************************
 
 popupProfileOpenButton.addEventListener('click', () => {
-    userInfo.getUserInfo()
-    popupClassProfile.open()
+
+    nameInput.value = userNameAndProfession.name
+    jobInput.value = userNameAndProfession.profession
+    popupWithFormClassProfile.open()
 })
 
 cardPopupOpenButton.addEventListener('click', () => {
-    popupClassCard.open()
+    popupWithFormClassCard.open()
 })
 
 const validatorProfile = new FormValidator(formValidators, popupProfileValid)

@@ -6,14 +6,16 @@ export default class Card {
         this._cardElement = cardElement;
     }
 
+
+
     // получаем элемент шаблона
     _getTemplateElement() {
-            const cardElement = document
+            return document
                 .querySelector(this._cardElement)
                 .content
                 .querySelector('.element')
                 .cloneNode(true)
-            return cardElement
+
         }
         // генерируем карточку
     generateCard() {

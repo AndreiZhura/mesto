@@ -10,6 +10,8 @@ module.exports = {
         filename: 'main.js',
         publicPath: ''
     },
+    // строчка , которой можно дебажить проект в браузере
+    devtool: "eval-source-map",
     mode: 'development',
     devServer: {
         static: path.resolve(__dirname, './dist'),
