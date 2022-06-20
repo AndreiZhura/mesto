@@ -6,7 +6,6 @@
 - Содержит публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа. */
 
 import { ESC_CODE } from "./index.js"
-/*
 export default class Popup {
 
     _selectorPopup
