@@ -91,7 +91,7 @@ const userInfo = new UserInfo({
     profileName: ".profile__name",
     profileProfession: ".profile__profession",
 })
-const userNameAndProfession = userInfo.getUserInfo()
+
 
 
 
@@ -103,7 +103,6 @@ const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-
             popupWithImage.open(name, link)
             popupWithImage.setEventListeners()
         }
@@ -149,17 +148,19 @@ const popupWithFormClassCard = new PopupWithForm({
     }
 })
 
-popupWithFormClassCard.setEventListeners()
+
 
 
 // класс UserInfo******************************************************************************************************************
 
 //Функционал кнопок открытия попапа************************************************************************************************
 
+
 popupProfileOpenButton.addEventListener('click', () => {
 
-    nameInput.value = userNameAndProfession.name
-    jobInput.value = userNameAndProfession.profession
+    nameInput.value = userInfo.getUserInfo().name
+    jobInput.value = userInfo.getUserInfo().profession
+
     popupWithFormClassProfile.open()
 })
 
