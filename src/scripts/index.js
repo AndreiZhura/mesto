@@ -87,15 +87,6 @@ const formValidators = {
     errorClass: 'popup__error_active'
 }
 
-const userInfo = new UserInfo({
-    profileName: ".profile__name",
-    profileProfession: ".profile__profession",
-})
-
-
-
-
-
 //создаем карточку**************************************************************************************************************************
 const popupWithImage = new PopupWithImage('.popupPhoto')
 
@@ -116,22 +107,15 @@ const section = new Section({
     renderer: (item) => {
         section.addItem(createCard(item))
     }
-
 }, '.elements')
 section.rendererValue()
 
-
-
 // сами попапы **********************************************************************************************************************
-
-
 
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
-
     submitForm: (form) => {
         userInfo.setUserInfo(form)
-
         popupWithFormClassProfile.close()
         validatorProfile.disableButton()
     }
@@ -148,19 +132,16 @@ const popupWithFormClassCard = new PopupWithForm({
     }
 })
 
-
-
-
 // класс UserInfo******************************************************************************************************************
-
-//Функционал кнопок открытия попапа************************************************************************************************
-
+const userInfo = new UserInfo({
+        profileName: ".profile__name",
+        profileProfession: ".profile__profession",
+    })
+    //Функционал кнопок открытия попапа************************************************************************************************
 
 popupProfileOpenButton.addEventListener('click', () => {
-
     nameInput.value = userInfo.getUserInfo().name
     jobInput.value = userInfo.getUserInfo().profession
-
     popupWithFormClassProfile.open()
 })
 
