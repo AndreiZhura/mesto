@@ -15,7 +15,6 @@ export default class Card {
                 .content
                 .querySelector('.element')
                 .cloneNode(true)
-
         }
         // генерируем карточку
     generateCard() {
