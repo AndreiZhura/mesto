@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-import Popup from "./Popup.js";
+//удалил импорт попапа
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
@@ -105,6 +105,7 @@ const createCard = (data) => {
         handleCardClick: (name, link) => {
 
             popupWithImage.open(name, link)
+            popupWithImage.setEventListeners()
         }
     }, '.template')
     return newCard.generateCard()
