@@ -127,19 +127,19 @@ section.rendererValue()
 
 
 const popupWithFormClassProfile = new PopupWithForm({
-    selectorPopup: '.popupProfile',
+    elementDomPopup: '.popupProfile',
 
     submitForm: (form) => {
         userInfo.setUserInfo(form)
-        profileName.value =
-            popupWithFormClassProfile.close()
+
+        popupWithFormClassProfile.close()
         validatorProfile.disableButton()
     }
 })
 popupWithFormClassProfile.setEventListeners()
 
 const popupWithFormClassCard = new PopupWithForm({
-    selectorPopup: '.popupElements',
+    elementDomPopup: '.popupElements',
 
     submitForm: (item) => {
         section.addItem(createCard(item))
