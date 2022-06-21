@@ -77,7 +77,7 @@ const popupCardValid = popupFormCard.querySelector('.popup__container');
 
 
 export const ESC_CODE = 'Escape';
-const ENTER_CODE = 'Enter';
+
 
 const formValidators = {
     inputSelector: '.popup__input',
@@ -121,18 +121,13 @@ const section = new Section({
 }, '.elements')
 section.rendererValue()
 
-
-
 // сами попапы **********************************************************************************************************************
-
-
 
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
 
     submitForm: (form) => {
         userInfo.setUserInfo(form)
-
         popupWithFormClassProfile.close()
         validatorProfile.disableButton()
     }
@@ -148,16 +143,13 @@ const popupWithFormClassCard = new PopupWithForm({
         validatorCard.disableButton()
     }
 })
-
 popupWithFormClassCard.setEventListeners()
-
 
 // класс UserInfo******************************************************************************************************************
 
 //Функционал кнопок открытия попапа************************************************************************************************
 
 popupProfileOpenButton.addEventListener('click', () => {
-
     nameInput.value = userInfo.getUserInfo().name
     jobInput.value = userInfo.getUserInfo().profession
     popupWithFormClassProfile.open()
