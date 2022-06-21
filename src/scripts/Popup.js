@@ -10,16 +10,16 @@ export default class Popup {
     constructor(elementDomPopup) {
         this._elementDomPopup = document.querySelector(elementDomPopup);
         this._buttonClose = this._elementDomPopup.querySelector('.popup__button')
-        this.__escClose = this.__handleEscClose.bind(this)
+        this._escClose = this._handleEscClose.bind(this)
     }
     open() {
         this._elementDomPopup.classList.add("popup_opened")
-        document.addEventListener('keydown', this.__escClose)
+        document.addEventListener('keydown', this._escClose)
 
     }
     close() {
         this._elementDomPopup.classList.remove("popup_opened")
-        document.removeEventListener('keydown', this.__escClose)
+        document.removeEventListener('keydown', this._escClose)
     }
     setEventListeners() {
         this._buttonClose.addEventListener('click', () => {
@@ -33,7 +33,7 @@ export default class Popup {
         });
 
     }
-    _handleEscClose(evt) {
+    _handleEscClose = (evt) => {
         if (evt.key === ESC_CODE) {
             this.close();
         }
