@@ -1,18 +1,4 @@
 .popup__img {
-    width: 816px;
-    height: 540px;
-}
-
-@media screen and (max-width:910px) {
-    .popup__img {
-        width: 433px;
-        height: 540px;
-    }
-}
-
-@media screen and (max-width:522px) {
-    .popup__img {
-        width: 240px;
-        height: 299px;
-    }
+    max-width: 75vw;
+    max-height: 75vh;
 }

@@ -76,7 +76,7 @@ const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 
 
-export const ESC_CODE = 'Escape';
+
 
 
 const formValidators = {

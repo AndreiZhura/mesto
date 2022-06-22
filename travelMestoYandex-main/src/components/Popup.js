@@ -5,7 +5,7 @@
 - Содержит приватный метод `_handleEscClose`, который содержит логику закрытия попапа клавишей Esc.
 - Содержит публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа. */
 
-import { ESC_CODE } from "./index.js"
+
 export default class Popup {
     constructor(elementDomPopup) {
         this._elementDomPopup = document.querySelector(elementDomPopup);
@@ -34,7 +34,7 @@ export default class Popup {
 
     }
     _handleEscClose = (evt) => {
-        if (evt.key === ESC_CODE) {
+        if (evt.key === 'Escape') {
             this.close();
         }
     }
