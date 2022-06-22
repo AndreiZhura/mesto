@@ -103,13 +103,13 @@ const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-
             popupWithImage.open(name, link)
-            popupWithImage.setEventListeners()
         }
     }, '.template')
     return newCard.generateCard()
 }
+
+popupWithImage.setEventListeners()
 
 // отрисовываем карточку****************************************************************************************************************
 const section = new Section({
@@ -148,10 +148,17 @@ popupWithFormClassCard.setEventListeners()
 // класс UserInfo******************************************************************************************************************
 
 //Функционал кнопок открытия попапа************************************************************************************************
-
+/*
 popupProfileOpenButton.addEventListener('click', () => {
     nameInput.value = userInfo.getUserInfo().name
     jobInput.value = userInfo.getUserInfo().profession
+    popupWithFormClassProfile.open()
+})
+*/
+popupProfileOpenButton.addEventListener('click', () => {
+    const { name, profession } = userInfo.getUserInfo();
+    nameInput.value = name
+    jobInput.value = profession
     popupWithFormClassProfile.open()
 })
 
