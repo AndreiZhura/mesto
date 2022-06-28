@@ -68,16 +68,15 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 const elements = document.querySelector('.elements');
 // значение первого поля карточки попапа 
 
-
 const popupFormProfile = document.querySelector('.popupProfile');
 const popupFormCard = document.querySelector('.popupElements');
-// валидация
+//const popupDelete = document.querySelector('.popupDelete');
+const popupAvatar = document.querySelector('.popupAvatar');
+const popupAvatarButton = document.querySelector('.profile__avatar')
+    // валидация
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
-
-
-
-
+const popupAvatarValid = popupAvatar.querySelector('.popup__container')
 
 const formValidators = {
     inputSelector: '.popup__input',
@@ -91,10 +90,6 @@ const userInfo = new UserInfo({
     profileName: ".profile__name",
     profileProfession: ".profile__profession",
 })
-
-
-
-
 
 //создаем карточку**************************************************************************************************************************
 const popupWithImage = new PopupWithImage('.popupPhoto')
@@ -122,6 +117,25 @@ const section = new Section({
 section.rendererValue()
 
 // сами попапы **********************************************************************************************************************
+/*
+const popupWithFormClassAvatar = new PopupWithForm({
+        elementDomPopup: '.popupAvatar',
+        submitForm: (form) => {
+            userInfo.setUserInfo(form)
+            popupWithFormClassAvatar.close()
+            validatorAvatar.disableButton()
+        }
+
+    })
+    /*
+    const popupWithFormClassDelete = new PopupWithForm({
+        elementDomPopup: '.popupDelete',
+
+        submitForm: (form) => {
+            popupWithFormClassDelete.close()
+        }
+    })*/
+
 
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
@@ -163,12 +177,18 @@ popupProfileOpenButton.addEventListener('click', () => {
 })
 
 cardPopupOpenButton.addEventListener('click', () => {
-    popupWithFormClassCard.open()
-})
+        popupWithFormClassCard.open()
+    })
+    /*
+    popupAvatarButton.addEventListener('click', () => {
+        popupWithFormClassAvatar.open()
+    })
 
-const validatorProfile = new FormValidator(formValidators, popupProfileValid)
-validatorProfile.enableValidation()
+    const validatorProfile = new FormValidator(formValidators, popupProfileValid)
+    validatorProfile.enableValidation()
 
 
-const validatorCard = new FormValidator(formValidators, popupCardValid)
-validatorCard.enableValidation()
+    const validatorCard = new FormValidator(formValidators, popupCardValid)
+    validatorCard.enableValidation()
+
+    const validatorAvatar = new FormValidator(formValidators, popupAvatarValid)*/
