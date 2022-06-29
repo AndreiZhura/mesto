@@ -67,13 +67,16 @@ const photoPopupButtonClose = document.querySelector('#photoPopupButtonClose');
 // div вставки карточки
 const elements = document.querySelector('.elements');
 // значение первого поля карточки попапа 
-
+//кнопка аватарки
+const popupAvatarOpenButton = document.querySelector('.profile__avatar');
 
 const popupFormProfile = document.querySelector('.popupProfile');
 const popupFormCard = document.querySelector('.popupElements');
-// валидация
+const popupFormAvatar = document.querySelector('.popupAvatars')
+    // валидация
 const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
+const popupAvatarsValid = popupFormAvatar.querySelector('.popup__container');
 
 
 
@@ -145,6 +148,14 @@ const popupWithFormClassCard = new PopupWithForm({
 })
 popupWithFormClassCard.setEventListeners()
 
+const popupWithFormClassAvatar = new PopupWithForm({
+    elementDomPopup: '.popupAvatars',
+    submitForm: (item) => {
+        popupWithFormClassAvatar.close();
+        validatorAvatar.disableButton();
+    }
+})
+
 // класс UserInfo******************************************************************************************************************
 
 //Функционал кнопок открытия попапа************************************************************************************************
@@ -166,9 +177,16 @@ cardPopupOpenButton.addEventListener('click', () => {
     popupWithFormClassCard.open()
 })
 
+popupAvatarOpenButton.addEventListener('click', () => {
+    popupWithFormClassAvatar.open()
+})
+
 const validatorProfile = new FormValidator(formValidators, popupProfileValid)
 validatorProfile.enableValidation()
 
 
 const validatorCard = new FormValidator(formValidators, popupCardValid)
 validatorCard.enableValidation()
+
+const validatorAvatar = new FormValidator(formValidators, popupAvatarsValid)
+validatorAvatar.enableValidation()
