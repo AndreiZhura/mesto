@@ -33,9 +33,9 @@ export default class Card {
         }
         // устанавливаем прослушивание событий
     _setEventListeners() {
-            this._elementBascet.addEventListener('click', this._handleDelete)
             this._elementLike.addEventListener('click', this._toggleLike)
             this._elementRectangle.addEventListener('click', this._handleImageClick)
+            this._elementBascet.addEventListener('click', this._handleDeleteBascet)
         }
         // удаляем карточку
     _handleDelete = () => {
@@ -48,5 +48,8 @@ export default class Card {
         // открываем попап с картинкой
     _handleImageClick = () => {
         this._handleCardClick(this._name, this._link)
+    }
+    _handleDeleteBascet = () => {
+        document.querySelector('.popupDeleteBascet').classList.add('popup_opened')
     }
 }
