@@ -49,7 +49,4 @@ export default class Card {
     _handleImageClick = () => {
         this._handleCardClick(this._name, this._link)
     }
-    _handlePopupDelete = () => {
-
-    }
 }
