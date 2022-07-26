@@ -668,4 +668,10 @@
 .popup__error_active {
     color: red;
 }
+.popup__main-avatars {
+    height: 272px;
+}
+.popup__main-delete {
+    height: 181px;
+}
 
