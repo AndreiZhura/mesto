@@ -32,6 +32,8 @@ import {
     popupAvatarsValid,
 } from '../utils/constants.js'
 
+import Api from "../components/Api.js";
+
 
 const formValidators = {
     inputSelector: '.popup__input',
@@ -45,8 +47,6 @@ const userInfo = new UserInfo({
     profileName: ".profile__name",
     profileProfession: ".profile__profession",
 })
-
-
 
 
 
@@ -107,7 +107,12 @@ const popupWithFormClassAvatar = new PopupWithForm({
     }
 })
 popupWithFormClassAvatar.setEventListeners()
-    // класс UserInfo******************************************************************************************************************
+
+
+
+
+
+// класс UserInfo******************************************************************************************************************
 
 //Функционал кнопок открытия попапа************************************************************************************************
 /*
@@ -118,12 +123,29 @@ popupProfileOpenButton.addEventListener('click', () => {
 })
 */
 popupProfileOpenButton.addEventListener('click', () => {
-    const { name, profession } = userInfo.getUserInfo();
-    nameInput.value = name
-    jobInput.value = profession
-    popupWithFormClassProfile.open()
-})
+        const { name, profession } = userInfo.getUserInfo();
+        nameInput.value = name
+        jobInput.value = profession
+        popupWithFormClassProfile.open()
+    })
+    // подключаем Api*********************************************************************************************************************************
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
+    headers: {
+        authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+        'Content-Type': 'application/json'
+    }
 
+});
+
+api.getInitialCards()
+    .then((result) => {
+        // обрабатываем результат
+    })
+    .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+    });
+//******************************************************************************************************************************************************
 cardPopupOpenButton.addEventListener('click', () => {
     popupWithFormClassCard.open()
 })
