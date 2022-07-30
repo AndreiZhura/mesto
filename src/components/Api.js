@@ -1,14 +1,13 @@
-class Api {
-    constructor(options) {
-        // тело конструктора
-        this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
+export default class Api {
+    constructor({ baseUrl, headers }) {
+        this._baseUrl = baseUrl;
+        this._headers = headers;
     }
-
     getInitialCards() {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-46/cards', {
                 headers: {
-                    authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0'
+                    authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
                 }
             })
             .then(res => {
@@ -20,6 +19,4 @@ class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             });
     }
-
-    // другие методы работы с API
 }
