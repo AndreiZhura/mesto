@@ -62,13 +62,14 @@ const api = new Api({
 api.getInitialCards()
     .then((result) => {
         // обрабатываем результат
-        console.log(result)
-            //  popupWithImage.setEventListeners()
-        console.log('Hello')
+        section.rendererValue(result)
+        console.log("привет")
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
+        console.log('ошибка')
     });
+
 //******************************************************************************************************************************************
 
 
@@ -89,13 +90,12 @@ popupWithImage.setEventListeners()
 
 // отрисовываем карточку****************************************************************************************************************
 const section = new Section({
-    items: initialCards,
     renderer: (item) => {
         section.addItem(createCard(item))
     }
 
 }, '.elements')
-section.rendererValue()
+
 
 // сами попапы **********************************************************************************************************************
 

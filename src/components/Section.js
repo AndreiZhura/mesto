@@ -1,15 +1,15 @@
 export default class Section {
-    constructor({ items, renderer }, containerSelector) {
-            this._items = items;
+    constructor({ renderer }, containerSelector) {
+
             this._renderer = renderer;
             // селектор класса div куда мы передаем карточки
             this._containerSelector = document.querySelector(containerSelector);
 
         }
         // рендерим данные
-    rendererValue() {
+    rendererValue(items) {
             //передаем массив в items -> перебираем его форечем и передаем в функцию рендер
-            this._items.forEach(item => {
+            items.forEach(item => {
                 this._renderer(item)
             });
         }
