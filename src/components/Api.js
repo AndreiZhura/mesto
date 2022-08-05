@@ -102,7 +102,26 @@ export default class Api {
         }
         /*9. Обновление аватара пользователя
 Чтобы сменить аватар, отправьте такой PATCH-запрос:*/
-    updateUseravatar() {
+    updateUseravatar(linkAvatar) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me/avatar', {
+                method: 'PATCH',
+                headers: {
+                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    avatar: linkAvatar['avatar-link']
 
+                })
+
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                // если ошибка, отклоняем промис
+                return Promise.reject(`Ошибка (Обновление аватара пользователя): ${res.status}`);
+            });
     }
 }

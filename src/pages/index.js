@@ -130,6 +130,22 @@ const popupWithFormClassProfile = new PopupWithForm({
 })
 popupWithFormClassProfile.setEventListeners()
 
+const popupWithFormClassAvatar = new PopupWithForm({
+    elementDomPopup: '.popupAvatars',
+    submitForm: (item) => {
+        api.updateUseravatar(item)
+            .then((result) => {
+                console.log(result)
+                userInfo.setUserInfo(result)
+                popupWithFormClassAvatar.close();
+                validatorAvatar.disableButton();
+            })
+
+    }
+})
+popupWithFormClassAvatar.setEventListeners()
+
+
 const popupWithFormClassCard = new PopupWithForm({
     elementDomPopup: '.popupElements',
 
@@ -141,14 +157,7 @@ const popupWithFormClassCard = new PopupWithForm({
 })
 popupWithFormClassCard.setEventListeners()
 
-const popupWithFormClassAvatar = new PopupWithForm({
-    elementDomPopup: '.popupAvatars',
-    submitForm: (item) => {
-        popupWithFormClassAvatar.close();
-        validatorAvatar.disableButton();
-    }
-})
-popupWithFormClassAvatar.setEventListeners()
+
 
 
 
