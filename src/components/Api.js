@@ -21,7 +21,7 @@ export default class Api {
                 }
 
                 // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка: ${res.status}`);
+                return Promise.reject(`Ошибка (Загрузка информации о пользователе с сервера): ${res.status}`);
             });
 
     }
@@ -30,6 +30,22 @@ export default class Api {
 Начальные карточки должны подгружаться с сервера. Для этого сделайте GET-запрос: */
 
     downloadingCardsFromServer(data) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards`, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                // если ошибка, отклоняем промис
+                return Promise.reject(`Ошибка (Загрузка карточек с сервера): ${res.status}`);
+            });
+
 
     }
 

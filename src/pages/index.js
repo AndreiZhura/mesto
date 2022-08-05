@@ -60,7 +60,7 @@ const api = new Api({
         'Content-Type': 'application/json'
     }
 });
-
+// 1. Загрузка информации о пользователе с сервера
 api.downLoadingUserInformationFromServer()
     .then((result) => {
         console.log(result)
@@ -71,6 +71,16 @@ api.downLoadingUserInformationFromServer()
         console.log(err); // выведем ошибку в консоль
     });
 
+
+//2. Загрузка карточек с сервера
+api.downloadingCardsFromServer()
+    .then((result) => {
+        console.log(result)
+        section.rendererValue(result)
+    })
+    .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+    });
 
 
 //******************************************************************************************************************************************
