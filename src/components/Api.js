@@ -77,8 +77,26 @@ export default class Api {
 
     /* 4. Добавление новой карточки
     Чтобы добавить на сервер новую карточку, отправьте POST-запрос:*/
-    addNewCard() {
+    addNewCard(form) {
+            return fetch('https://mesto.nomoreparties.co/v1/cohort-46/cards', {
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: form['name'],
+                        link: form['link']
+                    })
+                })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
 
+                    // если ошибка, отклоняем промис
+                    return Promise.reject(`Ошибка (Добавление новой карточки): ${res.status}`);
+                });
         }
         /*5. Отображение количества лайков карточки
         У каждой карточки есть свойство likes — оно содержит массив пользователей, лайкнувших карточку: */

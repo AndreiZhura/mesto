@@ -130,6 +130,7 @@ const popupWithFormClassProfile = new PopupWithForm({
 })
 popupWithFormClassProfile.setEventListeners()
 
+//9. Обновление аватара пользователя
 const popupWithFormClassAvatar = new PopupWithForm({
     elementDomPopup: '.popupAvatars',
     submitForm: (item) => {
@@ -140,7 +141,6 @@ const popupWithFormClassAvatar = new PopupWithForm({
                 popupWithFormClassAvatar.close();
                 validatorAvatar.disableButton();
             })
-
     }
 })
 popupWithFormClassAvatar.setEventListeners()
@@ -150,9 +150,13 @@ const popupWithFormClassCard = new PopupWithForm({
     elementDomPopup: '.popupElements',
 
     submitForm: (item) => {
-        section.addItem(createCard(item))
-        popupWithFormClassCard.close()
-        validatorCard.disableButton()
+        api.addNewCard(item)
+            .then((result) => {
+                section.addItem(createCard(result))
+                popupWithFormClassCard.close()
+                validatorCard.disableButton()
+            })
+
     }
 })
 popupWithFormClassCard.setEventListeners()
