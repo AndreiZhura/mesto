@@ -7,7 +7,6 @@ import UserInfo from '../components/UserInfo.js'
 import FormValidator from '../components/FormValidator.js'
 import './index.css'
 import {
-    initialCards,
     popupProfile,
     popupProfileOpenButton,
     popupProfileCloseButton,
@@ -46,7 +45,7 @@ const formValidators = {
 const userInfo = new UserInfo({
     profileName: ".profile__name",
     profileProfession: ".profile__profession",
-    avatar: '.profile__avatar'
+    profileAvatar: '.profile__avatar'
 })
 
 const user = {}
@@ -77,6 +76,11 @@ api.infoUsers()
         userInfo.setUserInfo(result);
 
     })
+    .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        console.log('ошибка')
+    });
+
 
 //******************************************************************************************************************************************
 
@@ -111,9 +115,16 @@ const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
 
     submitForm: (form) => {
-        userInfo.setUserInfo(form)
-        popupWithFormClassProfile.close()
-        validatorProfile.disableButton()
+        api.editInfoUsers(form)
+            .then((result) => {
+                userInfo.setUserInfo(result)
+                popupWithFormClassProfile.close()
+                validatorProfile.disableButton()
+            })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+                console.log('ошибка')
+            });
     }
 })
 popupWithFormClassProfile.setEventListeners()
