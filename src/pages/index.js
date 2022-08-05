@@ -12,6 +12,7 @@ import {
     popupProfileCloseButton,
     profileName,
     profileProfession,
+    profileAvatar,
     nameInput,
     jobInput,
     formPopupProfile,
@@ -48,7 +49,8 @@ const userInfo = new UserInfo({
     profileAvatar: '.profile__avatar'
 })
 
-const user = {}
+
+const userID = {}
 
 // подключаем Api*********************************************************************************************************************************
 const api = new Api({
@@ -59,27 +61,16 @@ const api = new Api({
     }
 });
 
-api.getInitialCards()
+api.downLoadingUserInformationFromServer()
     .then((result) => {
-        // обрабатываем результат
-        section.rendererValue(result)
-        console.log("привет")
+        console.log(result)
+        userID.id = result._id;
+        userInfo.setUserInfo(result)
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        console.log('ошибка')
     });
 
-api.infoUsers()
-    .then((result) => {
-        user.id = result._id
-        userInfo.setUserInfo(result);
-
-    })
-    .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-        console.log('ошибка')
-    });
 
 
 //******************************************************************************************************************************************

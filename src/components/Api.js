@@ -8,10 +8,11 @@ export default class Api {
     Информация о пользователе должна подгружаться с сервера.
      Чтобы осуществить это, сделайте GET-запрос на URL (cohortId замените на идентификатор вашей группы):*/
     downLoadingUserInformationFromServer() {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/users/me`, {
                 method: 'GET',
                 headers: {
-                    Authorization: this._token
+                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
                 }
             })
             .then(res => {

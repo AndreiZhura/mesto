@@ -11,7 +11,10 @@ const popupProfileCloseButton = document.querySelector('#closeButtonProfile');
 const profileName = document.querySelector('#profileName');
 //профессия профиля
 const profileProfession = document.querySelector('#profileProfession');
-// ввод имени профиля
+
+//Аватар
+const profileAvatar = document.querySelector('#profileAvatar')
+    // ввод имени профиля
 const nameInput = document.querySelector('#name-input');
 // профессия имени профиля
 const jobInput = document.querySelector('#job-input');
