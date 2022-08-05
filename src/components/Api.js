@@ -52,8 +52,26 @@ export default class Api {
     /* 3. Редактирование профиля
     Отредактированные данные профиля должны сохраняться на сервере. Для этого отправьте запрос методом PATCH:*/
 
-    editingProfile() {
+    editingProfile(form) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me', {
+                method: 'PATCH',
+                headers: {
+                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: form['nameProfile'],
+                    about: form['professionProfile']
+                })
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
 
+                // если ошибка, отклоняем промис
+                return Promise.reject(`Ошибка (Загрузка карточек с сервера): ${res.status}`);
+            });
 
     }
 

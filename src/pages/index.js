@@ -111,13 +111,13 @@ const section = new Section({
 
 
 // сами попапы **********************************************************************************************************************
-
+//3. Редактирование профиля
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
-
     submitForm: (form) => {
-        api.editInfoUsers(form)
+        api.editingProfile(form)
             .then((result) => {
+                console.log(result)
                 userInfo.setUserInfo(result)
                 popupWithFormClassProfile.close()
                 validatorProfile.disableButton()
