@@ -19,4 +19,26 @@ export default class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             });
     }
+
+    infoUsers() {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me', {
+                method: 'PATCH',
+                headers: {
+                    authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Marie Skłodowska Curie',
+                    about: 'Physicist and Chemist'
+                })
+            })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка: ${res.status}`);
+            })
+
+
+    }
 }
