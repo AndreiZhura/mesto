@@ -1,13 +1,11 @@
 .profile__pencil {
-    border: 10px solid green;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: .2s;
-    outline: none;
-    padding: 0;
-    width: 150px;
-    height: 50px;
-    background-color: transparent;
-    border: 2px solid #fff;
-    border-radius: 2px;
+    position: absolute;
+    top: 37%;
+    left: 34%;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+div:hover>.profile__pencil {
+    opacity: 1;
 }

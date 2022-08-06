@@ -11,8 +11,6 @@
 .profile__avatar:hover {
     opacity: .3;
     cursor: pointer;
-    background-image: url(../../../images/CloseIconSmall.svg);
-    background-position: center;
 }
 
 @media screen and (max-width:425px) {
