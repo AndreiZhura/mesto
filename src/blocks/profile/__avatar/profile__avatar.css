@@ -1,9 +1,18 @@
 .profile__avatar {
+    position: relative;
     border-radius: 50%;
     width: 120px;
     height: 120px;
     margin-left: 0px;
     object-fit: cover;
+    transition: .5s ease;
+}
+
+.profile__avatar:hover {
+    opacity: .3;
+    cursor: pointer;
+    background-image: url(../../../images/CloseIconSmall.svg);
+    background-position: center;
 }
 
 @media screen and (max-width:425px) {
