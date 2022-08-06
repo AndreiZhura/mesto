@@ -33,6 +33,7 @@ import {
 } from '../utils/constants.js'
 
 import Api from "../components/Api.js";
+import PopupWithBasket from "../components/PopupWithBascet.js";
 
 
 const formValidators = {
@@ -82,6 +83,19 @@ api.downloadingCardsFromServer()
         console.log(err); // выведем ошибку в консоль
     });
 
+const apiPopupDeleteCard = () => {
+    api.popupDeleteCard()
+        .then((result) => {
+            console.log(`удаление карточки: ${result}`)
+            console.log(`dfsdfsdfasadfsd`)
+        })
+        .catch((err) => {
+            console.log(`удаление карточки: ${err}`); // выведем ошибку в консоль
+        });
+}
+
+
+
 
 //******************************************************************************************************************************************
 
@@ -94,7 +108,12 @@ const createCard = (data) => {
         data: data,
         handleCardClick: (name, link) => {
             popupWithImage.open(name, link)
+        },
+
+        handleDeleteBascet: (open) => {
+            popupWithFormClassBasket.open(open)
         }
+
     }, '.template')
     return newCard.generateCard()
 }
@@ -163,7 +182,10 @@ popupWithFormClassCard.setEventListeners()
 
 
 
-
+// Попап удаления карточки*********************************************************************************************************
+const popupWithFormClassBasket = new PopupWithBasket({
+    elementDomPopup: '.popupDeleteBascet'
+})
 
 
 //Функционал кнопок открытия попапа************************************************************************************************

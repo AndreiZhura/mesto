@@ -110,16 +110,46 @@ export default class Api {
         /*7. Удаление карточки
         Прежде чем браться за работу с API, исправьте элемент карточки. 
         Сделайте так, чтобы иконка удаления была только на созданных вами карточках, так как удалять чужие карточки нельзя. */
-    popupDeleteCard() {
+    popupDeleteCard(cardId) {
+            return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards/${cardId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
 
+                    // если ошибка, отклоняем промис
+                    return Promise.reject(`Ошибка (Удаление карточки): ${res.status}`);
+                });
         }
         /*8. Постановка и снятие лайка
 Чтобы лайкнуть карточку, отправьте PUT-запрос: */
-    puttingAndRemovingLike() {
+    puttingLike(id) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards/${id}/likes `, {
+                method: 'PUT',
+                headers: {
+                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    'Content-Type': 'application/json'
+                },
 
-        }
-        /*9. Обновление аватара пользователя
-Чтобы сменить аватар, отправьте такой PATCH-запрос:*/
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                // если ошибка, отклоняем промис
+                return Promise.reject(`Ошибка (Постановка лайка): ${res.status}`);
+            });
+    }
+
+    /*9. Обновление аватара пользователя
+    Чтобы сменить аватар, отправьте такой PATCH-запрос:*/
     updateUseravatar(linkAvatar) {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me/avatar', {
                 method: 'PATCH',

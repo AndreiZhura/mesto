@@ -1,9 +1,10 @@
 export default class Card {
-    constructor({ data, handleCardClick }, cardElement) {
+    constructor({ data, handleCardClick, handleDeleteBascet }, cardElement) {
         this._name = data.name;
         this._link = data.link;
         this._handleCardClick = handleCardClick;
         this._cardElement = cardElement;
+        this._handleDeleteBascet = handleDeleteBascet;
     }
 
 
@@ -35,21 +36,24 @@ export default class Card {
     _setEventListeners() {
             this._elementLike.addEventListener('click', this._toggleLike)
             this._elementRectangle.addEventListener('click', this._handleImageClick)
-            this._elementBascet.addEventListener('click', this._handleDeleteBascet)
+            this._elementBascet.addEventListener('click', this._handleDeleteBascetcard)
         }
         // удаляем карточку
+        /*
     _handleDelete = () => {
             this._element.remove();
-        }
+        }*/
         // ставим лайк
     _toggleLike = () => {
             this._elementLike.classList.toggle('element__like_active_black')
         }
         // открываем попап с картинкой
     _handleImageClick = () => {
-        this._handleCardClick(this._name, this._link)
-    }
-    _handleDeleteBascet = () => {
-        document.querySelector('.popupDeleteBascet').classList.add('popup_opened')
+            this._handleCardClick(this._name, this._link)
+        }
+        // удаляем карточку
+
+    _handleDeleteBascetcard = () => {
+        this._handleDeleteBascet()
     }
 }
