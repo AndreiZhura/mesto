@@ -6,8 +6,9 @@
     cursor: pointer;
     border: none;
     background-color: #fff;
-    margin: 10px 9px 8px 0px;
+    margin: 10px 0px 8px 0px;
     background-image: url(../../../images/likeWhite.svg);
+    margin-bottom: 5px;
 }
 
 .element__like:hover {
@@ -16,6 +17,6 @@
 
 @media screen and (max-width:425px) {
     .element__like {
-        margin: 6px 16px 8px 8px;
+        margin: 6px 9px 8px 8px;
     }
 }

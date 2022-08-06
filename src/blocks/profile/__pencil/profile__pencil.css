@@ -7,6 +7,6 @@
     transition: .5s ease;
 }
 
-div:hover>.profile__pencil {
+.profile__container:hover>.profile__pencil {
     opacity: 1;
 }
