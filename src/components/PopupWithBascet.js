@@ -1,9 +1,9 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithBasket extends Popup {
-    constructor({ elementDomPopup, submitForm }) {
+    constructor({ elementDomPopup, deletePopup }) {
         super(elementDomPopup)
-        this._submitForm = submitForm;
+        this._deletePopup = deletePopup;
         this._popupForm = this._elementDomPopup.querySelector('.popup__container');
         this._buttonYes = this._popupForm.querySelector('#popupDeleteBasketButtonSave')
         this._cardId = {}
@@ -14,8 +14,9 @@ export default class PopupWithBasket extends Popup {
         return this._cardId = cardId;
     }
 
-    close() {
+    close(cardId) {
         super.close()
+        return this._cardId = cardId;
     }
 
     setEventListeners() {
@@ -23,7 +24,8 @@ export default class PopupWithBasket extends Popup {
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._buttonYes.addEventListener('click', () => {
-                this._submitForm(this._cardId)
+                this._deletePopup(this._cardId)
+                this.close();
             })
 
         })

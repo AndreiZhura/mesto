@@ -1,17 +1,17 @@
 export default class Api {
-    constructor({ url, token }) {
-        this._url = url;
-        this._token = token;
+    constructor(options) {
+        this._url = options.url;
+        this._token = options.token;
     }
 
     /*1. Загрузка информации о пользователе с сервера
     Информация о пользователе должна подгружаться с сервера.
      Чтобы осуществить это, сделайте GET-запрос на URL (cohortId замените на идентификатор вашей группы):*/
     downLoadingUserInformationFromServer() {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/users/me`, {
+        return fetch(`${this._url}/users/me`, {
                 method: 'GET',
                 headers: {
-                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+                    authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
                     'Content-Type': 'application/json'
                 }
             })
@@ -30,7 +30,7 @@ export default class Api {
 Начальные карточки должны подгружаться с сервера. Для этого сделайте GET-запрос: */
 
     downloadingCardsFromServer(data) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards`, {
+        return fetch(`${this._url}/cards`, {
                 method: 'GET',
                 headers: {
                     Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
@@ -53,7 +53,7 @@ export default class Api {
     Отредактированные данные профиля должны сохраняться на сервере. Для этого отправьте запрос методом PATCH:*/
 
     editingProfile(form) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me', {
+        return fetch(`${this._url}/users/me`, {
                 method: 'PATCH',
                 headers: {
                     Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
@@ -78,7 +78,7 @@ export default class Api {
     /* 4. Добавление новой карточки
     Чтобы добавить на сервер новую карточку, отправьте POST-запрос:*/
     addNewCard(form) {
-            return fetch('https://mesto.nomoreparties.co/v1/cohort-46/cards', {
+            return fetch(`${this._url}/cards`, {
                     method: 'POST',
                     headers: {
                         Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
@@ -111,7 +111,7 @@ export default class Api {
         Прежде чем браться за работу с API, исправьте элемент карточки. 
         Сделайте так, чтобы иконка удаления была только на созданных вами карточках, так как удалять чужие карточки нельзя. */
     popupDeleteCard(cardId) {
-            return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards/${cardId}`, {
+            return fetch(`${this._url}/cards/${cardId}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
@@ -130,7 +130,7 @@ export default class Api {
         /*8. Постановка и снятие лайка
 Чтобы лайкнуть карточку, отправьте PUT-запрос: */
     puttingLike(id) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-46/cards/${id}/likes `, {
+        return fetch(`${this._url}/cards/${id}/likes `, {
                 method: 'PUT',
                 headers: {
                     Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
@@ -151,7 +151,7 @@ export default class Api {
     /*9. Обновление аватара пользователя
     Чтобы сменить аватар, отправьте такой PATCH-запрос:*/
     updateUseravatar(linkAvatar) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-46/users/me/avatar', {
+        return fetch(`${this._url}/users/me/avatar`, {
                 method: 'PATCH',
                 headers: {
                     Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',

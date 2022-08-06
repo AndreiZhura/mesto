@@ -55,13 +55,10 @@ const userID = {}
 
 // подключаем Api*********************************************************************************************************************************
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
-    headers: {
-        Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-        'Content-Type': 'application/json'
-    }
-});
-// 1. Загрузка информации о пользователе с сервера
+        url: 'https://mesto.nomoreparties.co/v1/cohort-46',
+        authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0'
+    })
+    // 1. Загрузка информации о пользователе с сервера
 api.downLoadingUserInformationFromServer()
     .then((result) => {
         console.log(result)
@@ -119,6 +116,25 @@ const createCard = (data) => {
 }
 
 popupWithImage.setEventListeners()
+
+// Попап удаления карточки*********************************************************************************************************
+const popupWithFormClassBasket = new PopupWithBasket({
+    elementDomPopup: '.popupDeleteBascet',
+    deletePopup: (form) => {
+        console.log(form)
+        api.popupDeleteCard(form)
+            .then((result) => {
+
+                console.log(`удаление карточки: ${result}`)
+                console.log(`dfsdfsdfasadfsd`)
+            })
+            .catch((err) => {
+                console.log(`удаление карточки: ${err}`); // выведем ошибку в консоль
+            });
+    }
+})
+
+popupWithFormClassBasket.setEventListeners()
 
 // отрисовываем карточку****************************************************************************************************************
 const section = new Section({
@@ -178,14 +194,8 @@ const popupWithFormClassCard = new PopupWithForm({
 
     }
 })
+
 popupWithFormClassCard.setEventListeners()
-
-
-
-// Попап удаления карточки*********************************************************************************************************
-const popupWithFormClassBasket = new PopupWithBasket({
-    elementDomPopup: '.popupDeleteBascet'
-})
 
 
 //Функционал кнопок открытия попапа************************************************************************************************
