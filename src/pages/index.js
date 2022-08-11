@@ -98,10 +98,9 @@ const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
     deletePopup: (cardId) => {
 
-        console.log(cardId)
         api.popupDeleteCard(cardId)
-            .then((result) => {
-                console.log(result)
+            .then(() => {
+                cardId.handleDelete()
                 popupWithBasket.close()
             })
             .catch((err) => {

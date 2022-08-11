@@ -12,7 +12,7 @@ export default class PopupWithBasket extends Popup {
     open(cardId) {
         this._cardId = cardId;
         super.open();
-        return this._cardId
+        return this._cardId;
 
     }
 
