@@ -29,7 +29,7 @@ export default class Api {
     /*2. Загрузка карточек с сервера
 Начальные карточки должны подгружаться с сервера. Для этого сделайте GET-запрос: */
 
-    downloadingCardsFromServer(data) {
+    downloadingCardsFromServer() {
         return fetch(`${this._url}/cards`, {
                 method: 'GET',
                 headers: {
@@ -120,6 +120,7 @@ export default class Api {
                 })
                 .then(res => {
                     if (res.ok) {
+                        console.log(res)
                         return res.json();
                     }
 

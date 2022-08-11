@@ -10,25 +10,24 @@ export default class PopupWithBasket extends Popup {
     }
 
     open(cardId) {
+        this._cardId = cardId;
         super.open();
-        return this._cardId = cardId;
+        return this._cardId
+
     }
 
-    close(cardId) {
-        super.close()
-        return this._cardId = cardId;
+    close() {
+        super.close();
     }
+
+
 
     setEventListeners() {
         super.setEventListeners()
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._buttonYes.addEventListener('click', () => {
-                this._deletePopup(this._cardId)
-                this.close();
-            })
-
+            this._deletePopup(this._cardId)
         })
-
     }
+
 }

@@ -50,9 +50,6 @@ const userInfo = new UserInfo({
     profileAvatar: '.profile__avatar'
 })
 
-
-const userID = {}
-
 // подключаем Api*********************************************************************************************************************************
 const api = new Api({
         url: 'https://mesto.nomoreparties.co/v1/cohort-46',
@@ -61,8 +58,6 @@ const api = new Api({
     // 1. Загрузка информации о пользователе с сервера
 api.downLoadingUserInformationFromServer()
     .then((result) => {
-        console.log(result)
-        userID.id = result._id;
         userInfo.setUserInfo(result)
     })
     .catch((err) => {
@@ -73,30 +68,14 @@ api.downLoadingUserInformationFromServer()
 //2. Загрузка карточек с сервера
 api.downloadingCardsFromServer()
     .then((result) => {
-        console.log(result)
         section.rendererValue(result)
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
     });
 
-const apiPopupDeleteCard = () => {
-    api.popupDeleteCard()
-        .then((result) => {
-            console.log(`удаление карточки: ${result}`)
-            console.log(`dfsdfsdfasadfsd`)
-        })
-        .catch((err) => {
-            console.log(`удаление карточки: ${err}`); // выведем ошибку в консоль
-        });
-}
-
-
-
 
 //******************************************************************************************************************************************
-
-
 //создаем карточку**************************************************************************************************************************
 const popupWithImage = new PopupWithImage('.popupPhoto')
 
@@ -106,35 +85,33 @@ const createCard = (data) => {
         handleCardClick: (name, link) => {
             popupWithImage.open(name, link)
         },
-
-        handleDeleteBascet: (open) => {
-            popupWithFormClassBasket.open(open)
+        handleDeleteCard: (cardId) => {
+            popupWithBasket.open(cardId)
         }
+
 
     }, '.template')
     return newCard.generateCard()
 }
 
-popupWithImage.setEventListeners()
-
-// Попап удаления карточки*********************************************************************************************************
-const popupWithFormClassBasket = new PopupWithBasket({
+const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
-    deletePopup: (form) => {
-        console.log(form)
-        api.popupDeleteCard(form)
-            .then((result) => {
+    deletePopup: (cardId) => {
 
-                console.log(`удаление карточки: ${result}`)
-                console.log(`dfsdfsdfasadfsd`)
+        console.log(cardId)
+        api.popupDeleteCard(cardId)
+            .then((result) => {
+                console.log(result)
+                popupWithBasket.close()
             })
             .catch((err) => {
-                console.log(`удаление карточки: ${err}`); // выведем ошибку в консоль
+                console.log(err); // выведем ошибку в консоль
+                console.log('ошибка')
             });
     }
 })
 
-popupWithFormClassBasket.setEventListeners()
+
 
 // отрисовываем карточку****************************************************************************************************************
 const section = new Section({
@@ -145,8 +122,11 @@ const section = new Section({
 }, '.elements')
 
 
+// Попап удаления карточки*********************************************************************************************************
+
+
 // сами попапы **********************************************************************************************************************
-//3. Редактирование профиля
+//3. Редактирование профиля**********************
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
     submitForm: (form) => {
@@ -163,7 +143,7 @@ const popupWithFormClassProfile = new PopupWithForm({
             });
     }
 })
-popupWithFormClassProfile.setEventListeners()
+
 
 //9. Обновление аватара пользователя
 const popupWithFormClassAvatar = new PopupWithForm({
@@ -178,9 +158,9 @@ const popupWithFormClassAvatar = new PopupWithForm({
             })
     }
 })
-popupWithFormClassAvatar.setEventListeners()
 
 
+// попап карточки ************************************************************************************************************
 const popupWithFormClassCard = new PopupWithForm({
     elementDomPopup: '.popupElements',
 
@@ -195,10 +175,13 @@ const popupWithFormClassCard = new PopupWithForm({
     }
 })
 
+// *********************************************************************************************************************************
+popupWithImage.setEventListeners()
+popupWithBasket.setEventListeners()
+popupWithFormClassProfile.setEventListeners()
+popupWithFormClassAvatar.setEventListeners()
 popupWithFormClassCard.setEventListeners()
-
-
-//Функционал кнопок открытия попапа************************************************************************************************
+    //Функционал кнопок открытия попапа************************************************************************************************
 
 popupProfileOpenButton.addEventListener('click', () => {
     const { name, profession } = userInfo.getUserInfo();

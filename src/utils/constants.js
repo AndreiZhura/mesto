@@ -37,6 +37,8 @@ const elements = document.querySelector('.elements');
 //кнопка аватарки
 const popupAvatarOpenButton = document.querySelector('.profile__avatar');
 
+const popupDeleteBascet = document.querySelector('.popupDeleteBascet')
+
 const popupFormProfile = document.querySelector('.popupProfile');
 const popupFormCard = document.querySelector('.popupElements');
 const popupFormAvatar = document.querySelector('.popupAvatars')
@@ -46,7 +48,6 @@ const popupCardValid = popupFormCard.querySelector('.popup__container');
 const popupAvatarsValid = popupFormAvatar.querySelector('.popup__container');
 
 export {
-
     popupProfile,
     popupProfileOpenButton,
     popupProfileCloseButton,

@@ -1,13 +1,18 @@
 export default class Card {
-    constructor({ data, handleCardClick, handleDeleteBascet }, cardElement) {
+    constructor({ data, handleCardClick, handleDeleteCard }, cardElement) {
         this._name = data.name;
         this._link = data.link;
+        this._cardId = data._id;
+        this._owner = data.owner;
+
+        this._handleDeleteCard = handleDeleteCard
         this._handleCardClick = handleCardClick;
+
+
+
+        // template элемент карточки
         this._cardElement = cardElement;
-        this._handleDeleteBascet = handleDeleteBascet;
     }
-
-
 
     // получаем элемент шаблона
     _getTemplateElement() {
@@ -34,16 +39,13 @@ export default class Card {
         }
         // устанавливаем прослушивание событий
     _setEventListeners() {
-            this._elementLike.addEventListener('click', this._toggleLike)
-            this._elementRectangle.addEventListener('click', this._handleImageClick)
-            this._elementBascet.addEventListener('click', this._handleDeleteBascetcard)
-        }
-        // удаляем карточку
-        /*
-    _handleDelete = () => {
-            this._element.remove();
-        }*/
-        // ставим лайк
+        this._elementLike.addEventListener('click', this._toggleLike)
+        this._elementRectangle.addEventListener('click', this._handleImageClick)
+        this._elementBascet.addEventListener('click', this._handleCardClickDelete)
+
+    }
+
+    // ставим лайк
     _toggleLike = () => {
             this._elementLike.classList.toggle('element__like_active_black')
         }
@@ -52,8 +54,8 @@ export default class Card {
             this._handleCardClick(this._name, this._link)
         }
         // удаляем карточку
-
-    _handleDeleteBascetcard = () => {
-        this._handleDeleteBascet()
+    _handleCardClickDelete = () => {
+        this._handleDeleteCard(this._cardId)
     }
+
 }
