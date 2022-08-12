@@ -87,7 +87,7 @@ const createCard = (data) => {
         },
         handleDeleteCard: (cardId) => {
             popupWithBasket.open(cardId)
-            popupWithBasket.handleSubmitConfirm(() => {
+            popupWithBasket.setEventListeners(() => {
                 api.popupDeleteCard(newCard._id)
                     .then(() => {
                         newCard.handleDelete();
