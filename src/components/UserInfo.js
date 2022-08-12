@@ -10,10 +10,11 @@ setUserInfo - получает объект с ключами и устанав�
  */
 
 export default class UserInfo {
-    constructor({ profileName, profileProfession, profileAvatar }) {
+    constructor({ profileName, profileProfession, profileAvatar, idUsers }) {
         this._profileName = document.querySelector(profileName);
         this._profileProfession = document.querySelector(profileProfession);
         this._profileAvatar = document.querySelector(profileAvatar);
+        this._idUsers = idUsers;
     }
 
     //Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя.
@@ -29,6 +30,7 @@ export default class UserInfo {
     setUserInfo(data) {
         this._profileName.textContent = data.name;
         this._profileProfession.textContent = data.about;
-        this._profileAvatar.src = data.avatar
+        this._profileAvatar.src = data.avatar;
+        this._idUsers = data.idUsers;
     }
 }

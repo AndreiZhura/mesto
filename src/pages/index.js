@@ -87,6 +87,16 @@ const createCard = (data) => {
         },
         handleDeleteCard: (cardId) => {
             popupWithBasket.open(cardId)
+            popupWithBasket.handleSubmitConfirm(() => {
+                api.popupDeleteCard(newCard._id)
+                    .then(() => {
+                        newCard.handleDelete();
+                        popupWithBasket.close();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
         }
 
 
@@ -99,8 +109,8 @@ const popupWithBasket = new PopupWithBasket({
     deletePopup: (cardId) => {
 
         api.popupDeleteCard(cardId)
-            .then(() => {
-                cardId.handleDelete()
+            .then((result) => {
+                console.log(result)
                 popupWithBasket.close()
             })
             .catch((err) => {

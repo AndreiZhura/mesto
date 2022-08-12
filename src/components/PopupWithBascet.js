@@ -6,28 +6,26 @@ export default class PopupWithBasket extends Popup {
         this._deletePopup = deletePopup;
         this._popupForm = this._elementDomPopup.querySelector('.popup__container');
         this._buttonYes = this._popupForm.querySelector('#popupDeleteBasketButtonSave')
-        this._cardId = {}
+        this._deletePopup = deletePopup;
+        this._setEvent = this._setEvent.bind(this);
+    }
+    handleSubmitConfirm(submitConfirm) {
+        this._deletePopup = submitConfirm;
     }
 
-    open(cardId) {
-        this._cardId = cardId;
-        super.open();
-        return this._cardId;
+    _setEvent(evt) {
+        evt.preventDefault();
+        this._deletePopup();
+    }
 
+    open() {
+        super.open();
+        this._popupSelector.addEventListener('submit', this._setEvent);
     }
 
     close() {
         super.close();
-    }
-
-
-
-    setEventListeners() {
-        super.setEventListeners()
-        this._popupForm.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this._deletePopup(this._cardId)
-        })
+        this._popupSelector.removeEventListener('submit', this._setEvent);
     }
 
 }
