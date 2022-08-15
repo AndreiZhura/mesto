@@ -14,12 +14,10 @@ export default class PopupWithBasket extends Popup {
 
     open() {
         super.open();
-        this._popupForm.addEventListener('submit', this._setEvent);
     }
 
     close() {
         super.close();
-        this._popupForm.removeEventListener('submit', this._setEvent);
     }
 
     setEventListeners() {

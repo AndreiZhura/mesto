@@ -83,20 +83,10 @@ const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-            popupWithImage.open(name, link)
+            popupWithImage.open(name, link);
         },
         handleDeleteCard: (cardId) => {
             popupWithBasket.open(cardId)
-            popupWithBasket.setEventListeners(() => {
-                api.popupDeleteCard(newCard._id)
-                    .then(() => {
-                        newCard.handleDelete();
-                        popupWithBasket.close();
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            })
         }
 
 
@@ -108,10 +98,12 @@ const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
     deletePopup: (cardId) => {
 
+        console.log(cardId)
         api.popupDeleteCard(cardId)
             .then((result) => {
                 console.log(result)
-                popupWithBasket.close()
+
+                popupWithBasket.close();
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
