@@ -6,19 +6,21 @@ export default class PopupWithBasket extends Popup {
         this._deletePopup = deletePopup;
         this._popupForm = this._elementDomPopup.querySelector('.popup__container');
         this._buttonYes = this._popupForm.querySelector('#popupDeleteBasketButtonSave')
-        this._deletePopup = deletePopup;
+        this._cardId = {}
     }
 
-
-
-
-    open() {
+    open(cardId) {
+        this._cardId = cardId;
         super.open();
+        return this._cardId
+
     }
 
     close() {
         super.close();
     }
+
+
 
     setEventListeners() {
         super.setEventListeners()
@@ -27,4 +29,5 @@ export default class PopupWithBasket extends Popup {
             this._deletePopup(this._cardId)
         })
     }
+
 }

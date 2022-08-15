@@ -35,6 +35,7 @@ import {
 import Api from "../components/Api.js";
 import PopupWithBasket from "../components/PopupWithBascet.js";
 
+let dellCard = null;
 
 const formValidators = {
     inputSelector: '.popup__input',
@@ -83,9 +84,10 @@ const createCard = (data) => {
     const newCard = new Card({
         data: data,
         handleCardClick: (name, link) => {
-            popupWithImage.open(name, link);
+            popupWithImage.open(name, link)
         },
         handleDeleteCard: (cardId) => {
+            dellCard = newCard
             popupWithBasket.open(cardId)
         }
 
@@ -101,9 +103,9 @@ const popupWithBasket = new PopupWithBasket({
         console.log(cardId)
         api.popupDeleteCard(cardId)
             .then((result) => {
+                dellCard.handleDelete()
                 console.log(result)
-
-                popupWithBasket.close();
+                popupWithBasket.close()
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
