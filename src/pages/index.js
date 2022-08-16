@@ -36,15 +36,16 @@ import Api from "../components/Api.js";
 import PopupWithBasket from "../components/PopupWithBascet.js";
 
 let dellCard = null;
-
+let userId = null
+    // объект валидации форм
 const formValidators = {
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_inactively',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_active'
-}
-
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactively',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_active'
+    }
+    // информация о
 const userInfo = new UserInfo({
     profileName: ".profile__name",
     profileProfession: ".profile__profession",
@@ -54,7 +55,10 @@ const userInfo = new UserInfo({
 // подключаем Api*********************************************************************************************************************************
 const api = new Api({
         url: 'https://mesto.nomoreparties.co/v1/cohort-46',
-        authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0'
+        headers: {
+            Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
+            'Content-Type': 'application/json'
+        }
     })
     // 1. Загрузка информации о пользователе с сервера
 api.downLoadingUserInformationFromServer()
@@ -69,7 +73,9 @@ api.downLoadingUserInformationFromServer()
 //2. Загрузка карточек с сервера
 api.downloadingCardsFromServer()
     .then((result) => {
+        console.log(result)
         section.rendererValue(result)
+        userId = result._id
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -92,7 +98,7 @@ const createCard = (data) => {
         }
 
 
-    }, '.template')
+    }, '.template', userId)
     return newCard.generateCard()
 }
 

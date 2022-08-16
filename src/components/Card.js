@@ -1,15 +1,12 @@
 export default class Card {
-    constructor({ data, handleCardClick, handleDeleteCard }, cardElement) {
+    constructor({ data, handleCardClick, handleDeleteCard }, cardElement, userId) {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
-        this._owner = data.owner;
-
-        this._handleDeleteCard = handleDeleteCard
+        this._userId = userId;
+        this._ownerId = data.owner._id
+        this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
-
-
-
         // template элемент карточки
         this._cardElement = cardElement;
     }
@@ -32,7 +29,9 @@ export default class Card {
             this._elementRectangle.alt = this._name
             this._elementLike = this._element.querySelector('.element__like')
             this._elementBascet = this._element.querySelector('.element__basket')
-
+            if (this._ownerId === this._userId) {
+                this._elementBascet.remove()
+            }
             this._setEventListeners()
 
             return this._element

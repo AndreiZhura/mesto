@@ -1,7 +1,7 @@
 export default class Api {
     constructor(options) {
         this._url = options.url;
-        this._token = options.token;
+        this._headers = options.headers;
     }
 
     /*1. Загрузка информации о пользователе с сервера
@@ -10,10 +10,7 @@ export default class Api {
     downLoadingUserInformationFromServer() {
         return fetch(`${this._url}/users/me`, {
                 method: 'GET',
-                headers: {
-                    authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                    'Content-Type': 'application/json'
-                }
+                headers: this._headers
             })
             .then(res => {
                 if (res.ok) {
@@ -32,10 +29,7 @@ export default class Api {
     downloadingCardsFromServer() {
         return fetch(`${this._url}/cards`, {
                 method: 'GET',
-                headers: {
-                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                    'Content-Type': 'application/json'
-                }
+                headers: this._headers
             })
             .then(res => {
                 if (res.ok) {
@@ -55,10 +49,7 @@ export default class Api {
     editingProfile(form) {
         return fetch(`${this._url}/users/me`, {
                 method: 'PATCH',
-                headers: {
-                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                    'Content-Type': 'application/json'
-                },
+                headers: this._headers,
                 body: JSON.stringify({
                     name: form['nameProfile'],
                     about: form['professionProfile']
@@ -80,10 +71,7 @@ export default class Api {
     addNewCard(form) {
             return fetch(`${this._url}/cards`, {
                     method: 'POST',
-                    headers: {
-                        Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                        'Content-Type': 'application/json'
-                    },
+                    headers: this._headers,
                     body: JSON.stringify({
                         name: form['name'],
                         link: form['link']
@@ -113,10 +101,7 @@ export default class Api {
     popupDeleteCard(cardId) {
             return fetch(`${this._url}/cards/${cardId}`, {
                     method: 'DELETE',
-                    headers: {
-                        Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                        'Content-Type': 'application/json'
-                    },
+                    headers: this._headers,
                 })
                 .then(res => {
                     if (res.ok) {
@@ -133,10 +118,7 @@ export default class Api {
     puttingLike(id) {
         return fetch(`${this._url}/cards/${id}/likes `, {
                 method: 'PUT',
-                headers: {
-                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                    'Content-Type': 'application/json'
-                },
+                headers: this._headers,
 
             })
             .then(res => {
@@ -154,10 +136,7 @@ export default class Api {
     updateUseravatar(linkAvatar) {
         return fetch(`${this._url}/users/me/avatar`, {
                 method: 'PATCH',
-                headers: {
-                    Authorization: 'b1806163-4516-40f3-8e2a-a44c941a51c0',
-                    'Content-Type': 'application/json'
-                },
+                headers: this._headers,
                 body: JSON.stringify({
                     avatar: linkAvatar['avatar-link']
 
