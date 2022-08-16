@@ -3,10 +3,12 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
-        this._userId = userId;
         this._ownerId = data.owner._id
         this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
+        // переменная id Usera 
+        this._userId = userId;
+
         // template элемент карточки
         this._cardElement = cardElement;
     }
@@ -23,13 +25,13 @@ export default class Card {
         // генерируем карточку
     generateCard() {
             this._element = this._getTemplateElement()
-            this._element.querySelector('.element__title').textContent = this._name
-            this._elementRectangle = this._element.querySelector('.element__rectangle')
-            this._elementRectangle.src = this._link
-            this._elementRectangle.alt = this._name
-            this._elementLike = this._element.querySelector('.element__like')
-            this._elementBascet = this._element.querySelector('.element__basket')
-            if (this._ownerId === this._userId) {
+            this._element.querySelector('.element__title').textContent = this._name;
+            this._elementRectangle = this._element.querySelector('.element__rectangle');
+            this._elementRectangle.src = this._link;
+            this._elementRectangle.alt = this._name;
+            this._elementLike = this._element.querySelector('.element__like');
+            this._elementBascet = this._element.querySelector('.element__basket');
+            if (this._ownerId !== this._userId) {
                 this._elementBascet.remove()
             }
             this._setEventListeners()

@@ -36,8 +36,11 @@ import Api from "../components/Api.js";
 import PopupWithBasket from "../components/PopupWithBascet.js";
 
 let dellCard = null;
-let userId = null
-    // объект валидации форм
+let UserId = null;
+
+
+
+// объект валидации форм
 const formValidators = {
         inputSelector: '.popup__input',
         submitButtonSelector: '.popup__save',
@@ -63,6 +66,8 @@ const api = new Api({
     // 1. Загрузка информации о пользователе с сервера
 api.downLoadingUserInformationFromServer()
     .then((result) => {
+        UserId = result._id;
+        console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
     })
     .catch((err) => {
@@ -75,7 +80,8 @@ api.downloadingCardsFromServer()
     .then((result) => {
         console.log(result)
         section.rendererValue(result)
-        userId = result._id
+
+
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -98,7 +104,7 @@ const createCard = (data) => {
         }
 
 
-    }, '.template', userId)
+    }, '.template', UserId)
     return newCard.generateCard()
 }
 
@@ -106,11 +112,11 @@ const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
     deletePopup: (cardId) => {
 
-        console.log(cardId)
         api.popupDeleteCard(cardId)
             .then((result) => {
+
                 dellCard.handleDelete()
-                console.log(result)
+
                 popupWithBasket.close()
             })
             .catch((err) => {
@@ -141,7 +147,7 @@ const popupWithFormClassProfile = new PopupWithForm({
     submitForm: (form) => {
         api.editingProfile(form)
             .then((result) => {
-                console.log(result)
+
                 userInfo.setUserInfo(result)
                 popupWithFormClassProfile.close()
                 validatorProfile.disableButton()
@@ -160,7 +166,7 @@ const popupWithFormClassAvatar = new PopupWithForm({
     submitForm: (item) => {
         api.updateUseravatar(item)
             .then((result) => {
-                console.log(result)
+
                 userInfo.setUserInfo(result)
                 popupWithFormClassAvatar.close();
                 validatorAvatar.disableButton();
