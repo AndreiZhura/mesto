@@ -101,6 +101,9 @@ const createCard = (data) => {
         handleDeleteCard: (cardId) => {
             dellCard = newCard
             popupWithBasket.open(cardId)
+        },
+        handleLikeClick: () => {
+
         }
 
 

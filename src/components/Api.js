@@ -131,6 +131,22 @@ export default class Api {
             });
     }
 
+    deleteLike(id) {
+        return fetch(`${this._url}/cards/${id}/likes `, {
+                method: 'DELETE',
+                headers: this._headers,
+
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                // если ошибка, отклоняем промис
+                return Promise.reject(`Ошибка (Постановка лайка): ${res.status}`);
+            });
+    }
+
     /*9. Обновление аватара пользователя
     Чтобы сменить аватар, отправьте такой PATCH-запрос:*/
     updateUseravatar(linkAvatar) {

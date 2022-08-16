@@ -1,12 +1,14 @@
 export default class Card {
-    constructor({ data, handleCardClick, handleDeleteCard }, cardElement, userId) {
+    constructor({ data, handleCardClick, handleDeleteCard, handleLikeClick }, cardElement, userId) {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
         this._ownerId = data.owner._id
+
         this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
-        // переменная id Usera 
+        this._handleLikeClick = handleLikeClick
+            // переменная id Usera 
         this._userId = userId;
 
         // template элемент карточки
