@@ -67,7 +67,7 @@ const api = new Api({
 api.downLoadingUserInformationFromServer()
     .then((result) => {
         UserId = result._id;
-        console.log(`id  Usera: ${UserId}`)
+        //  console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
     })
     .catch((err) => {
@@ -88,9 +88,13 @@ api.downloadingCardsFromServer()
     });
 
 
+
+
 //******************************************************************************************************************************************
 //создаем карточку**************************************************************************************************************************
 const popupWithImage = new PopupWithImage('.popupPhoto')
+
+
 
 const createCard = (data) => {
     const newCard = new Card({
@@ -102,15 +106,34 @@ const createCard = (data) => {
             dellCard = newCard
             popupWithBasket.open(cardId)
         },
-        handleLikeClick: () => {
+        handleLikeClick: (cardId) => {
+            api.puttingLike(cardId)
+
+            .then((result) => {
+                    console.log(result)
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
+                });
 
         }
+
 
 
     }, '.template', UserId)
     return newCard.generateCard()
 }
 
+// отрисовываем карточку****************************************************************************************************************
+const section = new Section({
+    renderer: (item) => {
+        section.addItem(createCard(item))
+    }
+
+}, '.elements')
+
+
+// Попап удаления карточки*********************************************************************************************************
 const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
     deletePopup: (cardId) => {
@@ -128,19 +151,6 @@ const popupWithBasket = new PopupWithBasket({
             });
     }
 })
-
-
-
-// отрисовываем карточку****************************************************************************************************************
-const section = new Section({
-    renderer: (item) => {
-        section.addItem(createCard(item))
-    }
-
-}, '.elements')
-
-
-// Попап удаления карточки*********************************************************************************************************
 
 
 // сами попапы **********************************************************************************************************************

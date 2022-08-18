@@ -3,12 +3,15 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
-        this._ownerId = data.owner._id
+        this._likes = data.likes;
+        this._counter = data.likes.lenght;
+        this._ownerId = data.owner._id;
+
 
         this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
-        this._handleLikeClick = handleLikeClick
-            // переменная id Usera 
+        this._handleLikeClick = handleLikeClick;
+        // переменная id Usera 
         this._userId = userId;
 
         // template элемент карточки
@@ -32,10 +35,17 @@ export default class Card {
             this._elementRectangle.src = this._link;
             this._elementRectangle.alt = this._name;
             this._elementLike = this._element.querySelector('.element__like');
+            this._elementNumber = this._element.querySelector('.element__number');
             this._elementBascet = this._element.querySelector('.element__basket');
+
+            //выставляет корзину
             if (this._ownerId !== this._userId) {
                 this._elementBascet.remove()
             }
+
+            //лайки
+
+
             this._setEventListeners()
 
             return this._element
@@ -50,9 +60,12 @@ export default class Card {
 
     // ставим лайк
     _toggleLike = () => {
-            this._elementLike.classList.toggle('element__like_active_black')
-        }
-        // открываем попап с картинкой
+        this._handleLikeClick(this._cardId)
+        this._elementLike.classList.toggle('element__like_active_black');
+        this._elementNumber.textContent = this._counter
+    }
+
+    // открываем попап с картинкой
     _handleImageClick = () => {
             this._handleCardClick(this._name, this._link)
         }
@@ -63,6 +76,10 @@ export default class Card {
 
     handleDelete = () => {
         this._element.remove();
+    }
+
+    likeTrueAndFalse(likes) {
+
     }
 
 }
