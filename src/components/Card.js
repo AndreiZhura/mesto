@@ -4,7 +4,7 @@ export default class Card {
         this._link = data.link;
         this._cardId = data._id;
         this._likes = data.likes;
-        this._counter = data.likes.lenght;
+        this._likesLenght = data.likes.length;
         this._ownerId = data.owner._id;
 
 
@@ -52,17 +52,17 @@ export default class Card {
         }
         // устанавливаем прослушивание событий
     _setEventListeners() {
-        this._elementLike.addEventListener('click', this._toggleLike)
+        this._elementLike.addEventListener('click', this.toggleLike)
         this._elementRectangle.addEventListener('click', this._handleImageClick)
         this._elementBascet.addEventListener('click', this._handleCardClickDelete)
 
     }
 
     // ставим лайк
-    _toggleLike = () => {
-        this._handleLikeClick(this._cardId)
+    toggleLike = () => {
         this._elementLike.classList.toggle('element__like_active_black');
-        this._elementNumber.textContent = this._counter
+
+        this._elementNumber.textContent = this._likesLenght
     }
 
     // открываем попап с картинкой
@@ -78,8 +78,8 @@ export default class Card {
         this._element.remove();
     }
 
-    likeTrueAndFalse(likes) {
-
+    likeTrueAndFalse() {
+        return this._likes
     }
 
 }

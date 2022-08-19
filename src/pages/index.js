@@ -64,10 +64,11 @@ const api = new Api({
         }
     })
     // 1. Загрузка информации о пользователе с сервера
+
 api.downLoadingUserInformationFromServer()
     .then((result) => {
         UserId = result._id;
-        //  console.log(`id  Usera: ${UserId}`)
+        console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
     })
     .catch((err) => {
@@ -107,15 +108,15 @@ const createCard = (data) => {
             popupWithBasket.open(cardId)
         },
         handleLikeClick: (cardId) => {
-            api.puttingLike(cardId)
-
-            .then((result) => {
+            newCard.likeTrueAndFalse() ? api.puttingLike(cardId) : api.deleteLike(cardId)
+                .then((result) => {
                     console.log(result)
+                    newCard.toggleLike()
                 })
                 .catch((err) => {
                     console.log(err); // выведем ошибку в консоль
+                    console.log('ошибка')
                 });
-
         }
 
 
