@@ -52,18 +52,22 @@ export default class Card {
         }
         // устанавливаем прослушивание событий
     _setEventListeners() {
-        this._elementLike.addEventListener('click', this.toggleLike)
+        this._elementLike.addEventListener('click', this._handleLikeAndDislike)
         this._elementRectangle.addEventListener('click', this._handleImageClick)
         this._elementBascet.addEventListener('click', this._handleCardClickDelete)
 
     }
 
     // ставим лайк
-    toggleLike = () => {
+    toggleLike = (like) => {
         this._elementLike.classList.toggle('element__like_active_black');
-
-        this._elementNumber.textContent = this._likesLenght
+        this._elementNumber.textContent = like;
     }
+
+
+
+    // добавление лайка
+
 
     // открываем попап с картинкой
     _handleImageClick = () => {
@@ -78,8 +82,12 @@ export default class Card {
         this._element.remove();
     }
 
+    _handleLikeAndDislike = () => {
+        this._handleLikeClick(this._cardId)
+    }
+
     likeTrueAndFalse() {
-        return this._likes
+        return this._likes.find(user => user._id === this._cardId);
     }
 
 }

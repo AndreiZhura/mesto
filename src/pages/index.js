@@ -108,10 +108,11 @@ const createCard = (data) => {
             popupWithBasket.open(cardId)
         },
         handleLikeClick: (cardId) => {
+
             newCard.likeTrueAndFalse() ? api.puttingLike(cardId) : api.deleteLike(cardId)
                 .then((result) => {
-                    console.log(result)
-                    newCard.toggleLike()
+                    console.log(`привет  ${result.likes.length}`)
+                    newCard.toggleLike(result.likes.length)
                 })
                 .catch((err) => {
                     console.log(err); // выведем ошибку в консоль
