@@ -106,16 +106,15 @@ const createCard = (data) => {
             handleLikeClick: (data) => {
                 console.log(data)
                 if (newCard.isLiked()) {
-                    console.log('добавление')
                     api.deleteLike(data._cardId)
                         .then((result) => {
                             console.log(`привет  ${result.likes.length}`)
                             console.log(`привет  ${data}`)
-                            newCard.toggleLike(result)
+                            newCard.toggleLike(result.likes.length)
                         })
 
                 } else {
-                    console.log('удаление')
+
                     api.puttingLike(data._cardId)
                         .then((result) => {
                             console.log(`привет  ${result.likes.length}`)
