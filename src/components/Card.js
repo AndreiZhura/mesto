@@ -65,7 +65,7 @@ export default class Card {
 
     addLike = (like) => {
         this._elementLike.classList.add('element__like_active_black');
-        this._elementNumber.textContent = like;
+        return this._elementNumber.textContent = like
     }
 
     deleteLike = (like) => {
@@ -75,13 +75,25 @@ export default class Card {
 
 
     toggleLike(like) {
-            this._elementLike.classList.toggle('element__like_active_black');
-            this._elementNumber.textContent = like;
+        this._elementLike.classList.toggle('element__like_active_black');
+        this._elementNumber.textContent = like;
 
 
+    }
+
+    isLiked() {
+            if (this._elementLike.classList.contains('element__like_active_black')) {
+                return true
+            } else {
+                return false
+            }
         }
         // добавление лайка
-
+        /*
+    renderLikes(card) {
+        this._likes = card.likes.map((item) => item._id);
+        this._isLiked = this._likes.some((_id) => _id === this._userId);
+    }*/
 
     // открываем попап с картинкой
     _handleImageClick = () => {
@@ -96,14 +108,7 @@ export default class Card {
         this._element.remove();
     }
 
-
-
     _handleLikeAndDislike = () => {
-        this._handleLikeClick(this._cardId)
+        this._handleLikeClick(this)
     }
-
-
-
-
-
 }

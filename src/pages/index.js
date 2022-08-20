@@ -30,6 +30,7 @@ import {
     popupProfileValid,
     popupCardValid,
     popupAvatarsValid,
+    popupLikeActive,
 } from '../utils/constants.js'
 
 import Api from "../components/Api.js";
@@ -88,54 +89,45 @@ api.downloadingCardsFromServer()
         console.log(err); // выведем ошибку в консоль
     });
 
-
-
-
 //******************************************************************************************************************************************
 //создаем карточку**************************************************************************************************************************
 const popupWithImage = new PopupWithImage('.popupPhoto')
 
-
-
 const createCard = (data) => {
     const newCard = new Card({
-        data: data,
-        handleCardClick: (name, link) => {
-            popupWithImage.open(name, link)
-        },
-        handleDeleteCard: (cardId) => {
-            dellCard = newCard
-            popupWithBasket.open(cardId)
-        },
-        handleLikeClick: (cardId) => {
+            data: data,
+            handleCardClick: (name, link) => {
+                popupWithImage.open(name, link)
+            },
+            handleDeleteCard: (cardId) => {
+                dellCard = newCard
+                popupWithBasket.open(cardId)
+            },
+            handleLikeClick: (data) => {
+                console.log(data)
+                if (newCard.isLiked()) {
+                    console.log('добавление')
+                    api.deleteLike(data._cardId)
+                        .then((result) => {
+                            console.log(`привет  ${result.likes.length}`)
+                            console.log(`привет  ${data}`)
+                            newCard.toggleLike(result)
+                        })
 
-            if (newCard.isLiked()) {
+                } else {
+                    console.log('удаление')
+                    api.puttingLike(data._cardId)
+                        .then((result) => {
+                            console.log(`привет  ${result.likes.length}`)
+                            console.log(`привет  ${data}`)
+                            newCard.toggleLike(result.likes.length)
+                        })
+                }
 
-                api.puttingLike(cardId)
-                    .then((result) => {
-                        console.log(`привет  ${result.likes.length}`)
-                        newCard.setLikesInfo(result)
-                    })
-                    .catch((err) => {
-                        console.log(err); // выведем ошибку в консоль
-                        console.log('ошибка')
-                    });
-
-            } else {
-
-                api.deleteLike(cardId)
-                    .then((result) => {
-                        console.log(`привет  ${result.likes.length}`)
-                        newCard.setLikesInfo(result)
-                    })
-                    .catch((err) => {
-                        console.log(err); // выведем ошибку в консоль
-                        console.log('ошибка')
-                    });
             }
-        }
 
-    }, '.template', UserId)
+        },
+        '.template', UserId)
     return newCard.generateCard()
 }
 
