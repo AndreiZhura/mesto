@@ -30,4 +30,9 @@ export default class PopupWithBasket extends Popup {
         })
     }
 
+    renderLoading(load) {
+        super.renderLoading(load)
+    }
+
+
 }

@@ -82,12 +82,11 @@ api.downloadingCardsFromServer()
     .then((result) => {
         console.log(result)
         section.rendererValue(result)
-
-
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
     });
+
 
 //******************************************************************************************************************************************
 //создаем карточку**************************************************************************************************************************
@@ -105,7 +104,7 @@ const createCard = (data) => {
             },
             handleLikeClick: (data) => {
                 console.log(data)
-                if (newCard.isLiked()) {
+                if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
                             console.log(`привет  ${result.likes.length}`)
@@ -114,7 +113,6 @@ const createCard = (data) => {
                         })
 
                 } else {
-
                     api.puttingLike(data._cardId)
                         .then((result) => {
                             console.log(`привет  ${result.likes.length}`)
@@ -143,13 +141,15 @@ const section = new Section({
 const popupWithBasket = new PopupWithBasket({
     elementDomPopup: '.popupDeleteBascet',
     deletePopup: (cardId) => {
-
+        popupWithBasket.renderLoading(true)
         api.popupDeleteCard(cardId)
             .then((result) => {
+                console.log(result)
 
                 dellCard.handleDelete()
 
                 popupWithBasket.close()
+
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
@@ -164,6 +164,7 @@ const popupWithBasket = new PopupWithBasket({
 const popupWithFormClassProfile = new PopupWithForm({
     elementDomPopup: '.popupProfile',
     submitForm: (form) => {
+        popupWithFormClassProfile.renderLoading(true)
         api.editingProfile(form)
             .then((result) => {
 
@@ -183,13 +184,17 @@ const popupWithFormClassProfile = new PopupWithForm({
 const popupWithFormClassAvatar = new PopupWithForm({
     elementDomPopup: '.popupAvatars',
     submitForm: (item) => {
+        popupWithFormClassAvatar.renderLoading(true)
         api.updateUseravatar(item)
             .then((result) => {
-
                 userInfo.setUserInfo(result)
                 popupWithFormClassAvatar.close();
                 validatorAvatar.disableButton();
             })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+                console.log('ошибка')
+            });
     }
 })
 
@@ -199,14 +204,22 @@ const popupWithFormClassCard = new PopupWithForm({
     elementDomPopup: '.popupElements',
 
     submitForm: (item) => {
+        popupWithFormClassCard.renderLoading(true)
         api.addNewCard(item)
             .then((result) => {
+                console.log(result)
                 section.addItem(createCard(result))
                 popupWithFormClassCard.close()
                 validatorCard.disableButton()
             })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+                console.log('ошибка')
+            });
+
 
     }
+
 })
 
 // *********************************************************************************************************************************

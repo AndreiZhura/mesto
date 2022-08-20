@@ -9,7 +9,8 @@
 export default class Popup {
     constructor(elementDomPopup) {
         this._elementDomPopup = document.querySelector(elementDomPopup);
-        this._buttonClose = this._elementDomPopup.querySelector('.popup__button')
+        this._buttonClose = this._elementDomPopup.querySelector('.popup__button');
+        this._buttonSave = this._elementDomPopup.querySelector('.popup__save')
             // this._escClose = this._handleEscClose.bind(this)
     }
     open() {
@@ -43,4 +44,10 @@ export default class Popup {
             this.close();
         }
     }*/
+
+    renderLoading(load) {
+        if (load) {
+            this._buttonSave.textContent = "Сохранение..."
+        }
+    }
 }

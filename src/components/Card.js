@@ -83,8 +83,10 @@ export default class Card {
 
     isLiked() {
             if (this._elementLike.classList.contains('element__like_active_black')) {
+
                 return true
             } else {
+
                 return false
             }
         }

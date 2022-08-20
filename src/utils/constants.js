@@ -47,6 +47,8 @@ const popupProfileValid = popupFormProfile.querySelector('.popup__container')
 const popupCardValid = popupFormCard.querySelector('.popup__container');
 const popupAvatarsValid = popupFormAvatar.querySelector('.popup__container');
 
+const popupLikeActive = document.querySelector('.element__like_active_black')
+
 export {
     popupProfile,
     popupProfileOpenButton,
@@ -71,4 +73,5 @@ export {
     popupProfileValid,
     popupCardValid,
     popupAvatarsValid,
+    popupLikeActive,
 }
