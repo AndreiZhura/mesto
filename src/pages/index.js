@@ -109,18 +109,31 @@ const createCard = (data) => {
         },
         handleLikeClick: (cardId) => {
 
-            newCard.likeTrueAndFalse() ? api.puttingLike(cardId) : api.deleteLike(cardId)
-                .then((result) => {
-                    console.log(`привет  ${result.likes.length}`)
-                    newCard.toggleLike(result.likes.length)
-                })
-                .catch((err) => {
-                    console.log(err); // выведем ошибку в консоль
-                    console.log('ошибка')
-                });
+            if (newCard.isLiked()) {
+
+                api.puttingLike(cardId)
+                    .then((result) => {
+                        console.log(`привет  ${result.likes.length}`)
+                        newCard.setLikesInfo(result)
+                    })
+                    .catch((err) => {
+                        console.log(err); // выведем ошибку в консоль
+                        console.log('ошибка')
+                    });
+
+            } else {
+
+                api.deleteLike(cardId)
+                    .then((result) => {
+                        console.log(`привет  ${result.likes.length}`)
+                        newCard.setLikesInfo(result)
+                    })
+                    .catch((err) => {
+                        console.log(err); // выведем ошибку в консоль
+                        console.log('ошибка')
+                    });
+            }
         }
-
-
 
     }, '.template', UserId)
     return newCard.generateCard()

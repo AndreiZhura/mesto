@@ -7,7 +7,6 @@ export default class Card {
         this._likesLenght = data.likes.length;
         this._ownerId = data.owner._id;
 
-
         this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
@@ -20,14 +19,16 @@ export default class Card {
 
     // получаем элемент шаблона
     _getTemplateElement() {
-            return document
-                .querySelector(this._cardElement)
-                .content
-                .querySelector('.element')
-                .cloneNode(true)
+        return document
+            .querySelector(this._cardElement)
+            .content
+            .querySelector('.element')
+            .cloneNode(true)
 
-        }
-        // генерируем карточку
+    }
+
+
+    // генерируем карточку
     generateCard() {
             this._element = this._getTemplateElement()
             this._element.querySelector('.element__title').textContent = this._name;
@@ -37,6 +38,7 @@ export default class Card {
             this._elementLike = this._element.querySelector('.element__like');
             this._elementNumber = this._element.querySelector('.element__number');
             this._elementBascet = this._element.querySelector('.element__basket');
+            this._elementLikeActive = this._element.querySelector('.element__like_active_black');
 
             //выставляет корзину
             if (this._ownerId !== this._userId) {
@@ -59,14 +61,26 @@ export default class Card {
     }
 
     // ставим лайк
-    toggleLike = (like) => {
-        this._elementLike.classList.toggle('element__like_active_black');
+
+
+    addLike = (like) => {
+        this._elementLike.classList.add('element__like_active_black');
+        this._elementNumber.textContent = like;
+    }
+
+    deleteLike = (like) => {
+        this._elementLike.classList.remove('element__like_active_black');
         this._elementNumber.textContent = like;
     }
 
 
+    toggleLike(like) {
+            this._elementLike.classList.toggle('element__like_active_black');
+            this._elementNumber.textContent = like;
 
-    // добавление лайка
+
+        }
+        // добавление лайка
 
 
     // открываем попап с картинкой
@@ -82,12 +96,14 @@ export default class Card {
         this._element.remove();
     }
 
+
+
     _handleLikeAndDislike = () => {
         this._handleLikeClick(this._cardId)
     }
 
-    likeTrueAndFalse() {
-        return this._likes.find(user => user._id === this._cardId);
-    }
+
+
+
 
 }
