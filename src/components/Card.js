@@ -34,6 +34,7 @@ export default class Card {
             this._elementRectangle.alt = this._name;
             this._elementLike = this._element.querySelector('.element__like');
             this._elementNumber = this._element.querySelector('.element__number');
+            this._elementNumber.textContent = this._likesLenght
             this._elementBascet = this._element.querySelector('.element__basket');
             this._elementLikeActive = this._element.querySelector('.element__like_active_black');
             //выставляет корзину

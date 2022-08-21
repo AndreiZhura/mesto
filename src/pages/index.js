@@ -52,9 +52,9 @@ const api = new Api({
 
 api.downLoadingUserInformationFromServer()
     .then((result) => {
-        console.log(result)
+        // console.log(result)
         UserId = result._id;
-        console.log(`id  Usera: ${UserId}`)
+        //  console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
     })
     .catch((err) => {
@@ -92,15 +92,15 @@ const createCard = (data) => {
                 if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
-                            console.log(`привет  ${result.likes.length}`)
-                            console.log(`привет  ${data}`)
+                            //   console.log(`привет  ${result.likes.length}`)
+                            //   console.log(`привет  ${data}`)
                             newCard.toggleLike(result.likes.length)
                         })
                 } else {
                     api.puttingLike(data._cardId)
                         .then((result) => {
-                            console.log(`привет  ${result.likes.length}`)
-                            console.log(`привет  ${data}`)
+                            //  console.log(`привет  ${result.likes.length}`)
+                            //  console.log(`привет  ${data}`)
                             newCard.toggleLike(result.likes.length)
                         })
                 }
@@ -164,7 +164,6 @@ const popupWithFormClassProfile = new PopupWithForm({
 const popupWithFormClassAvatar = new PopupWithForm({
     elementDomPopup: '.popupAvatars',
     submitForm: (item) => {
-
         popupWithFormClassAvatar.renderLoading(true)
         api.updateUseravatar(item)
             .then((result) => {
@@ -193,7 +192,7 @@ const popupWithFormClassCard = new PopupWithForm({
             popupWithFormClassCard.renderLoading(true)
             api.addNewCard(item)
                 .then((result) => {
-                    console.log(result)
+                    //  console.log(result)
                     section.addItem(createCard(result))
                     popupWithFormClassCard.close()
                     validatorCard.disableButton()
