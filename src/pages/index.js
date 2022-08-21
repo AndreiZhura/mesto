@@ -15,6 +15,7 @@ import {
     popupProfileValid,
     popupCardValid,
     popupAvatarsValid,
+    popupPencilAvatarOpenButton,
 } from '../utils/constants.js'
 
 import Api from "../components/Api.js";
@@ -223,6 +224,10 @@ popupProfileOpenButton.addEventListener('click', () => {
 
 cardPopupOpenButton.addEventListener('click', () => {
     popupWithFormClassCard.open()
+})
+
+popupPencilAvatarOpenButton.addEventListener('click', () => {
+    popupWithFormClassAvatar.open()
 })
 
 popupAvatarOpenButton.addEventListener('click', () => {
