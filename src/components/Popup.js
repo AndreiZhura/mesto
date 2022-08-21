@@ -11,35 +11,39 @@ export default class Popup {
         this._elementDomPopup = document.querySelector(elementDomPopup);
         this._buttonClose = this._elementDomPopup.querySelector('.popup__button');
         this._buttonSave = this._elementDomPopup.querySelector('.popup__save')
-            // this._escClose = this._handleEscClose.bind(this)
+        this._escClose = this._handleEscClose.bind(this)
     }
+
     open() {
         this._elementDomPopup.classList.add("popup_opened")
-
-        // document.addEventListener('keydown', this._escClose)
+        document.addEventListener('keydown', this._escClose)
 
     }
+
     close() {
         this._elementDomPopup.classList.remove("popup_opened")
-            // document.removeEventListener('keydown', this._escClose)
+        document.removeEventListener('keydown', this._escClose)
     }
-    setEventListeners() {
-            this._buttonClose.addEventListener('click', () => {
-                    this.close()
-                })
-                /*
-                this._elementDomPopup.addEventListener('mousedown', (event) => {
-                    if (event.target.classList.contains('popup')) {
-                        this.close();
-                    }
-                });*/
 
+    setEventListeners() {
+        this._buttonClose.addEventListener('click', () => {
+            this.close()
+        })
+
+        this._elementDomPopup.addEventListener('mousedown', (event) => {
+            if (event.target.classList.contains('popup')) {
+                this.close();
+            }
+        });
+
+    }
+
+    _handleEscClose = (evt) => {
+        if (evt.key === 'Escape') {
+            this.close();
         }
-        /* _handleEscClose = (evt) => {
-             if (evt.key === 'Escape') {
-                 this.close();
-             }
-         }*/
+    }
+
     renderLoading(load) {
         if (load) {
             this._buttonSave.textContent = "Сохранение..."
