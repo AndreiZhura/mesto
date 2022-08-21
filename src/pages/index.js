@@ -7,30 +7,14 @@ import UserInfo from '../components/UserInfo.js'
 import FormValidator from '../components/FormValidator.js'
 import './index.css'
 import {
-    popupProfile,
     popupProfileOpenButton,
-    popupProfileCloseButton,
-    profileName,
-    profileProfession,
-    profileAvatar,
     nameInput,
     jobInput,
-    formPopupProfile,
-    cardPopup,
     cardPopupOpenButton,
-    cardPopupCloseButton,
-    formCardPopup,
-    popupPhoto,
-    photoPopupButtonClose,
-    elements,
     popupAvatarOpenButton,
-    popupFormProfile,
-    popupFormCard,
-    popupFormAvatar,
     popupProfileValid,
     popupCardValid,
     popupAvatarsValid,
-    popupLikeActive,
 } from '../utils/constants.js'
 
 import Api from "../components/Api.js";
@@ -68,6 +52,7 @@ const api = new Api({
 
 api.downLoadingUserInformationFromServer()
     .then((result) => {
+        console.log(result)
         UserId = result._id;
         console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
@@ -111,7 +96,6 @@ const createCard = (data) => {
                             console.log(`привет  ${data}`)
                             newCard.toggleLike(result.likes.length)
                         })
-
                 } else {
                     api.puttingLike(data._cardId)
                         .then((result) => {
@@ -120,9 +104,7 @@ const createCard = (data) => {
                             newCard.toggleLike(result.likes.length)
                         })
                 }
-
             }
-
         },
         '.template', UserId)
     return newCard.generateCard()
@@ -158,7 +140,6 @@ const popupWithBasket = new PopupWithBasket({
     }
 })
 
-
 // сами попапы **********************************************************************************************************************
 //3. Редактирование профиля**********************
 const popupWithFormClassProfile = new PopupWithForm({
@@ -179,11 +160,11 @@ const popupWithFormClassProfile = new PopupWithForm({
     }
 })
 
-
 //9. Обновление аватара пользователя
 const popupWithFormClassAvatar = new PopupWithForm({
     elementDomPopup: '.popupAvatars',
     submitForm: (item) => {
+
         popupWithFormClassAvatar.renderLoading(true)
         api.updateUseravatar(item)
             .then((result) => {
@@ -192,37 +173,41 @@ const popupWithFormClassAvatar = new PopupWithForm({
                 validatorAvatar.disableButton();
             })
             .catch((err) => {
-                console.log(err); // выведем ошибку в консоль
+                console.log(err);
                 console.log('ошибка')
-            });
-    }
+            })
+            .finally(popupWithFormClassAvatar.renderLoading(false))
+
+    },
+
 })
+
+
 
 
 // попап карточки ************************************************************************************************************
 const popupWithFormClassCard = new PopupWithForm({
-    elementDomPopup: '.popupElements',
+        elementDomPopup: '.popupElements',
 
-    submitForm: (item) => {
-        popupWithFormClassCard.renderLoading(true)
-        api.addNewCard(item)
-            .then((result) => {
-                console.log(result)
-                section.addItem(createCard(result))
-                popupWithFormClassCard.close()
-                validatorCard.disableButton()
-            })
-            .catch((err) => {
-                console.log(err); // выведем ошибку в консоль
-                console.log('ошибка')
-            });
+        submitForm: (item) => {
+            popupWithFormClassCard.renderLoading(true)
+            api.addNewCard(item)
+                .then((result) => {
+                    console.log(result)
+                    section.addItem(createCard(result))
+                    popupWithFormClassCard.close()
+                    validatorCard.disableButton()
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
+                    console.log('ошибка')
+                })
 
 
-    }
+        }
 
-})
-
-// *********************************************************************************************************************************
+    })
+    // *********************************************************************************************************************************
 popupWithImage.setEventListeners()
 popupWithBasket.setEventListeners()
 popupWithFormClassProfile.setEventListeners()

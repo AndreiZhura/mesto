@@ -12,6 +12,7 @@ export default class PopupWithBasket extends Popup {
     open(cardId) {
         this._cardId = cardId;
         super.open();
+        this._buttonYes.textContent = "Да"
         return this._cardId
 
     }
@@ -20,8 +21,6 @@ export default class PopupWithBasket extends Popup {
         super.close();
     }
 
-
-
     setEventListeners() {
         super.setEventListeners()
         this._popupForm.addEventListener('submit', (evt) => {
@@ -29,7 +28,6 @@ export default class PopupWithBasket extends Popup {
             this._deletePopup(this._cardId)
         })
     }
-
     renderLoading(load) {
         super.renderLoading(load)
     }
