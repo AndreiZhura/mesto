@@ -53,7 +53,7 @@ const api = new Api({
 
 api.downLoadingUserInformationFromServer()
     .then((result) => {
-        // console.log(result)
+        console.log(result)
         UserId = result._id;
         //  console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
@@ -149,7 +149,6 @@ const popupWithFormClassProfile = new PopupWithForm({
         popupWithFormClassProfile.renderLoading(true)
         api.editingProfile(form)
             .then((result) => {
-
                 userInfo.setUserInfo(result)
                 popupWithFormClassProfile.close()
                 validatorProfile.disableButton()
