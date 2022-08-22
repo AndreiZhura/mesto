@@ -41,13 +41,14 @@ export default class PopupWithForm extends Popup {
         this._popupForm.reset();
     }
     open() {
-        this._buttonSave.textContent = "Сохранить"
-        super.open()
-    }
+            this._buttonSave.textContent = "Сохранить"
+            super.open()
+        }
+        /*
+        //+
+            renderLoading(load) {
 
-    renderLoading(load) {
-
-        super.renderLoading(load)
-    }
+                super.renderLoading(load)
+            }*/
 
 }

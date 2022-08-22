@@ -7,7 +7,8 @@ export default class Section {
 
         }
         // рендерим данные
-    rendererValue(items) {
+        //+
+    renderItems(items) {
             //передаем массив в items -> перебираем его форечем и передаем в функцию рендер
             items.forEach(item => {
                 this._renderer(item)

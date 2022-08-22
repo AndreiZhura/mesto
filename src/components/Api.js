@@ -4,6 +4,7 @@ export default class Api {
         this._headers = options.headers;
     }
 
+    //+
     /*1. Загрузка информации о пользователе с сервера
     Информация о пользователе должна подгружаться с сервера.
      Чтобы осуществить это, сделайте GET-запрос на URL (cohortId замените на идентификатор вашей группы):*/
@@ -12,14 +13,7 @@ export default class Api {
                 method: 'GET',
                 headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Загрузка информации о пользователе с сервера): ${res.status}`);
-            });
+            .then(this._getResponseData)
 
     }
 
@@ -31,14 +25,7 @@ export default class Api {
                 method: 'GET',
                 headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Загрузка карточек с сервера): ${res.status}`);
-            });
+            .then(this._getResponseData)
 
 
     }
@@ -55,14 +42,7 @@ export default class Api {
                     about: form['professionProfile']
                 })
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Загрузка карточек с сервера): ${res.status}`);
-            });
+            .then(this._getResponseData)
 
     }
 
@@ -77,41 +57,24 @@ export default class Api {
                         link: form['link']
                     })
                 })
-                .then(res => {
-                    if (res.ok) {
-                        return res.json();
-                    }
-
-                    // если ошибка, отклоняем промис
-                    return Promise.reject(`Ошибка (Добавление новой карточки): ${res.status}`);
-                });
+                .then(this._getResponseData)
         }
         /*5. Отображение количества лайков карточки
         У каждой карточки есть свойство likes — оно содержит массив пользователей, лайкнувших карточку: */
-    displayTheNumberOfLikesOfTheCard() {
 
-        }
-        /*6. Попап удаления карточки
-        Удаление чего-то, как правило, безвозвратно. 
-        Поэтому перед этим действием стоит спросить пользователя, уверен ли он, что хочет удалить карточку. 
-        Для этого сделайте новый попап. Он должен открываться по клику на иконку удаления: */
-        /*7. Удаление карточки
-        Прежде чем браться за работу с API, исправьте элемент карточки. 
-        Сделайте так, чтобы иконка удаления была только на созданных вами карточках, так как удалять чужие карточки нельзя. */
+    /*6. Попап удаления карточки
+    Удаление чего-то, как правило, безвозвратно. 
+    Поэтому перед этим действием стоит спросить пользователя, уверен ли он, что хочет удалить карточку. 
+    Для этого сделайте новый попап. Он должен открываться по клику на иконку удаления: */
+    /*7. Удаление карточки
+    Прежде чем браться за работу с API, исправьте элемент карточки. 
+    Сделайте так, чтобы иконка удаления была только на созданных вами карточках, так как удалять чужие карточки нельзя. */
     popupDeleteCard(cardId) {
             return fetch(`${this._url}/cards/${cardId}`, {
                     method: 'DELETE',
                     headers: this._headers,
                 })
-                .then(res => {
-                    if (res.ok) {
-                        console.log(res)
-                        return res.json();
-                    }
-
-                    // если ошибка, отклоняем промис
-                    return Promise.reject(`Ошибка (Удаление карточки): ${res.status}`);
-                });
+                .then(this._getResponseData)
         }
         /*8. Постановка и снятие лайка
 Чтобы лайкнуть карточку, отправьте PUT-запрос: */
@@ -121,14 +84,7 @@ export default class Api {
                 headers: this._headers,
 
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Постановка лайка): ${res.status}`);
-            });
+            .then(this._getResponseData)
     }
 
     deleteLike(id) {
@@ -137,14 +93,7 @@ export default class Api {
                 headers: this._headers,
 
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Постановка лайка): ${res.status}`);
-            });
+            .then(this._getResponseData)
     }
 
     /*9. Обновление аватара пользователя
@@ -159,13 +108,12 @@ export default class Api {
                 })
 
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-
-                // если ошибка, отклоняем промис
-                return Promise.reject(`Ошибка (Обновление аватара пользователя): ${res.status}`);
-            });
+            .then(this._getResponseData)
+    }
+    _getResponseData(res) {
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }
+        return res.json();
     }
 }

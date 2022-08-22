@@ -22,7 +22,9 @@ import Api from "../components/Api.js";
 import PopupWithBasket from "../components/PopupWithBascet.js";
 
 let dellCard = null;
-let UserId = null;
+
+//+
+let userId = null;
 
 
 
@@ -53,8 +55,8 @@ const api = new Api({
 
 api.downLoadingUserInformationFromServer()
     .then((result) => {
-        console.log(result)
-        UserId = result._id;
+        //  console.log(result)
+        userId = result._id;
         //  console.log(`id  Usera: ${UserId}`)
         userInfo.setUserInfo(result)
     })
@@ -66,8 +68,9 @@ api.downLoadingUserInformationFromServer()
 //2. Загрузка карточек с сервера
 api.downloadingCardsFromServer()
     .then((result) => {
-        console.log(result)
-        section.rendererValue(result)
+        //   console.log(result)
+
+        section.renderItems(result)
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -93,21 +96,21 @@ const createCard = (data) => {
                 if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
-                            //   console.log(`привет  ${result.likes.length}`)
-                            //   console.log(`привет  ${data}`)
-                            newCard.toggleLike(result.likes.length)
+                            console.log(`привет  ${result.likes.length}`)
+                                //   console.log(`привет  ${data}`)
+                            newCard.deleteLike(result.likes.length)
                         })
                 } else {
                     api.puttingLike(data._cardId)
                         .then((result) => {
                             //  console.log(`привет  ${result.likes.length}`)
                             //  console.log(`привет  ${data}`)
-                            newCard.toggleLike(result.likes.length)
+                            newCard.addLike(result.likes.length)
                         })
                 }
             }
         },
-        '.template', UserId)
+        '.template', userId)
     return newCard.generateCard()
 }
 

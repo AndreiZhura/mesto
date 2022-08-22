@@ -13,7 +13,10 @@ export default class PopupWithBasket extends Popup {
         this._cardId = cardId;
         super.open();
         this._buttonYes.textContent = "Да"
-        return this._cardId
+            /*
+            //+
+            return this._cardId
+            */
 
     }
 
@@ -22,15 +25,17 @@ export default class PopupWithBasket extends Popup {
     }
 
     setEventListeners() {
-        super.setEventListeners()
-        this._popupForm.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this._deletePopup(this._cardId)
-        })
-    }
-    renderLoading(load) {
-        super.renderLoading(load)
-    }
+            super.setEventListeners()
+            this._popupForm.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+                this._deletePopup(this._cardId)
+            })
+        }
+        /*
+        //+
+        renderLoading(load) {
+            super.renderLoading(load)
+        }*/
 
 
 }

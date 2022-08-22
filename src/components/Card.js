@@ -6,6 +6,7 @@ export default class Card {
             this._likes = data.likes;
             this._likesLenght = data.likes.length;
             this._ownerId = data.owner._id;
+            this._likesName = data.likes.name
 
             this._handleDeleteCard = handleDeleteCard;
             this._handleCardClick = handleCardClick;
@@ -15,6 +16,7 @@ export default class Card {
 
             // template элемент карточки
             this._cardElement = cardElement;
+            this._likeUsers = {};
         }
         // получаем элемент шаблона
     _getTemplateElement() {
@@ -42,11 +44,51 @@ export default class Card {
                 this._elementBascet.remove()
             }
 
+            if (this._likesLenght) {
+                console.log(this._likesLenght)
+                this._likes.forEach((item) => {
+                    console.log(item)
+                    this._checkingLikes(item, this._likesLenght)
+                })
+            }
             this._setEventListeners()
 
             return this._element
         }
         // устанавливаем прослушивание событий
+
+
+    _checkingLikes(item, likesLenght) {
+        console.log(item, likesLenght)
+        if (item._id == this._userId) {
+            this._elementLike.classList.add('element__like_active_black');
+            this._elementNumber.textContent = likesLenght;
+
+
+        } else {
+            this._elementNumber.textContent = likesLenght;
+
+        }
+
+    }
+    isLiked() {
+        if (this._elementLike.classList.contains('element__like_active_black')) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    addLike(likesLenght) {
+        this._elementLike.classList.add('element__like_active_black');
+        this._elementNumber.textContent = likesLenght;
+
+    }
+    deleteLike(likesLenght) {
+        this._elementLike.classList.remove('element__like_active_black');
+        this._elementNumber.textContent = likesLenght;
+    }
+
     _setEventListeners() {
             this._elementLike.addEventListener('click', this._handleLikeAndDislike)
             this._elementRectangle.addEventListener('click', this._handleImageClick)
@@ -54,18 +96,10 @@ export default class Card {
 
         }
         // ставим лайк
-    toggleLike(like) {
-        this._elementLike.classList.toggle('element__like_active_black');
-        this._elementNumber.textContent = like;
-    }
-    isLiked() {
-            if (this._elementLike.classList.contains('element__like_active_black')) {
-                return true
-            } else {
-                return false
-            }
-        }
-        // добавление лайка
+
+
+
+    // добавление лайка
 
     // открываем попап с картинкой
     _handleImageClick = () => {
@@ -83,4 +117,6 @@ export default class Card {
     _handleLikeAndDislike = () => {
         this._handleLikeClick(this)
     }
+
+
 }
