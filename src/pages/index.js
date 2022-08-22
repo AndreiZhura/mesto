@@ -92,12 +92,12 @@ const createCard = (data) => {
                 popupWithBasket.open(cardId)
             },
             handleLikeClick: (data) => {
-                console.log(data)
+                // console.log(data)
                 if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
-                            console.log(`привет  ${result.likes.length}`)
-                                //   console.log(`привет  ${data}`)
+                            // console.log(`привет  ${result.likes.length}`)
+                            //   console.log(`привет  ${data}`)
                             newCard.deleteLike(result.likes.length)
                         })
                 } else {
@@ -130,7 +130,7 @@ const popupWithBasket = new PopupWithBasket({
         popupWithBasket.renderLoading(true)
         api.popupDeleteCard(cardId)
             .then((result) => {
-                console.log(result)
+                //  console.log(result)
 
                 dellCard.handleDelete()
 

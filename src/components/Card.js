@@ -16,7 +16,6 @@ export default class Card {
 
             // template элемент карточки
             this._cardElement = cardElement;
-            this._likeUsers = {};
         }
         // получаем элемент шаблона
     _getTemplateElement() {
@@ -45,12 +44,13 @@ export default class Card {
             }
 
             if (this._likesLenght) {
-                console.log(this._likesLenght)
+
                 this._likes.forEach((item) => {
-                    console.log(item)
+
                     this._checkingLikes(item, this._likesLenght)
                 })
             }
+
             this._setEventListeners()
 
             return this._element
@@ -59,11 +59,10 @@ export default class Card {
 
 
     _checkingLikes(item, likesLenght) {
-        console.log(item, likesLenght)
+        // console.log(item, likesLenght)
         if (item._id == this._userId) {
             this._elementLike.classList.add('element__like_active_black');
             this._elementNumber.textContent = likesLenght;
-
 
         } else {
             this._elementNumber.textContent = likesLenght;

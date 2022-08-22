@@ -13,11 +13,9 @@ export default class Popup {
         this._buttonSave = this._elementDomPopup.querySelector('.popup__save')
         this._escClose = this._handleEscClose.bind(this)
     }
-
     open() {
         this._elementDomPopup.classList.add("popup_opened")
         document.addEventListener('keydown', this._escClose)
-
     }
 
     close() {
