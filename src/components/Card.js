@@ -55,7 +55,6 @@ export default class Card {
     }
 
     _checkingLikes(item, likesLenght) {
-        // console.log(item, likesLenght)
         if (item._id == this._userId) {
             this._elementLike.classList.add('element__like_active_black');
             this._elementNumber.textContent = likesLenght;
@@ -93,9 +92,9 @@ export default class Card {
         }
         // открываем попап с картинкой
     _handleImageClick = () => {
-            this._handleCardClick(this._name, this._link)
-        }
-        // удаляем карточку
+        this._handleCardClick(this._name, this._link)
+    }
+
     _handleCardClickDelete = () => {
         this._handleDeleteCard(this._cardId)
     }

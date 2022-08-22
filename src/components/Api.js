@@ -4,7 +4,6 @@ export default class Api {
         this._headers = options.headers;
     }
 
-    //+
     /*1. Загрузка информации о пользователе с сервера
     Информация о пользователе должна подгружаться с сервера.
      Чтобы осуществить это, сделайте GET-запрос на URL (cohortId замените на идентификатор вашей группы):*/
@@ -21,17 +20,14 @@ export default class Api {
 Начальные карточки должны подгружаться с сервера. Для этого сделайте GET-запрос: */
 
     downloadingCardsFromServer() {
-        return fetch(`${this._url}/cards`, {
-                method: 'GET',
-                headers: this._headers
-            })
-            .then(this._getResponseData)
-
-
-    }
-
-    /* 3. Редактирование профиля
-    Отредактированные данные профиля должны сохраняться на сервере. Для этого отправьте запрос методом PATCH:*/
+            return fetch(`${this._url}/cards`, {
+                    method: 'GET',
+                    headers: this._headers
+                })
+                .then(this._getResponseData)
+        }
+        /* 3. Редактирование профиля
+        Отредактированные данные профиля должны сохраняться на сервере. Для этого отправьте запрос методом PATCH:*/
 
     editingProfile(form) {
         return fetch(`${this._url}/users/me`, {
@@ -43,7 +39,6 @@ export default class Api {
                 })
             })
             .then(this._getResponseData)
-
     }
 
     /* 4. Добавление новой карточки

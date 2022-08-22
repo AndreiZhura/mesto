@@ -172,9 +172,6 @@ const popupWithFormClassAvatar = new PopupWithForm({
 
 })
 
-
-
-
 // попап карточки ************************************************************************************************************
 const popupWithFormClassCard = new PopupWithForm({
         elementDomPopup: '.popupElements',
