@@ -28,35 +28,31 @@ export default class Card {
         }
         // генерируем карточку
     generateCard() {
-            this._element = this._getTemplateElement()
-            this._element.querySelector('.element__title').textContent = this._name;
-            this._elementRectangle = this._element.querySelector('.element__rectangle');
-            this._elementRectangle.src = this._link;
-            this._elementRectangle.alt = this._name;
-            this._elementLike = this._element.querySelector('.element__like');
-            this._elementNumber = this._element.querySelector('.element__number');
-            this._elementNumber.textContent = this._likesLenght
-            this._elementBascet = this._element.querySelector('.element__basket');
-            this._elementLikeActive = this._element.querySelector('.element__like_active_black');
-            //выставляет корзину
-            if (this._ownerId !== this._userId) {
-                this._elementBascet.remove()
-            }
-
-            if (this._likesLenght) {
-
-                this._likes.forEach((item) => {
-
-                    this._checkingLikes(item, this._likesLenght)
-                })
-            }
-
-            this._setEventListeners()
-
-            return this._element
+        this._element = this._getTemplateElement()
+        this._element.querySelector('.element__title').textContent = this._name;
+        this._elementRectangle = this._element.querySelector('.element__rectangle');
+        this._elementRectangle.src = this._link;
+        this._elementRectangle.alt = this._name;
+        this._elementLike = this._element.querySelector('.element__like');
+        this._elementNumber = this._element.querySelector('.element__number');
+        this._elementNumber.textContent = this._likesLenght
+        this._elementBascet = this._element.querySelector('.element__basket');
+        this._elementLikeActive = this._element.querySelector('.element__like_active_black');
+        //выставляет корзину
+        if (this._ownerId !== this._userId) {
+            this._elementBascet.remove()
         }
-        // устанавливаем прослушивание событий
 
+        if (this._likesLenght) {
+
+            this._likes.forEach((item) => {
+
+                this._checkingLikes(item, this._likesLenght)
+            })
+        }
+        this._setEventListeners()
+        return this._element
+    }
 
     _checkingLikes(item, likesLenght) {
         // console.log(item, likesLenght)
@@ -70,6 +66,7 @@ export default class Card {
         }
 
     }
+
     isLiked() {
         if (this._elementLike.classList.contains('element__like_active_black')) {
             return true
@@ -81,8 +78,8 @@ export default class Card {
     addLike(likesLenght) {
         this._elementLike.classList.add('element__like_active_black');
         this._elementNumber.textContent = likesLenght;
-
     }
+
     deleteLike(likesLenght) {
         this._elementLike.classList.remove('element__like_active_black');
         this._elementNumber.textContent = likesLenght;
@@ -94,13 +91,7 @@ export default class Card {
             this._elementBascet.addEventListener('click', this._handleCardClickDelete)
 
         }
-        // ставим лайк
-
-
-
-    // добавление лайка
-
-    // открываем попап с картинкой
+        // открываем попап с картинкой
     _handleImageClick = () => {
             this._handleCardClick(this._name, this._link)
         }

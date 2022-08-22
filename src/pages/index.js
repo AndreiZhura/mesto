@@ -22,11 +22,7 @@ import Api from "../components/Api.js";
 import PopupWithBasket from "../components/PopupWithBascet.js";
 
 let dellCard = null;
-
-//+
 let userId = null;
-
-
 
 // объект валидации форм
 const formValidators = {
@@ -96,15 +92,11 @@ const createCard = (data) => {
                 if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
-                            // console.log(`привет  ${result.likes.length}`)
-                            //   console.log(`привет  ${data}`)
                             newCard.deleteLike(result.likes.length)
                         })
                 } else {
                     api.puttingLike(data._cardId)
                         .then((result) => {
-                            //  console.log(`привет  ${result.likes.length}`)
-                            //  console.log(`привет  ${data}`)
                             newCard.addLike(result.likes.length)
                         })
                 }
@@ -130,12 +122,8 @@ const popupWithBasket = new PopupWithBasket({
         popupWithBasket.renderLoading(true)
         api.popupDeleteCard(cardId)
             .then((result) => {
-                //  console.log(result)
-
                 dellCard.handleDelete()
-
                 popupWithBasket.close()
-
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль

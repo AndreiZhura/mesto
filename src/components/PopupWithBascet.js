@@ -19,11 +19,6 @@ export default class PopupWithBasket extends Popup {
             */
 
     }
-
-    close() {
-        super.close();
-    }
-
     setEventListeners() {
             super.setEventListeners()
             this._popupForm.addEventListener('submit', (evt) => {
