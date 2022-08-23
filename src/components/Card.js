@@ -44,9 +44,7 @@ export default class Card {
         }
 
         if (this._likesLenght) {
-
             this._likes.forEach((item) => {
-
                 this._checkingLikes(item, this._likesLenght)
             })
         }
@@ -61,7 +59,6 @@ export default class Card {
 
         } else {
             this._elementNumber.textContent = likesLenght;
-
         }
 
     }
@@ -106,6 +103,4 @@ export default class Card {
     _handleLikeAndDislike = () => {
         this._handleLikeClick(this)
     }
-
-
 }

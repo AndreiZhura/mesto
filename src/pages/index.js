@@ -88,7 +88,7 @@ const createCard = (data) => {
                 popupWithBasket.open(cardId)
             },
             handleLikeClick: (data) => {
-                // console.log(data)
+                console.log(data)
                 if (newCard.isLiked(data)) {
                     api.deleteLike(data._cardId)
                         .then((result) => {
